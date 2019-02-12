@@ -1,0 +1,162 @@
+
+<header class="h-100" style="margin-top:100px;">
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+    <mdb-navbar-brand>
+      <a class="logo navbar-brand" href="#">
+        <strong>Valeria´s</strong>
+      </a>
+    </mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item waves-light" mdbWavesEffect>
+          <a routerLink="" class="nav-link">
+            Inicio
+          </a>
+        </li>
+      </ul>
+
+      <div *ngIf="currentUser" class="navbar-nav nav-flex-icons">
+        <div class="nav-item dropdown" dropdown>
+          <a dropdownToggle type="button" class="nav-link">
+            <i class="fa fa-user" style="font-size: x-large;"></i>
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a routerLink="/detail-count/{{currentUser.email}}" class="dropdown-item ">{{currentUser.name}}</a>
+            <a routerLink="/orders" class="dropdown-item ">Mis pedidos</a>
+            <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+          </div>
+
+        </div>
+        <a routerLink="/order" class="nav-link">
+          <i class="fa fa-shopping-cart" style="font-size: x-large;"></i>
+        </a>
+      </div>
+    </links>
+  </mdb-navbar>
+  <!-- Main -->
+  <!-- /.Main -->
+</header>
+
+<div class="container" style="">
+  <!--Grid column-->
+  <div class="">
+
+    <div class="card">
+      <div class="card-body">
+        <!-- Shopping Cart table -->
+        <div class="table-responsive">
+
+          <table class="table product-table">
+
+            <!-- Table head -->
+            <thead class="mdb-color lighten-5">
+              <tr style="background-color:white;">
+                <th></th>
+                <th class="font-weight-bold">
+                  <strong>Producti</strong>
+                </th>
+                <th></th>
+                <th class="font-weight-bold">
+                  <strong>Precio</strong>
+                </th>
+                <th class="font-weight-bold">
+                  <strong>Cantidad</strong>
+                </th>
+                <th class="font-weight-bold">
+                  <strong>Valor</strong>
+                </th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <!-- /.Table head -->
+            <!-- Table body -->
+            <tbody *ngIf="products">
+
+              <!-- First row -->
+              <tr *ngFor="let product of products" style="vertical-align:middle;">
+                <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                    <!--Content-->
+                    <div class="modal-content text-center">
+                      <!--Header-->
+                      <div class="modal-header d-flex justify-content-center">
+                        <p class="heading">Estas seguro?</p>
+                      </div>
+
+                      <!--Body-->
+                      <div class="modal-body">
+                        <i class="fa fa-times fa-4x animated rotateIn"></i>
+                      </div>
+
+                      <!--Footer-->
+                      <div class="modal-footer justify-content-center">
+                        <a mdbBtn color="succsess" outline="true" class="waves-effect"
+                           mdbWavesEffect (click)="delete(product)">Si</a>
+                        <a (click)="frame.hide()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" this.photo=product.photo;>No</a>
+                      </div>
+                    </div>
+                    <!--/.Content-->
+                  </div>
+                </div>
+                <th scope="row">
+                  <img [src]="product.photo" alt="" class="img-fluid z-depth-0">
+                </th>
+                <td>
+                  <h5 class="mt-3">
+                    <strong>{{product.name}}</strong>
+                  </h5>
+                </td>
+                <td></td>
+                <td>{{product.priceOut}}</td>
+                <td class="font-weight-bold">
+                  <input [disabled]="disable" type="number" value="{{product.amount}}" aria-label="Search" class="form-control" style="width: 100px">
+                </td>
+                <td>{{product.total}}</td>
+                <td><i (click)="disable = !disable" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
+
+                <td>
+                  <button (click)="frame.show()" type="button" class="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove item">
+                    X
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="products[0]">
+                <td colspan="3"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <h4 class="mt-2">
+                    <strong>Total</strong>
+                  </h4>
+                </td>
+                <td class="text-right">
+                  <h4 class="mt-2">
+                    <strong>{{products[0].totalOrder}}</strong>
+                  </h4>
+                </td>
+              </tr>
+              <!-- /.First row -->
+            </tbody>
+            <!-- /.Table body -->
+
+          </table>
+
+        </div>
+        <!-- /.Shopping Cart table -->
+
+      </div>
+
+    </div>
+
+  </div>
+  <!--Grid column-->
+
+</div>
+
+<button (click)="confirmOrder()"  style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem;z-index:1;"
+        class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
+  <i class="fa fa-check"></i>
+</button>

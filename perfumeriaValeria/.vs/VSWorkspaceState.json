@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\add-order",
+    "\\src\\app\\add-product",
+    "\\src\\app\\add-provider",
+    "\\src\\app\\detail-client",
+    "\\src\\app\\login",
+    "\\src\\app\\order-client",
+    "\\src\\app\\product-list"
+  ],
+  "SelectedNode": "\\src\\app\\product-list\\product-list.component.html",
+  "PreviewInSolutionExplorer": false
+}

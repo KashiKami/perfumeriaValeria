@@ -1,0 +1,103 @@
+<header class="h-100">
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+    <mdb-navbar-brand>
+      <a class="logo navbar-brand" href="#">
+        <strong>Valeria´s</strong>
+      </a>
+    </mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item waves-light" mdbWavesEffect>
+          <a routerLink="" class="nav-link">
+            Inicio
+          </a>
+        </li>
+      </ul>
+
+      <div *ngIf="currentUser" class="navbar-nav nav-flex-icons">
+        <div class="nav-item dropdown" dropdown>
+          <a dropdownToggle type="button" class="nav-link">
+            <i class="fa fa-user" style="font-size: x-large;"></i>
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a  routerLink="/detail-count/{{currentUser.email}}" class="dropdown-item ">{{currentUser.name}}</a>
+            <a routerLink="/orders" class="dropdown-item ">Mis pedidos</a>
+            <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+          </div>
+        </div>
+        <a routerLink="/order" class="nav-link">
+          <i class="fa fa-shopping-cart" style="font-size: x-large;"></i>
+        </a>
+      </div>
+    </links>
+  </mdb-navbar>
+  <!-- Main -->
+  <div class="view intro-2" style="">
+    <div class="full-bg-img">
+      <div class="mask rgba-purple-light flex-center">
+        <div class="row pt-5 mt-3">
+          <div class="col-md-12 mb-3" *ngIf="currentUser; else elseBlock">
+            <div class="intro-info-content text-center">
+              <h1 class="display-3 mb-5 wow fadeInDown animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
+                PERFUMERIA
+                <a class="black-text font-weight-bold">VALERIA</a>
+              </h1>
+              <h5 class="text-uppercase mb-5 mt-1 font-weight-bold wow fadeInDown animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;"></h5>
+              <a routerLink="/order" class="btn btn-outline-indigo btn-lg wow fadeInDown waves-effect waves-light animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">Mis Pedidos</a>
+            </div>
+          </div>
+          <ng-template #elseBlock>
+            <div class="intro-info-content text-center">
+              <h1 class="display-3 mb-5 wow fadeInDown animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
+                PERFUMERIA
+                <a class="black-text font-weight-bold">VALERIA</a>
+              </h1>
+              <h5 class="text-uppercase mb-5 mt-1 font-weight-bold wow fadeInDown animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;"></h5>
+              <a routerLink="/login" class="btn btn-outline-indigo btn-lg wow fadeInDown waves-effect waves-light animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">Ingresa</a>
+              <a routerLink="/register" class="btn btn-indigo btn-lg wow fadeInDown waves-effect waves-light animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">Registrate</a>
+            </div>
+          </ng-template>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /.Main -->
+</header>
+
+<div class="container">
+  <div class="d-flex p-4 col-example m-4"></div>
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 row">
+
+
+      <blockquote class="blockquote bq-primary">
+        <p class="bq-title">Tus pedidos!</p>
+        <h3>
+          <a (click)=" getProcedure()">Tramite</a>
+        </h3>
+        <h3>
+          <a (click)=" getValidate()">Validados</a>
+        </h3>
+        <h3>
+          <a (click)=" getDispatched()">Despachados</a>
+        </h3>
+      </blockquote>
+
+    </div>
+    <table mdbTable hover="true" class="m-4 table product-table" class="col-12 col-sm-12 col-md-7 col-lg-8 col-xl-8">
+
+      <thead>
+        <tr>
+          <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="orders">
+        <tr routerLink="{{order.id}}"  mdbTableCol *ngFor="let order of orders">
+          <th>{{order.id}}</th>
+          <th>{{order.date}}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

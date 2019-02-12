@@ -1,0 +1,104 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg indigo navbar-dark fixed-top scrolling-navbar">
+
+  <!-- Navbar brand -->
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Pedidos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/help">Ayuda</a>
+      </li>
+
+      <!-- Dropdown -->
+
+
+    </ul>
+    <!-- Links -->
+    <!-- Search form -->
+    <!--
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
+      </div>
+    </form>
+    -->
+    <div class="navbar-nav nav-flex-icons">
+      <div class="nav-item dropdown" dropdown>
+        <a dropdownToggle type="button" class="nav-link">
+          <i class="fa fa-user" style="font-size: x-large;"></i>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item " href="#">Perfil</a>
+          <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+        </div>
+      </div>
+    </div>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+
+<div class="container">
+  <div class="d-flex p-4 col-example"></div>
+  <table mdbTable hover="true" class="m-4">
+    <thead>
+      <tr>
+        <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let provider of providers">
+
+        <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+              <!--Header-->
+              <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Estas seguro?</p>
+              </div>
+
+              <!--Body-->
+              <div class="modal-body">
+                <i class="fa fa-times fa-4x animated rotateIn"></i>
+              </div>
+
+              <!--Footer-->
+              <div class="modal-footer justify-content-center">
+                <a mdbBtn color="danger" outline="true" class="waves-effect"
+                   mdbWavesEffect (click)="delete(provider)">Si</a>
+                <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">No</a>
+              </div>
+            </div>
+            <!--/.Content-->
+          </div>
+        </div>
+
+        <th scope="row">{{provider.name}} {{provider.lastName}}</th>
+        <td>{{provider.phone}}</td>
+        <td>{{provider.direction}}</td>
+        <td>{{provider.email}}</td>
+        <td><i routerLink="edit-provider/{{provider.email}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
+        <td><i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<button routerLink="add-provider" class="btn red waves-light position-fixed"
+        style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem">
+  <i class="fa fa-plus"></i>
+</button>

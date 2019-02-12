@@ -1,0 +1,19 @@
+.table td{
+  vertical-align: middle;
+}
+
+.md-form label{
+  left: auto;
+}
+
+.md-form .prefix ~ .inputVal {
+  left: 3.5rem;
+}
+
+.table thead th {
+  border-bottom: 2px solid #33b5e5;
+}
+
+.img-fluid, .modal-dialog.cascading-modal.modal-avatar .modal-header, .video-fluid {
+  width: 100px;
+}

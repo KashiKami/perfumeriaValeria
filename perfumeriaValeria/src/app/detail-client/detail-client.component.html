@@ -1,0 +1,89 @@
+<header class="h-100" style="margin-top:100px;">
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+    <mdb-navbar-brand>
+      <a class="logo navbar-brand" href="#">
+        <strong>Valeria´s</strong>
+      </a>
+    </mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item waves-light" mdbWavesEffect>
+          <a routerLink="" class="nav-link">
+            Inicio
+          </a>
+        </li>
+      </ul>
+
+      <div *ngIf="currentUser" class="navbar-nav nav-flex-icons">
+        <div class="nav-item dropdown" dropdown>
+          <a dropdownToggle type="button" class="nav-link">
+            <i class="fa fa-user" style="font-size: x-large;"></i>
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a routerLink="/detail-count/{{currentUser.email}}" class="dropdown-item ">{{currentUser.name}}</a>
+            <a routerLink="/orders" class="dropdown-item ">Mis pedidos</a>
+            <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+          </div>
+
+        </div>
+        <a routerLink="/order" class="nav-link">
+          <i class="fa fa-shopping-cart" style="font-size: x-large;"></i>
+        </a>
+      </div>
+    </links>
+  </mdb-navbar>
+  <!-- Main -->
+  <!-- /.Main -->
+</header>
+
+<!--form create product -->
+<div class="d-flex p-2 col-example"></div>
+<form class="text-center p-5 container md-form col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <p class="h4 mb-4">Crear proveedor</p>
+  <div class="row">
+
+    <!-- Name -->
+    <div class="md-form col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <input mdbInputDirective type="text" id="name" class="form-control" formControlName="name">
+      <label for="name" class="">Nombres</label>
+    </div>
+
+
+    <!-- LastName -->
+    <div class="md-form col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <input mdbInputDirective type="text" id="lastname" class="form-control" formControlName="lastName">
+      <label for="lastname" class="">Apellidos</label>
+    </div>
+
+    <!-- Direction -->
+    <div class="md-form col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <input mdbInputDirective type="text" id="direction" class="form-control" formControlName="direction">
+      <label for="direction" class="">Dirección</label>
+    </div>
+
+    <!-- Password -->
+    <div class="md-form col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <input mdbInputDirective type="text" id="password" class="form-control" formControlName="password">
+      <label for="password" class="">Constraseña</label>
+    </div>
+
+    <!-- phone -->
+    <div class="md-form col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <input mdbInputDirective type="text" id="phone" class="form-control" formControlName="phone">
+      <label for="phone" class="">Telefono</label>
+    </div>
+
+    <!-- indentify -->
+    <div class="md-form col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <input mdbInputDirective type="text" id="identify" class="form-control" formControlName="identify">
+      <label for="identify" class="">Cedula</label>
+    </div>
+
+    <!-- Sign in button -->
+    <button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem"
+            class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
+      <i class="fa fa-check"></i>
+    </button>
+  </div>
+</form>
+<!-- form create product -->

@@ -1,0 +1,63 @@
+<header class="h-100">
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+    <mdb-navbar-brand>
+      <a class="logo navbar-brand" href="#">
+        <strong>Valeria´s</strong>
+      </a>
+    </mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item waves-light" mdbWavesEffect>
+          <a routerLink="" class="nav-link">
+            Inicio
+          </a>
+        </li>
+      </ul>
+    </links>
+  </mdb-navbar>
+  <!-- Main -->
+  <div class="view intro-2" style="">
+    <div class="full-bg-img">
+      <div class="mask flex-center">
+        <div class="row pt-5 mt-3">
+          <div class="col-md-12 mb-3">
+            <div class="intro-info-content text-center ">
+
+              <div class="container d-flex justify-content-center p-4 col-example  animated  wow fadeInRight">
+                <form class="text-center border border-light p-5" style="margin-top:100px;" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+
+                  <p class="h4 mb-4">Ingresa</p>
+
+                  <!-- Email -->
+                  <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="correo" formControlName="email" [(ngModel)]="order.email">
+
+                  <!-- Password -->
+                  <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="contraseña" formControlName="password">
+
+                  <div class="d-flex justify-content-around">
+                    
+                  </div>
+
+                  <!-- Sign in button -->
+                  <button mdbBtn color="info" block="true" class="my-4" type="submit">Ingresar</button>
+
+                  <!-- Register -->
+                  <p>
+                    No estas registrado?
+                    <a routerLink="/register" href="">Registrate</a>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </header>
+  <!-- /.Main -
+
+  <!-- Default form login -->
+  
+  <!-- Default form login -->

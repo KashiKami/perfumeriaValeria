@@ -1,0 +1,87 @@
+<header class="h-100">
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+    <mdb-navbar-brand>
+      <a class="logo navbar-brand" href="#">
+        <strong>Valeria´s</strong>
+      </a>
+    </mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item waves-light" mdbWavesEffect>
+          <a routerLink="" class="nav-link">
+            Inicio
+          </a>
+        </li>
+      </ul>
+    </links>
+  </mdb-navbar>
+  <!-- Main -->
+  <div class="view intro-2" style="">
+    <div class="full-bg-img">
+      <div class="mask flex-center">
+        <div class="row pt-5 mt-3">
+          <div class="col-md-12 mb-3">
+            <div class="intro-info-content text-center ">
+
+              <div class="container d-flex justify-content-center p-4 col-example  animated  wow fadeInRight">
+               
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </header>
+
+<!-- Default form register -->
+<div class="container"style="margin-top:100px;">
+  <form class="text-center border border-light p-5" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+    <p class="h4 mb-4">Registro</p>
+
+    <div class="form-row mb-4">
+      <div class="col">
+        <!-- First name -->
+        <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Nombres" formControlName="name">
+      </div>
+      <div class="col">
+        <!-- Last name -->
+        <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Apellidos" formControlName="lastName">
+      </div>
+    </div>
+
+
+    <!-- Phone number -->
+    <input type="text" id="defaultRegisterDirectionPassword" class="form-control" placeholder="Direccion" aria-describedby="defaultRegisterFormPhoneHelpBlock" formControlName="direction">
+    <br>
+    <input type="text" id="defaultRegisterIdentifyPassword" class="form-control" placeholder="Identificacion" aria-describedby="defaultRegisterFormPhoneHelpBlock" formControlName="identify">
+    <br>
+    <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Celular" aria-describedby="defaultRegisterFormPhoneHelpBlock" formControlName="phone">
+    <br>
+    <!-- E-mail -->
+    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="correo" formControlName="email">
+
+    <!-- Password -->
+    <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="contraseña" aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="password">
+
+
+
+
+    <!-- Newsletter -->
+    <div class="row">
+      <div class="col-md-6 mx-auto d-flex justify-content-center">
+        <p>
+         Ya estas registrado
+          <a routerLink="/login" href="">Ingresa!</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Sign up button -->
+    <button mdbBtn color="info" block="true" class="my-4" type="submit">Registrar</button>
+
+  </form>
+</div>
+<!-- Default form register -->

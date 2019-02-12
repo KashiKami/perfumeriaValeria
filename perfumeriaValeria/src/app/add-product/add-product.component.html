@@ -1,0 +1,133 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg indigo navbar-dark fixed-top scrolling-navbar">
+
+  <!-- Navbar brand -->
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Pedidos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/help">Ayuda</a>
+      </li>
+
+      <!-- Dropdown -->
+
+
+    </ul>
+    <!-- Links -->
+    <!-- Search form -->
+    <!--
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
+      </div>
+    </form>
+    -->
+    <div class="navbar-nav nav-flex-icons">
+      <div class="nav-item dropdown" dropdown>
+        <a dropdownToggle type="button" class="nav-link">
+          <i class="fa fa-user" style="font-size: x-large;"></i>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item " href="#">Perfil</a>
+          <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+        </div>
+      </div>
+    </div>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+
+<!--form create product -->
+<div class="d-flex p-2 col-example"></div>
+<form class="text-center p-5 container col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <p class="h4 mb-4">Crear producto</p>
+  <div class="row">
+
+    <!-- Name -->
+    <div class="md-form col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <input mdbInputDirective type="text" id="name" class="form-control mb-4 " formControlName="name">
+      <label for="name" class="">Nombre</label>
+    </div>
+
+
+    <!-- Code Bar -->
+    <div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 md-form">
+      <input mdbInputDirective type="text" id="codeBar" class="form-control mb-4" formControlName="codeBar" #qr (keyup)="0">
+      <label for="codeBar" class="">Codigo</label>
+    </div>
+
+
+    <!-- Price -->
+    <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 md-form">
+      <input mdbInputDirective type="number" id="priceIn" class="form-control mb-4" formControlName="priceIn">
+      <label for="priceIn" class="">Precio Compra</label>
+    </div>
+
+    <!-- Price -->
+    <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 md-form">
+      <input mdbInputDirective type="number" id="priceOut" class="form-control mb-4" formControlName="priceOut">
+      <label for="priceOut" class="">Precio Venta</label>
+    </div>
+
+    <!-- Amount -->
+    <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 md-form">
+      <input mdbInputDirective type="number" id="amount" class="form-control mb-4" formControlName="amount">
+      <label for="amount" class="">Descuento</label>
+    </div>
+
+    <!-- Description -->
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 md-form">
+      <textarea mdbInputDirective type="text" id="description" class="form-control mb-4 md-textarea" formControlName="description"></textarea>
+      <label for="description" class="">Descripcion</label>
+    </div>
+
+    <!-- Image -->
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <img [src]="url" class="w-responsive text-center col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-2">
+      <label class="w-responsive text-center mx-auto p-3 mt-2" mdbBtn color="success" style="position:unset;">
+        <input type="file" id="photo" name="photo" ng2FileSelect [uploader]="uploader" (change)="onSelectFile($event)" class="inputfile">
+        Subir imagen
+      </label>
+      <input mdbInputDirective type="hidden" id="" class="form-control mb-4" formControlName="photo">
+    </div>
+
+    <input type="file" style="display: none" id="fileChooser">
+
+    <!-- Video -->
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <video [src]="urlVideo" class="w-responsive text-center p-5" controls></video>
+      <label class="w-responsive text-center mx-auto p-3 mt-2 custom-file-upload" mdbBtn color="success" style="position:unset;">
+        <input type="file" name="" id="video" ng2FileSelect [uploader]="uploader" (change)="onSelectFileVideo($event)" class="inputfile">
+        Subir Video
+      </label>
+      <input mdbInputDirective type="hidden" id="" class="form-control mb-4" formControlName="video">
+    </div>
+
+    <!-- Sign in button -->
+
+    <button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem"
+            class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
+      <i class="fa fa-check"></i>
+    </button>
+
+    <qrcode style="left:20px; bottom:20px;"
+            class="position-fixed" mdbWavesEffect id="qr" [qrdata]="qr.value" [size]="128" [level]="'M'" image="true"></qrcode>
+
+  </div>
+
+
+</form>
+<!-- form create product -->
