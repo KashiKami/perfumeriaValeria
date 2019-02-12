@@ -21,11 +21,14 @@ import { OrderClientComponent } from './order-client/order-client.component';
 import { OrderListClientComponent } from './order-list-client/order-list-client.component';
 import { DetailOrderClientComponent } from './detail-order-client/detail-order-client.component';
 import { DetailClientComponent } from './detail-client/detail-client.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 const routes: Routes = [
   { path: 'admin/products', component: ProductListComponent, canActivate: [AuthGuard]},
   { path: 'admin/products/add-product', component: AddProductComponent, canActivate: [AuthGuard] },
   { path: 'admin/products/edit-product/:id', component: AddProductComponent, canActivate: [AuthGuard] },
+
+  { path: 'admin/inventory', component: InventoryComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/providers', component: ProviderListComponent, canActivate: [AuthGuard] },
   { path: 'admin/providers/add-provider', component: AddProviderComponent, canActivate: [AuthGuard] },

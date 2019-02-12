@@ -10,6 +10,9 @@
       <li class="nav-item ">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos<span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Inventario</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
       </li>
@@ -121,97 +124,9 @@
 </div>
 
 
-<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog modal-full-height modal-right modal-notify modal-success" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <p class="heading lead">Agregar</p>
-
-        <button (click)="frame.hide()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="white-text">×</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <form class="" [formGroup]="addForm" (ngSubmit)="onSubmit()">
-          <div class="modal-body mx-3">
-
-            <!-- Name -->
-            <div class="md-form">
-              <i class="fa fa-barcode prefix grey-text"></i>
-
-              <ng-template #customItemTemplate let-model="item" let-index="index">
-                <h6>Nombre: {{model }}</h6>
-              </ng-template>
-
-              <input formControlName="codeBar" type="text" autocomplete="off" id="name" mdbInputDirective [(ngModel)]="asyncSelected"
-                     [typeaheadScrollable]="true"
-                     [typeahead]="dataSource"
-                     typeaheadOptionField="codeBar"
-                     class="form-control">
-              <label for="name" class="">producto</label>
-              <div *ngIf="typeaheadLoading">Loading</div>
-
-            </div>
-
-
-            <!-- LastName -->
-            <div class="md-form">
-              <i class="fa fa-hashtag prefix grey-text"></i>
-              <input mdbInputDirective type="text" id="lastname" autocomplete="off" class="form-control" formControlName="amount">
-              <label for="lastname" class="">Cantidad</label>
-            </div>
-
-            <!-- Email -->
-            <div class="md-form">
-              <i class="fa fa-user prefix grey-text"></i>
-              <input formControlName="email" type="text" autocomplete="off" id="email" mdbInputDirective [(ngModel)]="asyncSelectedProvider"
-                     [typeaheadScrollable]="true"
-                     [typeahead]="dataSourceProvider"
-                     typeaheadOptionField="email"
-                     class="form-control">
-              <label for="email" class="">Proveedor</label>
-            </div>
-
-            <!-- Sign in button -->
-
-
-          </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button mdbBtn color="success" class="waves-light" mdbWavesEffect>Agregar</button>
-          </div>
-        </form>
-
-        <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" bordered="true">
-          <thead>
-            <tr>
-              <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let product of productsAmount">
-              <td> {{product.name}}</td>
-              <td>{{product.amount}}</td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-    </div>
-
-
-  </div>
-</div>
-
-
-<button (click)="frame.show()" class="btn indigo waves-light position-fixed"
-        style="right:20px; bottom:80px;border-radius: 50%;width:55px;height:55px;padding:0.5rem">
-  <i class="fa fa-plus"></i>
-</button>
-
 <button routerLink="add-product" class="btn green waves-light position-fixed"
         style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem">
-  <i class="fa fa-edit"></i>
+  <i class="fa fa-plus"></i>
 </button>
 
 
