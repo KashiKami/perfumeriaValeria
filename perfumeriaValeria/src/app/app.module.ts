@@ -19,6 +19,7 @@ import { ViewProductComponent } from './view-product/view-product.component';
 
 import { QRCodeModule } from 'angularx-qrcode';
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxTypeaheadModule } from 'ngx-typeahead';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FormsModule } from '@angular/forms';
@@ -34,6 +35,7 @@ import { OrderListClientComponent } from './order-list-client/order-list-client.
 import { DetailOrderClientComponent } from './detail-order-client/detail-order-client.component';
 import { DetailClientComponent } from './detail-client/detail-client.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { SalesComponent } from './sales/sales.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { InventoryComponent } from './inventory/inventory.component';
     OrderListClientComponent,
     DetailOrderClientComponent,
     DetailClientComponent,
-    InventoryComponent
+    InventoryComponent,
+    SalesComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ import { InventoryComponent } from './inventory/inventory.component';
     QRCodeModule,
     NgxTypeaheadModule,
     TypeaheadModule.forRoot(),
-    FormsModule
+    FormsModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [AuthGuard, AuthenticationService],
   bootstrap: [AppComponent]

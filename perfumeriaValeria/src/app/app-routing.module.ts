@@ -22,6 +22,7 @@ import { OrderListClientComponent } from './order-list-client/order-list-client.
 import { DetailOrderClientComponent } from './detail-order-client/detail-order-client.component';
 import { DetailClientComponent } from './detail-client/detail-client.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { SalesComponent } from './sales/sales.component';
 
 const routes: Routes = [
   { path: 'admin/products', component: ProductListComponent, canActivate: [AuthGuard]},
@@ -29,6 +30,8 @@ const routes: Routes = [
   { path: 'admin/products/edit-product/:id', component: AddProductComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+
+  { path: 'admin/sales', component: SalesComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/providers', component: ProviderListComponent, canActivate: [AuthGuard] },
   { path: 'admin/providers/add-provider', component: AddProviderComponent, canActivate: [AuthGuard] },

@@ -123,7 +123,7 @@ export class InventoryComponent implements OnInit {
     }
       setTimeout(() => {
         this.getProductsAmount();
-      }, 100);
+      }, 500);
 
       this.addForm = this.formBuilder.group({
         "codeBar": ['', Validators.required],

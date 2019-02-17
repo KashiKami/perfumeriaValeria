@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
+
+<mdb-navbar SideClass="navbar navbar-expand-lg indigo navbar-dark fixed-top scrolling-navbar">
+
+  <!-- Navbar brand -->
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Inventario</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/sales">Ventas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Pedidos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/help">Ayuda</a>
+      </li>
+
+      <!-- Dropdown -->
+
+
+    </ul>
+    <!-- Links -->
+    <!-- Search form -->
+    <!--
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
+      </div>
+    </form>
+    -->
+    <div class="navbar-nav nav-flex-icons">
+      <div class="nav-item dropdown" dropdown>
+        <a dropdownToggle type="button" class="nav-link">
+          <i class="fa fa-user" style="font-size: x-large;"></i>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item " href="#">Perfil</a>
+          <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+        </div>
+      </div>
+    </div>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+
+<div class="container">
+  <div class="d-flex p-4 col-example" style="margin-top:50px;"></div>
+  <form [formGroup]="myForm">
+    <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
+      <input type="text" readonly class="form-control mb-3"
+             placeholder="Daterangepicker" bsDaterangepicker formControlName="range" />
+      <div *ngIf="myForm.value.range">
+        <input type="" formControlName="dateStart" value="{{myForm.value.range[0] | date:'yyyy-MM-dd'}}" />
+        <input type="" formControlName="dateFinish" value="{{myForm.value.range[1] | date:'yyyy-MM-dd'}}" />
+      </div>
+    </div>
+  </form>
+  <button mdbBtn *ngIf="myForm.value.range" type="button" gradient="blue" rounded="true" (click)="getProducts()" mdbWavesEffect>Generar Reporte</button>
+  <table mdbTable hover="true" class="m-4" *ngIf="products">
+    <thead>
+      <tr>
+        <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let product of products">
+        <th scope="row">{{product.name}}</th>
+        <td>{{product.amount}}</td>
+        <td>{{product.priceOut}}</td>
+        <td>{{product.total}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

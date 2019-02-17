@@ -3,15 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\add-order",
-    "\\src\\app\\add-product",
-    "\\src\\app\\detail-order-client",
-    "\\src\\app\\inventory",
     "\\src\\app\\product-list",
+    "\\src\\app\\sales",
     "\\src\\app\\services",
+    "\\src\\app\\services\\client",
     "\\src\\app\\services\\product",
-    "\\src\\app\\services\\provider"
+    "\\src\\app\\services\\provider",
+    "\\src\\app\\services\\report"
   ],
-  "SelectedNode": "\\src\\app\\inventory\\inventory.component.ts",
+  "SelectedNode": "\\src\\app\\product-list\\product-list.component.ts",
   "PreviewInSolutionExplorer": false
 }
