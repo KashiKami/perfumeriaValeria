@@ -49,7 +49,7 @@ export class AddProductComponent implements OnInit {
       "description": ['', Validators.required],
       "priceIn": ['', Validators.required],
       "priceOut": ['', Validators.required],
-      "amount": ['', Validators.required],
+      "discount": ['', Validators.required],
       "photo": [''],
       "qr": [''],
       "video": [''],

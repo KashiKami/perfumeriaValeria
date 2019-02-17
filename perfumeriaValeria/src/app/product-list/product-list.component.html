@@ -111,7 +111,24 @@
 
           <!--Text-->
           <mdb-card-text>
-            {{product.description}}
+            <div *ngIf="product.amount <= 10" class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">Oye!</h4>
+              <p>En este momento cuentas solo con {{product.amount}} productos.</p>
+              <hr>
+              <p class="mb-0">Porfavor realiza un pedido.</p>
+            </div>
+
+            <div *ngIf="product.amount <= 20 && product.amount > 10" class="alert alert-warning" role="alert">
+              <h4 class="alert-heading">Oye!</h4>
+              <p>Tienes {{product.amount}} productos en el inventario.</p>
+              <hr>
+              <p class="mb-0">Pronto deberias relizar un pedido.</p>
+            </div>
+
+            <div *ngIf="product.amount > 20" class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Oye!</h4>
+              <p>En este momento estas muy bien de este producto, tienes en el inventario {{product.amount}} productos.</p>
+            </div>
           </mdb-card-text>
 
           

@@ -20,6 +20,8 @@ export class InventoryComponent implements OnInit {
   public productsAmount: Product[] = null;
   providers: Provider[] = [];
 
+  isEditing: boolean = false;
+
   asyncSelected: string;
   dataSource: Observable<any>;
 
@@ -76,7 +78,8 @@ export class InventoryComponent implements OnInit {
     this.addForm = this.formBuilder.group({
       "codeBar": ['', Validators.required],
       "amount": ['', Validators.required],
-      "email": ['', Validators.required]
+      "email": ['', Validators.required],
+      "id": ['', Validators.required]
     });
     setTimeout(() => {
       this.getProducts();
@@ -110,17 +113,42 @@ export class InventoryComponent implements OnInit {
   }
 
   onSubmit() {
-    this.producInventiryServide.addProduct(this.addForm.value);
+    this.productsAmount = null;
 
+    if (this.isEditing) {
+      this.producInventiryServide.editProduct(this.addForm.value);
+    } else {
+
+      this.producInventiryServide.addProduct(this.addForm.value);
+    }
+      setTimeout(() => {
+        this.getProductsAmount();
+      }, 100);
+
+      this.addForm = this.formBuilder.group({
+        "codeBar": ['', Validators.required],
+        "amount": ['', Validators.required],
+        "email": ['', Validators.required],
+        "id": ['', Validators.required]
+      });
+  }
+
+  edit(id: any) {
+    this.isEditing = true;
+    this.producInventiryServide.getProduct(id).subscribe(data => {
+      this.addForm.setValue(data);
+    })
+
+
+  } 
+
+  delete(product: any) {
+    this.productsAmount = null
+    this.producInventiryServide.deleteProduct(product);
     setTimeout(() => {
       this.getProductsAmount();
     }, 100);
 
-    this.addForm = this.formBuilder.group({
-      "codeBar": ['', Validators.required],
-      "amount": ['', Validators.required],
-      "email": ['', Validators.required]
-    });
   }
 
   logOut() {

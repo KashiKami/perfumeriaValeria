@@ -14,8 +14,20 @@ export class ProducInventoryService {
     return this.http.get(`${this.baseUrl}getAll.php`);
   }
 
+  public getProduct(id: any) {
+    return this.http.get(`${this.baseUrl}getProduct.php?id=` + id);
+  }
+
   addProduct(provider: any) {
     return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(provider)).subscribe();
+  }
+
+  deleteProduct(provider: any) {
+    return this.http.post(`${this.baseUrl}deleteProduct.php`, JSON.stringify(provider)).subscribe();
+  }
+
+  editProduct(provider: any) {
+    return this.http.post(`${this.baseUrl}reduceInventory.php`, JSON.stringify(provider)).subscribe();
   }
 
   removeProduct(product: any) {

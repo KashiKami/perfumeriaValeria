@@ -51,64 +51,14 @@
 
 </mdb-navbar>
 
-<div class="container">
-  <div class="d-flex p-4 col-example table-responsive"></div>
-  <table mdbTable hover="true" class="m-4 table product-table">
-
-    <thead>
-      <tr>
-        <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
-      </tr>
-    </thead>
-    <tbody *ngIf="productsAmount">
-      <tr mdbTableCol *ngFor="let product of productsAmount">
-
-        <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
-             aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-            <!--Content-->
-            <div class="modal-content text-center">
-              <!--Header-->
-              <div class="modal-header d-flex justify-content-center">
-                <p class="heading">Estas seguro?</p>
-              </div>
-
-              <!--Body-->
-              <div class="modal-body">
-                <i class="fa fa-times fa-4x animated rotateIn"></i>
-              </div>
-
-              <!--Footer-->
-              <div class="modal-footer justify-content-center">
-                <a mdbBtn color="succsess" outline="true" class="waves-effect"
-                   mdbWavesEffect (click)="delete(order)">Si</a>
-                <a (click)="frame.hide()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" this.photo=product.photo;>No</a>
-              </div>
-            </div>
-            <!--/.Content-->
-          </div>
-        </div>
-
-        <td>{{product.name}}</td>
-        <td>{{product.amount}}</td>
-        <td>
-          <i class="float-right p-2 fa fa-edit green-text fa-lg" aria-hidden="true"></i>
-          <i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i>
-        </td>
-        
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+<div mdbModal #frame2="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
   <div class="modal-dialog modal-full-height modal-right modal-notify modal-success" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <p class="heading lead">Agregar</p>
 
-        <button (click)="frame.hide()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button (click)="frame2.hide()" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" class="white-text">×</span>
         </button>
       </div>
@@ -166,7 +116,61 @@
   </div>
 </div>
 
-<button (click)="frame.show()" class="btn green waves-light position-fixed"
+<div class="container">
+  <div class="d-flex p-4 col-example table-responsive"></div>
+  <table mdbTable hover="true" class="m-4 table product-table">
+
+    <thead>
+      <tr>
+        <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="productsAmount">
+      <tr mdbTableCol *ngFor="let product of productsAmount">
+
+        <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+              <!--Header-->
+              <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Estas seguro?</p>
+              </div>
+
+              <!--Body-->
+              <div class="modal-body">
+                <i class="fa fa-times fa-4x animated rotateIn"></i>
+              </div>
+
+              <!--Footer-->
+              <div class="modal-footer justify-content-center">
+                <a mdbBtn color="succsess" outline="true" class="waves-effect"
+                   mdbWavesEffect (click)="delete(product)">Si</a>
+                <a (click)="frame.hide()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" this.photo=product.photo;>No</a>
+              </div>
+            </div>
+            <!--/.Content-->
+          </div>
+        </div>
+
+        <td>{{product.product}}</td>
+        <td>{{product.provider}}</td>
+        <td>{{product.phone}}</td>
+        <td>{{product.amount}}</td>
+        <td>
+          <i (click)="[frame2.show(), edit(product.id)]" class="float-right p-2 fa fa-edit green-text fa-lg" aria-hidden="true"></i>
+          <i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<button (click)="frame2.show()" class="btn green waves-light position-fixed"
         style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem">
   <i class="fa fa-plus"></i>
 </button>
