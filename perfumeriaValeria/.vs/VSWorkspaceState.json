@@ -5,11 +5,12 @@
     "\\src\\app",
     "\\src\\app\\add-order",
     "\\src\\app\\add-product",
+    "\\src\\app\\detail-order-client",
     "\\src\\app\\inventory",
-    "\\src\\app\\order-list",
-    "\\src\\app\\provider-list",
+    "\\src\\app\\product-list",
     "\\src\\app\\services",
-    "\\src\\app\\services\\productInventory"
+    "\\src\\app\\services\\product",
+    "\\src\\app\\services\\provider"
   ],
   "SelectedNode": "\\src\\app\\inventory\\inventory.component.ts",
   "PreviewInSolutionExplorer": false
