@@ -113,16 +113,14 @@
     <input type="file" style="display: none" id="fileChooser">
 
     <!-- Video -->
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-      <video [src]="urlVideo" class="w-responsive text-center p-5" controls></video>
-      <label class="w-responsive text-center mx-auto p-3 mt-2 custom-file-upload" mdbBtn color="success" style="position:unset;">
-        <input type="file" name="" id="video" ng2FileSelect [uploader]="uploader" (change)="onSelectFileVideo($event)" class="inputfile">
-        Subir Video
-      </label>
-      <input mdbInputDirective type="hidden" id="" class="form-control mb-4" formControlName="video">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 md-form">
+      <input mdbInputDirective type="text" id="video" class="form-control mb-4" formControlName="video" [(ngModel)]="product.video">
+      <label for="video" class="">Video</label>
+      <button (click)="loadVideo()" mdbBtn type="button" gradient="aqua" rounded="true" mdbWavesEffect>Agregar</button>
     </div>
-
-    <!-- Sign in button -->
+    <div *ngIf="safeSrc" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 embed-responsive embed-responsive-16by9 mb-4">
+      <iframe class="embed-responsive-item" [src]="safeSrc" allowfullscreen></iframe>
+    </div><!-- Sign in button -->
 
     <button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem"
             class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>

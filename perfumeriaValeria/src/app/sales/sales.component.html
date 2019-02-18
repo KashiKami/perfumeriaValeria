@@ -58,17 +58,17 @@
 
 <div class="container">
   <div class="d-flex p-4 col-example" style="margin-top:50px;"></div>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" (ngSubmit)="getProducts()">
     <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
       <input type="text" readonly class="form-control mb-3"
              placeholder="Daterangepicker" bsDaterangepicker formControlName="range" />
-      <div *ngIf="myForm.value.range">
-        <input type="" formControlName="dateStart" value="{{myForm.value.range[0] | date:'yyyy-MM-dd'}}" />
-        <input type="" formControlName="dateFinish" value="{{myForm.value.range[1] | date:'yyyy-MM-dd'}}" />
-      </div>
     </div>
+
+    <button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem"
+            class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
+      <i class="fa fa-check"></i>
+    </button>
   </form>
-  <button mdbBtn *ngIf="myForm.value.range" type="button" gradient="blue" rounded="true" (click)="getProducts()" mdbWavesEffect>Generar Reporte</button>
   <table mdbTable hover="true" class="m-4" *ngIf="products">
     <thead>
       <tr>
@@ -77,10 +77,16 @@
     </thead>
     <tbody>
       <tr mdbTableCol *ngFor="let product of products">
-        <th scope="row">{{product.name}}</th>
+        <th>{{product.name}}</th>
         <td>{{product.amount}}</td>
         <td>{{product.priceOut}}</td>
         <td>{{product.total}}</td>
+      </tr>
+      <tr>
+        <th></th>
+        <td></td>
+        <td>Total</td>
+        <td>{{TotalSale.total}}</td>
       </tr>
     </tbody>
   </table>

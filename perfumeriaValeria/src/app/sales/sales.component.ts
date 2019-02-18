@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReportService } from '../services/report/report.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-sales',
@@ -10,7 +11,8 @@ import { ReportService } from '../services/report/report.service';
 export class SalesComponent implements OnInit {
 
   products: any[] = null;
-  TotalSale: any = null;
+  TotalSale: any;
+  
   headElements = ['Producto', 'Cantidad', 'Precio de Venta', 'Total'];
   date: any = {};
 
@@ -20,22 +22,29 @@ export class SalesComponent implements OnInit {
               private reportService: ReportService) { }
 
   ngOnInit() {
+
     this.myForm = this.formBuilder.group({
       date: null,
       range: null,
-      dateStart: null,
-      dateFinish: null
+      dateStart: '',
+      dateFinish: ''
     });
   }
 
   getProducts() {
+    this.date.dateStart = formatDate(this.myForm.value.range[0], 'yyyy-MM-dd', 'en');
+    this.date.dateFinish = formatDate(this.myForm.value.range[1], 'yyyy-MM-dd', 'en');
     this.products = null;
     setTimeout(() => {
-      this.reportService.getSales(this.myForm.value).subscribe((data: any) => {
-        console.log(data);
-      this.products = data;
-    });
-    }, 500);
+      this.reportService.getSales(this.date).subscribe((data: any) => {
+        this.products = data;
+      });
+    }, 200);
+    setTimeout(() => {
+      this.reportService.getPriceSales(this.date).subscribe((data: any) => {
+        this.TotalSale = data;
+      });
+    }, 200);
   }
 
 }
