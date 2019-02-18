@@ -28,7 +28,7 @@ export class OrderListComponent implements OnInit {
   asyncSelectedClient: string;
   dataSourceClient: Observable<any>;
 
-  headElements = ['#', 'Nombre Cliente', 'Telefono Cliente', 'Valor', 'Estado', 'Fecha'];
+  headElements = ['#', 'Nombre Cliente', 'Telefono Cliente', 'Valor', 'Estado', 'Fecha', ];
 
   addForm: FormGroup;
 

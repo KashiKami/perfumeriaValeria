@@ -11,6 +11,6 @@
     "\\src\\app\\sales",
     "\\src\\app\\services"
   ],
-  "SelectedNode": "\\src\\app\\app.module.ts",
+  "SelectedNode": "\\src\\app\\order-list\\order-list.component.ts",
   "PreviewInSolutionExplorer": false
 }

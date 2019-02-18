@@ -48,7 +48,7 @@ export class AddProductComponent implements OnInit {
     
 
     this.addForm = new FormGroup({
-      'codeBar': new FormControl('', [Validators.required,,Validators.pattern('[0-9]*')]),
+      'codeBar': new FormControl(' ', [Validators.required,,Validators.pattern('[0-9]*')]),
       'name': new FormControl('', [Validators.required]),
       'description': new FormControl('', [Validators.required]),
       'priceIn': new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),

@@ -99,10 +99,12 @@
         <td>{{order.value}}</td>
         <td>{{order.state}}</td>
         <td>{{order.date}}</td>
-        <td><i *ngIf="order.state == 'T' " routerLink="edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
-        <td><i *ngIf="order.state == 'T' " (click)="edit('V', order.id)" class="float-right p-2 fa fa-check-circle blue-text fa-lg" aria-hidden="true"></i></td>
-        <td><i *ngIf="order.state == 'V' " (click)="edit('D', order.id)" class="float-right p-2 fa fa-truck grey-text fa-lg" aria-hidden="true"></i></td>
-        <td><i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i></td>
+        <td>
+          <i *ngIf="order.state == 'T' " routerLink="edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i>
+          <i *ngIf="order.state == 'T' " (click)="edit('V', order.id)" class="float-right p-2 fa fa-check-circle blue-text fa-lg" aria-hidden="true"></i>
+          <i *ngIf="order.state == 'V' " (click)="edit('D', order.id)" class="float-right p-2 fa fa-truck grey-text fa-lg" aria-hidden="true"></i>
+          <i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i>
+        </td>
       </tr>
     </tbody>
   </table>
