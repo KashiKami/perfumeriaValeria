@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {FormGroup, Validators, FormControl } from "@angular/forms";
 import { ClientService } from '../services/client/client.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,24 +12,21 @@ export class RegisterComponent implements OnInit {
 
   addForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
-              private clientService: ClientService,
-              private router: Router,) { }
+  constructor(private clientService: ClientService) { }
 
   ngOnInit() {
-    this.addForm = this.formBuilder.group({
-      "email": ['', Validators.required],
-      "name": ['', Validators.required],
-      "lastName": ['', Validators.required],
-      "password": ['', Validators.required],
-      "direction": ['', Validators.required],
-      "phone": ['', Validators.required],
-      "identify": ['', Validators.required]
+    this.addForm = new FormGroup({
+      'email': new FormControl('', [Validators.required,Validators.email]),
+      'name': new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z ]*')]),
+      'lastName': new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z ]*')]),
+      'password': new FormControl('', [Validators.required]),
+      'direction': new FormControl('', [Validators.required]),
+      'phone':  new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
+      'identify': new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
     });
   }
 
   onSubmit() {
     this.clientService.createClient(this.addForm.value);
-    this.router.navigate(['/login']);
   }
 }

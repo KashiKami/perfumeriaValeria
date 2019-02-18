@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 import { DOCUMENT } from '@angular/common'; 
 
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {  FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ProductService } from '../services/product/product.service';
 
@@ -28,8 +28,7 @@ export class AddProductComponent implements OnInit {
 
   product: any = {};
 
-  constructor(private formBuilder: FormBuilder,
-    private router: Router,
+  constructor(private router: Router,
     private productService: ProductService,
     private route: ActivatedRoute,
     private http: HttpClient,
@@ -43,17 +42,17 @@ export class AddProductComponent implements OnInit {
     this.element = document.getElementById('qr').children as HTMLCollection;
     
 
-    this.addForm = this.formBuilder.group({
-      "codeBar": [' ', Validators.required],
-      "name": ['', Validators.required],
-      "description": ['', Validators.required],
-      "priceIn": ['', Validators.required],
-      "priceOut": ['', Validators.required],
-      "discount": ['', Validators.required],
-      "photo": [''],
-      "qr": [''],
-      "video": [''],
-      "email": ["hola@123"]
+    this.addForm = new FormGroup({
+      'codeBar': new FormControl('', [Validators.required,,Validators.pattern('[0-9]*')]),
+      'name': new FormControl('', [Validators.required]),
+      'description': new FormControl('', [Validators.required]),
+      'priceIn': new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
+      'priceOut': new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
+      'amount': new FormControl('', []),
+      'photo': new FormControl(['']),
+      'qr': new FormControl(['']),
+      'video': new FormControl(['']),
+      'email': new FormControl(["hola@"])
     });
     if (id != null) {
       this.productService.getOneProduct(id).subscribe(data => {

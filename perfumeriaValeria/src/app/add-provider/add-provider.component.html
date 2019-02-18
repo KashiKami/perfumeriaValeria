@@ -10,12 +10,6 @@
       <li class="nav-item ">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Inventario</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/sales">Ventas</a>
-      </li>
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
       </li>
@@ -63,50 +57,75 @@
 
     <!-- Name -->
     <div class="md-form col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-      <input mdbInputDirective type="text" id="name" class="form-control" formControlName="name">
+      <input mdbInputDirective type="text"  class="form-control" formControlName="name">
       <label for="name" class="">Nombres</label>
     </div>
 
 
     <!-- LastName -->
     <div class="md-form col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-      <input mdbInputDirective type="text" id="lastname" class="form-control" formControlName="lastName">
+      <input mdbInputDirective type="text" class="form-control" formControlName="lastName">
       <label for="lastname" class="">Apellidos</label>
     </div>
+    <br>
+    <div class='errors'>      
+        <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['required']"> El nombre es requerido</p>
+        <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['pattern']"> El nombre ingresado es inválido</p>
+        <p *ngIf="addForm.get('lastName').dirty && addForm.get('lastName').errors && addForm.get('lastName').errors['required']"> El apellido es requerido</p>
+        <p *ngIf="addForm.get('lastName').dirty && addForm.get('lastName').errors && addForm.get('lastName').errors['pattern']"> El apellido ingresado es inválido</p>
+      </div>
+      <br>
+      <br>
 
     <!-- Email -->
     <div class="md-form col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-      <input mdbInputDirective type="email" id="email" class="form-control" formControlName="email">
+      <input mdbInputDirective type="email"  class="form-control" formControlName="email">
       <label for="email" class="">Correo</label>
     </div>
 
     <!-- Direction -->
     <div class="md-form col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-      <input mdbInputDirective type="text" id="direction" class="form-control" formControlName="direction">
+      <input mdbInputDirective type="text"  class="form-control" formControlName="direction">
       <label for="direction" class="">Dirección</label>
     </div>
-
+    <br>
+    <br>
+    <div class='errors'>      
+        <p *ngIf="addForm.get('direction').dirty && addForm.get('direction').errors && addForm.get('direction').errors['required']"> La dirección es requerida</p>   
+            <p *ngIf="addForm.get('email').dirty && addForm.get('email').errors && addForm.get('email').errors['required']"> El correo electronico es requerido</p>
+            <p *ngIf="addForm.get('email').dirty && addForm.get('email').errors && addForm.get('email').errors['email']"> El correo electronico ingresado tiene formato invalido</p> 
+      </div>
+      <br>
     <!-- Password -->
     <div class="md-form col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-      <input mdbInputDirective type="text" id="password" class="form-control" formControlName="password">
+      <input mdbInputDirective type="text"  class="form-control" formControlName="password">
       <label for="password" class="">Constraseña</label>
     </div>
 
     <!-- phone -->
     <div class="md-form col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-      <input mdbInputDirective type="text" id="phone" class="form-control" formControlName="phone">
+      <input mdbInputDirective type="text"  class="form-control" formControlName="phone">
       <label for="phone" class="">Telefono</label>
     </div>
 
     <!-- indentify -->
     <div class="md-form col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-      <input mdbInputDirective type="text" id="identify" class="form-control" formControlName="identify">
+      <input mdbInputDirective type="text"  class="form-control" formControlName="identify">
       <label for="identify" class="">Cedula</label>
     </div>
+    <br>
+    <br>
+    <div class='errors'>      
+        <p *ngIf="addForm.get('identify').dirty && addForm.get('identify').errors && addForm.get('identify').errors['required']"> El numero de identificación es requerido</p>
+        <p *ngIf="addForm.get('identify').dirty && addForm.get('identify').errors && addForm.get('identify').errors['pattern']"> El numero de identificación ingresado es inválido</p>
+        <p *ngIf="addForm.get('phone').dirty && addForm.get('phone').errors && addForm.get('phone').errors['required']"> El numero de teléfono es requerido</p>
+        <p *ngIf="addForm.get('phone').dirty && addForm.get('phone').errors && addForm.get('phone').errors['pattern']"> El numero de teléfono ingresado es inválido</p>
+        <p *ngIf="addForm.get('password').dirty && addForm.get('password').errors && addForm.get('password').errors['required']"> La dirección es requerida</p>
+      </div>
 
     <!-- Sign in button -->
     <button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem"
-            class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
+            class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect [disabled]="!addForm.valid">
       <i class="fa fa-check"></i>
     </button>
   </div>

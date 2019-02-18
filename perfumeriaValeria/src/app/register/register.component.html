@@ -44,43 +44,69 @@
     <div class="form-row mb-4">
       <div class="col">
         <!-- First name -->
-        <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Nombres" formControlName="name">
+        <input type="text"  class="form-control" placeholder="Nombres" formControlName="name">
       </div>
+      
       <div class="col">
         <!-- Last name -->
-        <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Apellidos" formControlName="lastName">
+        <input type="text"  class="form-control" placeholder="Apellidos" formControlName="lastName">
       </div>
+      
     </div>
-
+    <div class='errors'>      
+        <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['required']"> El nombre es requerido</p>
+        <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['pattern']"> El nombre ingresado es inválido</p>
+        <p *ngIf="addForm.get('lastName').dirty && addForm.get('lastName').errors && addForm.get('lastName').errors['required']"> El apellido es requerido</p>
+        <p *ngIf="addForm.get('lastName').dirty && addForm.get('lastName').errors && addForm.get('lastName').errors['pattern']"> El apellido ingresado es inválido</p>
+      </div>
 
     <!-- Phone number -->
-    <input type="text" id="defaultRegisterDirectionPassword" class="form-control" placeholder="Direccion" aria-describedby="defaultRegisterFormPhoneHelpBlock" formControlName="direction">
+    <input type="text"  class="form-control" placeholder="Direccion"  formControlName="direction">
     <br>
-    <input type="text" id="defaultRegisterIdentifyPassword" class="form-control" placeholder="Identificacion" aria-describedby="defaultRegisterFormPhoneHelpBlock" formControlName="identify">
+    <div class='errors'>      
+        <p *ngIf="addForm.get('direction').dirty && addForm.get('direction').errors && addForm.get('direction').errors['required']"> La dirección es requerida</p>
+      </div>
+    
+    <input type="text"  class="form-control" placeholder="Identificacion" formControlName="identify">
     <br>
-    <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Celular" aria-describedby="defaultRegisterFormPhoneHelpBlock" formControlName="phone">
+    <div class='errors'>      
+        <p *ngIf="addForm.get('identify').dirty && addForm.get('identify').errors && addForm.get('identify').errors['required']"> El numero de identificación es requerido</p>
+        <p *ngIf="addForm.get('identify').dirty && addForm.get('identify').errors && addForm.get('identify').errors['pattern']"> El numero de identificación ingresado es inválido</p>
+      </div>
+    
+    <input type="text"  class="form-control" placeholder="Celular"  formControlName="phone">
     <br>
+    <div class='errors'>      
+        <p *ngIf="addForm.get('phone').dirty && addForm.get('phone').errors && addForm.get('phone').errors['required']"> El numero de teléfono es requerido</p>
+        <p *ngIf="addForm.get('phone').dirty && addForm.get('phone').errors && addForm.get('phone').errors['pattern']"> El numero de teléfono ingresado es inválido</p>
+      </div>
+    
     <!-- E-mail -->
-    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="correo" formControlName="email">
+    <input type="email"  class="form-control mb-4" placeholder="Correo" formControlName="email">
+    <br>
+    <div class='errors'>      
+      <p *ngIf="addForm.get('email').dirty && addForm.get('email').errors && addForm.get('email').errors['required']"> El correo electronico es requerido</p>
+      <p *ngIf="addForm.get('email').dirty && addForm.get('email').errors && addForm.get('email').errors['email']"> El correo electronico ingresado tiene formato invalido</p>
+    </div>   
 
     <!-- Password -->
-    <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="contraseña" aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="password">
-
-
+    <input type="password"  class="form-control" placeholder="contraseña"  formControlName="password">
+    <br>
+    <div class='errors'>      
+        <p *ngIf="addForm.get('password').dirty && addForm.get('password').errors && addForm.get('password').errors['required']"> La dirección es requerida</p>
+        
+      </div>
 
 
     <!-- Newsletter -->
     <div class="row">
       <div class="col-md-6 mx-auto d-flex justify-content-center">
-        <p>
-         Ya estas registrado
-          <a routerLink="/login" href="">Ingresa!</a>
-        </p>
+        <mdb-checkbox [default]="true">Subscribe to our newsletter</mdb-checkbox>
       </div>
     </div>
-
+    
     <!-- Sign up button -->
-    <button mdbBtn color="info" block="true" class="my-4" type="submit">Registrar</button>
+    <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!addForm.valid">Registrar</button>
 
   </form>
 </div>
