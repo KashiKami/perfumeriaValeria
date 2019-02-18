@@ -9,6 +9,8 @@ import { ProductService } from '../services/product/product.service';
 import { HttpClient } from '@angular/common/http'
 import { Product } from '../models/product';
 
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 const URL = 'http://localhost:3000/api/upload';
 
 @Component({
@@ -26,12 +28,15 @@ export class AddProductComponent implements OnInit {
   selectFile: File = null;
   element: HTMLCollection;
 
+  safeSrc: SafeResourceUrl = null;
+
   product: any = {};
 
   constructor(private router: Router,
     private productService: ProductService,
     private route: ActivatedRoute,
     private http: HttpClient,
+    private sanitizer: DomSanitizer,
     @Inject(DOCUMENT) document) {
   } 
 
@@ -56,10 +61,10 @@ export class AddProductComponent implements OnInit {
     });
     if (id != null) {
       this.productService.getOneProduct(id).subscribe(data => {
-        //this.urlVideo = data.video;
         let product = new Product(data);
         this.url = product.photo;
         this.addForm.setValue(data);
+        this.loadVideo();
       })
     }
     
@@ -70,7 +75,6 @@ export class AddProductComponent implements OnInit {
   onSubmit() {
     let id = this.route.snapshot.paramMap.get('id');
     if (id == null) {
-      this.addForm.patchValue({ video: this.urlVideo })
       this.addForm.patchValue({ photo: this.url })
       this.addForm.patchValue({ qr: this.element[1].getAttribute('src') });
       this.productService.createProduct(this.addForm.value);
@@ -110,6 +114,11 @@ export class AddProductComponent implements OnInit {
         this.urlVideo = event.target.result;
       }
     }
+  }
+
+  loadVideo() {
+    let auxUrl = "https://www.youtube.com/embed/"+this.product.video.substring(32, this.product.video.length);
+    this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(auxUrl);
   }
 
   logOut() {
