@@ -16,7 +16,7 @@ export class ClientService {
   }
 
   createClient(client: any) {
-    return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(client)).subscribe();
+    return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(client));
   }
 
 

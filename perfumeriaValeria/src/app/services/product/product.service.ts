@@ -20,7 +20,7 @@ export class ProductService {
   }
 
   createProduct(product: any) {
-    return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(product)).subscribe();
+    return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(product));
   }
 
   editProduct(product: any, id: any) {

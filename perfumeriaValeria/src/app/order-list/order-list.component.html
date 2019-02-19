@@ -8,19 +8,19 @@
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos<span class="sr-only">(current)</span></a>
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos</a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Inventario</a>
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Pedidos</a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/sales">Ventas</a>
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/sales">Reportes</a>
       </li>
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Pedidos</a>
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Ventas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/help">Ayuda</a>
@@ -127,6 +127,14 @@
       <!--Body-->
       <div class="modal-body">
         <form class="" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+          <div *ngIf="error" #alert class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{errorText}}
+          </div>
+
           <div class="modal-body mx-3">
             <!-- LastName -->
             <div class="md-form">

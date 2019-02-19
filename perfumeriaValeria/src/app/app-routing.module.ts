@@ -50,6 +50,7 @@ const routes: Routes = [
   { path: 'orders/:id', component: DetailOrderClientComponent, canActivate: [AuthGuardClient] },
 
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin] },
+  { path: 'login/:state', component: LoginComponent, canActivate: [AuthGuardLogin] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuardLogin] },
 
   { path: 'detail-count/:email', component: DetailClientComponent, canActivate: [AuthGuardClient] },

@@ -1,4 +1,3 @@
-<!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg indigo navbar-dark fixed-top scrolling-navbar">
 
   <!-- Navbar brand -->
@@ -8,13 +7,19 @@
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos<span class="sr-only">(current)</span></a>
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Pedidos</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/sales">Reportes</a>
       </li>
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Pedidos</a>
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Ventas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/help">Ayuda</a>
@@ -55,57 +60,64 @@
   <p class="h4 mb-4">Crear producto</p>
   <div class="row">
 
+    <div *ngIf="error" #alert class="alert alert-danger alert-dismissible fade show" role="alert">
+      <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{errorText}}
+    </div>
+
     <!-- Name -->
     <div class="md-form col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-      <input mdbInputDirective type="text"  class="form-control mb-4 " formControlName="name">
+      <input mdbInputDirective type="text" class="form-control mb-4 " formControlName="name">
       <label for="name" class="">Nombre</label>
     </div>
-    
+
 
     <!-- Code Bar -->
     <div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 md-form">
-      <input mdbInputDirective type="text"  class="form-control mb-4" formControlName="codeBar" #qr (keyup)="0">
+      <input mdbInputDirective type="text" class="form-control mb-4" formControlName="codeBar" #qr (keyup)="0">
       <label for="codeBar" class="">Codigo</label>
     </div>
-    
+
 
     <!-- Price -->
     <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 md-form">
-      <input mdbInputDirective type="number"  id="priceIn" class="form-control mb-4" formControlName="priceIn">
+      <input mdbInputDirective type="number" id="priceIn" class="form-control mb-4" formControlName="priceIn">
       <label for="priceIn" class="">Precio Compra</label>
     </div>
-    
+
     <!-- Price -->
     <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 md-form">
-      <input mdbInputDirective type="number"  id="priceOut" class="form-control mb-4" formControlName="priceOut">
+      <input mdbInputDirective type="number" id="priceOut" class="form-control mb-4" formControlName="priceOut">
       <label for="priceOut" class="">Precio Venta</label>
     </div>
- 
+
     <!-- Amount -->
     <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 md-form">
-      <input mdbInputDirective type="number"  id="amount" class="form-control mb-4" formControlName="amount">
-      <label for="amount" class="">Descuento</label>
+      <input mdbInputDirective type="number" id="discount" class="form-control mb-4" formControlName="discount">
+      <label for="discount" class="">Descuento</label>
     </div>
     <br>
-    <div class='errors'>      
-        <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['required']"> El nombrre de prosucto es requerido</p>
-        <p *ngIf="addForm.get('codeBar').dirty && addForm.get('codeBar').errors && addForm.get('codeBar').errors['required']"> El código de barras es requerido</p>
-        <p *ngIf="addForm.get('codeBar').dirty && addForm.get('codeBar').errors && addForm.get('codeBar').errors['pattern']"> El código de barras ingresado es inválido</p>
-        <p *ngIf="addForm.get('priceIn').dirty && addForm.get('priceIn').errors && addForm.get('priceIn').errors['required']"> El precio de entrada es requerido</p>        
-        <p *ngIf="addForm.get('priceOut').dirty && addForm.get('priceOut').errors && addForm.get('priceOut').errors['required']"> El precio de salida es requerido</p>
-        
-        
-      </div>
+    <div class='errors'>
+      <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['required']"> El nombrre de prosucto es requerido</p>
+      <p *ngIf="addForm.get('codeBar').dirty && addForm.get('codeBar').errors && addForm.get('codeBar').errors['required']"> El código de barras es requerido</p>
+      <p *ngIf="addForm.get('codeBar').dirty && addForm.get('codeBar').errors && addForm.get('codeBar').errors['pattern']"> El código de barras ingresado es inválido</p>
+      <p *ngIf="addForm.get('priceIn').dirty && addForm.get('priceIn').errors && addForm.get('priceIn').errors['required']"> El precio de entrada es requerido</p>
+      <p *ngIf="addForm.get('priceOut').dirty && addForm.get('priceOut').errors && addForm.get('priceOut').errors['required']"> El precio de salida es requerido</p>
+
+
+    </div>
     <!-- Description -->
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 md-form">
-      <textarea mdbInputDirective type="text"  class="form-control mb-4 md-textarea" formControlName="description"></textarea>
+      <textarea mdbInputDirective type="text" class="form-control mb-4 md-textarea" formControlName="description"></textarea>
       <label for="description" class="">Descripcion</label>
     </div>
     <br>
-    <div class='errors'>      
-        <p *ngIf="addForm.get('description').dirty && addForm.get('description').errors && addForm.get('description').errors['required']"> La descripción es requerida</p>
-        
-      </div>
+    <div class='errors'>
+      <p *ngIf="addForm.get('description').dirty && addForm.get('description').errors && addForm.get('description').errors['required']"> La descripción es requerida</p>
+
+    </div>
     <!-- Image -->
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -130,7 +142,7 @@
     </div><!-- Sign in button -->
 
     <button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem"
-            class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect [disabled]="!addForm.valid"> 
+            class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect [disabled]="!addForm.valid">
       <i class="fa fa-check"></i>
     </button>
 

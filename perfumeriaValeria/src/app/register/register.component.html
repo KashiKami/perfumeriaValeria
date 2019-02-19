@@ -24,7 +24,7 @@
             <div class="intro-info-content text-center ">
 
               <div class="container d-flex justify-content-center p-4 col-example  animated  wow fadeInRight">
-               
+
               </div>
             </div>
           </div>
@@ -33,81 +33,82 @@
       </div>
     </div>
   </div>
-  </header>
+</header>
 
 <!-- Default form register -->
-<div class="container"style="margin-top:100px;">
+<div class="container" style="margin-top:100px;">
+
   <form class="text-center border border-light p-5" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
     <p class="h4 mb-4">Registro</p>
 
+    <div *ngIf="error" #alert class="alert alert-warning alert-dismissible fade show" role="alert">
+      <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{errorText}}
+    </div>
+
     <div class="form-row mb-4">
       <div class="col">
         <!-- First name -->
-        <input type="text"  class="form-control" placeholder="Nombres" formControlName="name">
+        <input type="text" class="form-control" placeholder="Nombres" formControlName="name">
       </div>
-      
+
       <div class="col">
         <!-- Last name -->
-        <input type="text"  class="form-control" placeholder="Apellidos" formControlName="lastName">
+        <input type="text" class="form-control" placeholder="Apellidos" formControlName="lastName">
       </div>
-      
+
     </div>
-    <div class='errors'>      
-        <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['required']"> El nombre es requerido</p>
-        <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['pattern']"> El nombre ingresado es inválido</p>
-        <p *ngIf="addForm.get('lastName').dirty && addForm.get('lastName').errors && addForm.get('lastName').errors['required']"> El apellido es requerido</p>
-        <p *ngIf="addForm.get('lastName').dirty && addForm.get('lastName').errors && addForm.get('lastName').errors['pattern']"> El apellido ingresado es inválido</p>
-      </div>
+    <div class='errors'>
+      <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['required']"> El nombre es requerido</p>
+      <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['pattern']"> El nombre ingresado es inválido</p>
+      <p *ngIf="addForm.get('lastName').dirty && addForm.get('lastName').errors && addForm.get('lastName').errors['required']"> El apellido es requerido</p>
+      <p *ngIf="addForm.get('lastName').dirty && addForm.get('lastName').errors && addForm.get('lastName').errors['pattern']"> El apellido ingresado es inválido</p>
+    </div>
 
     <!-- Phone number -->
-    <input type="text"  class="form-control" placeholder="Direccion"  formControlName="direction">
+    <input type="text" class="form-control" placeholder="Direccion" formControlName="direction">
     <br>
-    <div class='errors'>      
-        <p *ngIf="addForm.get('direction').dirty && addForm.get('direction').errors && addForm.get('direction').errors['required']"> La dirección es requerida</p>
-      </div>
-    
-    <input type="text"  class="form-control" placeholder="Identificacion" formControlName="identify">
+    <div class='errors'>
+      <p *ngIf="addForm.get('direction').dirty && addForm.get('direction').errors && addForm.get('direction').errors['required']"> La dirección es requerida</p>
+    </div>
+
+    <input type="text" class="form-control" placeholder="Identificacion" formControlName="identify">
     <br>
-    <div class='errors'>      
-        <p *ngIf="addForm.get('identify').dirty && addForm.get('identify').errors && addForm.get('identify').errors['required']"> El numero de identificación es requerido</p>
-        <p *ngIf="addForm.get('identify').dirty && addForm.get('identify').errors && addForm.get('identify').errors['pattern']"> El numero de identificación ingresado es inválido</p>
-      </div>
-    
-    <input type="text"  class="form-control" placeholder="Celular"  formControlName="phone">
+    <div class='errors'>
+      <p *ngIf="addForm.get('identify').dirty && addForm.get('identify').errors && addForm.get('identify').errors['required']"> El numero de identificación es requerido</p>
+      <p *ngIf="addForm.get('identify').dirty && addForm.get('identify').errors && addForm.get('identify').errors['pattern']"> El numero de identificación ingresado es inválido</p>
+    </div>
+
+    <input type="text" class="form-control" placeholder="Celular" formControlName="phone">
     <br>
-    <div class='errors'>      
-        <p *ngIf="addForm.get('phone').dirty && addForm.get('phone').errors && addForm.get('phone').errors['required']"> El numero de teléfono es requerido</p>
-        <p *ngIf="addForm.get('phone').dirty && addForm.get('phone').errors && addForm.get('phone').errors['pattern']"> El numero de teléfono ingresado es inválido</p>
-      </div>
-    
+    <div class='errors'>
+      <p *ngIf="addForm.get('phone').dirty && addForm.get('phone').errors && addForm.get('phone').errors['required']"> El numero de teléfono es requerido</p>
+      <p *ngIf="addForm.get('phone').dirty && addForm.get('phone').errors && addForm.get('phone').errors['pattern']"> El numero de teléfono ingresado es inválido</p>
+    </div>
+
     <!-- E-mail -->
-    <input type="email"  class="form-control mb-4" placeholder="Correo" formControlName="email">
+    <input type="email" class="form-control mb-4" placeholder="Correo" formControlName="email">
     <br>
-    <div class='errors'>      
+    <div class='errors'>
       <p *ngIf="addForm.get('email').dirty && addForm.get('email').errors && addForm.get('email').errors['required']"> El correo electronico es requerido</p>
       <p *ngIf="addForm.get('email').dirty && addForm.get('email').errors && addForm.get('email').errors['email']"> El correo electronico ingresado tiene formato invalido</p>
-    </div>   
+    </div>
 
     <!-- Password -->
-    <input type="password"  class="form-control" placeholder="contraseña"  formControlName="password">
+    <input type="password" class="form-control" placeholder="contraseña" formControlName="password">
     <br>
-    <div class='errors'>      
-        <p *ngIf="addForm.get('password').dirty && addForm.get('password').errors && addForm.get('password').errors['required']"> La dirección es requerida</p>
-        
-      </div>
+    <div class='errors'>
+      <p *ngIf="addForm.get('password').dirty && addForm.get('password').errors && addForm.get('password').errors['required']"> La dirección es requerida</p>
 
-
-    <!-- Newsletter -->
-    <div class="row">
-      <div class="col-md-6 mx-auto d-flex justify-content-center">
-        <mdb-checkbox [default]="true">Subscribe to our newsletter</mdb-checkbox>
-      </div>
     </div>
-    
+
     <!-- Sign up button -->
     <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!addForm.valid">Registrar</button>
 
   </form>
 </div>
 <!-- Default form register -->
+

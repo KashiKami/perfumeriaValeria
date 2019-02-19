@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, Validators, FormControl } from "@angular/forms";
 import { ClientService } from '../services/client/client.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -11,8 +12,11 @@ import { ClientService } from '../services/client/client.service';
 export class RegisterComponent implements OnInit {
 
   addForm: FormGroup;
+  error: boolean = false;
+  errorText: string = "";
 
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService,
+              private router: Router,) { }
 
   ngOnInit() {
     this.addForm = new FormGroup({
@@ -27,6 +31,17 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.clientService.createClient(this.addForm.value);
+    this.clientService.createClient(this.addForm.value).subscribe((data: any) => {
+      if (data.error && data.error != 'creado exitosamente') {
+        this.error = true;
+        this.errorText = data.error;
+      } else if (data.error == 'creado exitosamente') {
+        this.router.navigate(['/login/'+true]);
+      }
+    });
+  }
+
+  closeAlert() {
+    this.error = false;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from '../services/user/authentication.service';
 import { User } from '../models/user';
@@ -13,18 +13,31 @@ import { formatDate } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
+  @ViewChild('alert') alert: ElementRef;
+
   loginForm: FormGroup;
   currentUser: User;
   order: any = {};
 
+  error: boolean = false;
+  textError: string = "";
+
   constructor(private authenticationService: AuthenticationService,
               private router: Router,
-              private clientService: ClientService) { }
+              private clientService: ClientService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    let state = this.route.snapshot.paramMap.get('state');
+
+    if (state) {
+      this.error = true;
+      this.textError = "creado exitosamente";
+    }
+
     this.loginForm =  new FormGroup({
       'email': new FormControl('', [Validators.required,Validators.email]),
-      'password': new FormControl('', [Validators.required, Validators.minLength(8)])
+      'password': new FormControl('', [Validators.required])
     });
 
   }
@@ -32,16 +45,25 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     // stop here if form is invalid
     if (this.loginForm.invalid) {
+      
       return;
     }
 
-    this.authenticationService.login(this.loginForm.value);
+    this.authenticationService.login(this.loginForm.value).subscribe((data: any) => {
+      if (data.email) {
+        localStorage.setItem('currentUser', JSON.stringify(data));
+      } else if (data.error) {
+        this.error = true;
+        this.textError = data.error;
+      }
+
+    });
 
     setTimeout(() => {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
       if (this.currentUser != null) {
-        
+
         if (this.currentUser.typeUser == 'A') {
         this.router.navigate(['admin/products']);
         } else if (this.currentUser.typeUser == 'P') {
@@ -55,6 +77,10 @@ export class LoginComponent implements OnInit {
       }
     }
       , 500);
+  }
+
+  closeAlert() {
+    this.error = false;
   }
 
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef} from '@angular/core';
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 
-import {  FormGroup, Validators, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ProductService } from '../services/product/product.service';
 
@@ -28,36 +28,40 @@ export class AddProductComponent implements OnInit {
   selectFile: File = null;
   element: HTMLCollection;
 
+  error: boolean = false;
+  errorText: string = "";
+
   safeSrc: SafeResourceUrl = null;
 
   product: any = {};
 
-  constructor(private router: Router,
+  constructor(private formBuilder: FormBuilder,
+    private router: Router,
     private productService: ProductService,
     private route: ActivatedRoute,
     private http: HttpClient,
     private sanitizer: DomSanitizer,
     @Inject(DOCUMENT) document) {
-  } 
+  }
 
 
   ngOnInit() {
-    
+
     let id = this.route.snapshot.paramMap.get('id');
     this.element = document.getElementById('qr').children as HTMLCollection;
-    
 
-    this.addForm = new FormGroup({
-      'codeBar': new FormControl(' ', [Validators.required,,Validators.pattern('[0-9]*')]),
-      'name': new FormControl('', [Validators.required]),
-      'description': new FormControl('', [Validators.required]),
-      'priceIn': new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
-      'priceOut': new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
-      'amount': new FormControl('', []),
-      'photo': new FormControl(['']),
-      'qr': new FormControl(['']),
-      'video': new FormControl(['']),
-      'email': new FormControl(["hola@"])
+
+    this.addForm = this.formBuilder.group({
+      "codeBar": [' ', Validators.required],
+      "name": ['', Validators.required],
+      "description": ['', Validators.required],
+      "priceIn": ['', Validators.required],
+      "priceOut": ['', Validators.required],
+      "discount": ['', Validators.required],
+      "photo": [''],
+      "qr": [''],
+      "video": [''],
+      "email": ["hola@123"]
     });
     if (id != null) {
       this.productService.getOneProduct(id).subscribe(data => {
@@ -67,7 +71,7 @@ export class AddProductComponent implements OnInit {
         this.loadVideo();
       })
     }
-    
+
   }
 
 
@@ -77,13 +81,22 @@ export class AddProductComponent implements OnInit {
     if (id == null) {
       this.addForm.patchValue({ photo: this.url })
       this.addForm.patchValue({ qr: this.element[1].getAttribute('src') });
-      this.productService.createProduct(this.addForm.value);
+      this.productService.createProduct(this.addForm.value).subscribe((data: any) => {
+        if (data.error && data.error != 'creado exitosamente') {
+          this.error = true;
+          this.errorText = data.error;
+        } else if (data.error == 'creado exitosamente') {
+          setTimeout(() => {
+            this.router.navigate(['admin/products']);
+          }, 500);
+        }
+      });
     } else {
       this.addForm.patchValue({ photo: this.url })
       this.productService.editProduct(this.addForm.value, id);
     }
-     this.router.navigate(['admin/products']);
     
+
   }
 
   onKey(event: any) {
@@ -91,7 +104,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onSelectFile(event) {
-    
+
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
@@ -99,7 +112,7 @@ export class AddProductComponent implements OnInit {
 
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = event.target.result;
-        
+
       }
     }
   }
@@ -117,8 +130,12 @@ export class AddProductComponent implements OnInit {
   }
 
   loadVideo() {
-    let auxUrl = "https://www.youtube.com/embed/"+this.product.video.substring(32, this.product.video.length);
+    let auxUrl = "https://www.youtube.com/embed/" + this.product.video.substring(32, this.product.video.length);
     this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(auxUrl);
+  }
+
+  closeAlert() {
+    this.error = false;
   }
 
   logOut() {
