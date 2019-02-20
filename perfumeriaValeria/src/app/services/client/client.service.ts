@@ -37,4 +37,7 @@ export class ClientService {
   public getOrderSpecify(order: any) {
     return this.http.post(`${this.baseUrl}getOrderSpecify.php`, JSON.stringify(order));
   }
+  deleteClients(client: any) {
+    return this.http.post(`${this.baseUrl}delete.php`, JSON.stringify(client)).subscribe();
+  }
 }
