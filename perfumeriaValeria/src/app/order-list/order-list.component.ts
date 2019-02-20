@@ -21,6 +21,9 @@ export class OrderListComponent implements OnInit {
   public orders: Order[] = null;
   public clients: Client[];
 
+  error: boolean = false;
+  errorText: string = "";
+
   order: any = {};
   
   aux: any = {};
@@ -28,7 +31,7 @@ export class OrderListComponent implements OnInit {
   asyncSelectedClient: string;
   dataSourceClient: Observable<any>;
 
-  headElements = ['#', 'Nombre Cliente', 'Telefono Cliente', 'Valor', 'Estado', 'Fecha'];
+  headElements = ['#', 'Nombre Cliente', 'Telefono Cliente', 'Valor', 'Estado', 'Fecha', ];
 
   addForm: FormGroup;
 
@@ -94,9 +97,16 @@ export class OrderListComponent implements OnInit {
   onSubmit() {
     let myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
     this.addForm.patchValue({ date: myDate })
-    this.orderService.addOrder(this.addForm.value);
+    this.orderService.addOrder(this.addForm.value).subscribe((data: any) => {
+      if (data.error && data.error != 'creado exitosamente') {
+        this.error = true;
+        this.errorText = data.error;
+      } else if (data.error == 'creado exitosamente') {
+        console.log("creado exitosamente")
+        this.router.navigate(['admin/orders/edit-order/' + this.aux.idOrder]);
+      }
+    });
 
-    this.router.navigate(['admin/orders/edit-order/' + this.aux.idOrder]);
 
    this.getOrders();
 
@@ -123,5 +133,9 @@ export class OrderListComponent implements OnInit {
     setTimeout(() => {
       this.getOrders();
     }, 100);
+  }
+
+  closeAlert() {
+    this.error = false;
   }
 }

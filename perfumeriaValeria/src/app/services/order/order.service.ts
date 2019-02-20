@@ -20,7 +20,7 @@ export class OrderService {
   }
 
   addOrder(order: any) {
-    return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(order)).subscribe();
+    return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(order));
   }
 
   addProduct(order: any, id: any) {

@@ -13,12 +13,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   login(user: any) {
-    return this.http.post(`${this.baseUrl}authenticate.php`, user).subscribe((data: User) => {
-      if (data.email) {
-        localStorage.setItem('currentUser', JSON.stringify(data));
-      }
-      
-    });
+    return this.http.post(`${this.baseUrl}authenticate.php`, user);
   }
 
   logout() {
