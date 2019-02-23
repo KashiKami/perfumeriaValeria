@@ -15,6 +15,11 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}getAll.php`);
   }
 
+  public getProductsByCategory(id: any) {
+    return this.http.get(`${this.baseUrl}getAllByCategory.php?id=`+id);
+  }
+
+
   public getOneProduct(id: any) {
     return this.http.get(`${this.baseUrl}getProduct.php?id=`+id);
   }

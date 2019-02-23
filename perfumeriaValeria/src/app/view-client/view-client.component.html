@@ -12,6 +12,21 @@
             Inicio
           </a>
         </li>
+        <li class="nav-item waves-light dropdown" dropdown *ngFor="let category of categories">
+          <a *ngIf="category.num != 0; else elseMenu" dropdownToggle mdbWavesEffect (click)="getSubCategories(category.id)" class="nav-link dropdown-toggle waves-light">
+            {{category.name}}<span class="caret"></span>
+          </a>
+          <ng-template #elseMenu class="navbar-nav nav-flex-icons ">
+            <a routerLink="/category/{{category.id}}" class="nav-link">
+              {{category.name}}
+            </a>
+          </ng-template>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{category.id}}">{{category.name}}</a>
+            <a *ngFor="let subcategory of subCategories" class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{subcategory.id}}">{{subcategory.name}}</a>
+          </div>
+
+        </li>
       </ul>
 
       <div *ngIf="currentUser; else elseLogin" class="navbar-nav nav-flex-icons">
@@ -75,49 +90,94 @@
 </header>
 <!--Main Navigation-->
 <!--Main Layout-->
-<main class="text-center py-5">
 
+<mdb-carousel [isControls]="true" class="carousel slide" [animation]="'slide'">
+  <mdb-carousel-item>
+    <div class="view w-100">
+      
+    </div>
+
+    <div class="carousel-caption">
+      <div class="animated fadeInDown">
+        <h3 class="h3-responsive">Light mask</h3>
+        <p>First text</p>
+      </div>
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <div class="view">
+      <video class="video-fluid" autoplay loop>
+        <source src="https://mdbootstrap.com/img/video/animation-intro.mp4" type="video/mp4" />
+      </video>
+      <div class="mask rgba-purple-slight waves-light" mdbWavesEffect></div>
+    </div>
+
+    <div class="carousel-caption">
+      <div class="animated fadeInDown">
+        <h3 class="h3-responsive">Super light mask</h3>
+        <p>Secondary text</p>
+      </div>
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <div class="view">
+      <video class="video-fluid" autoplay loop>
+        <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
+      </video>
+      <div class="mask rgba-black-strong waves-light" mdbWavesEffect></div>
+    </div>
+
+    <div class="carousel-caption">
+      <div class="animated fadeInDown">
+        <h3 class="h3-responsive">Strong mask</h3>
+        <p>Third text</p>
+      </div>
+    </div>
+  </mdb-carousel-item>
+</mdb-carousel>
+
+<main class="text-center container">
   <div class="container">
     <div class="row">
-      
 
-        <div *ngFor="let product of products" class="zoom col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 p-2">
 
-          <!--Card-->
-          <div style="height:300px;" class="card  align-items-center" routerLink="/product/{{product.codeBar}}">
+      <div *ngFor="let product of products" class="zoom col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 p-2">
 
-            <!--Card image-->
-            <div class=" overlay waves-light">
-              <img  style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="">
-              <a>
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <!--Card image-->
-            <!--Card content-->
-            <mdb-card-body class="text-center">
-              <!--Category & Title-->
-              
-              <h5>
-                <strong>
-                  <a  class="dark-grey-text">{{product.name}}</a>
-                </strong>
-              </h5>
+        <!--Card-->
+        <div style="height:300px;" class="card  align-items-center" routerLink="/product/{{product.codeBar}}">
 
-              <h4 class="font-weight-bold blue-text">
-                <strong>{{product.priceOut}}$</strong>
-              </h4>
-
-            </mdb-card-body>
-            <!--Card content-->
-
+          <!--Card image-->
+          <div class=" overlay waves-light">
+            <img style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
           </div>
-          <!--Card-->
+          <!--Card image-->
+          <!--Card content-->
+          <mdb-card-body class="text-center">
+            <!--Category & Title-->
+
+            <h5>
+              <strong>
+                <a class="dark-grey-text">{{product.name}}</a>
+              </strong>
+            </h5>
+
+            <h4 class="font-weight-bold blue-text">
+              <strong>{{product.priceOut}}$</strong>
+            </h4>
+
+          </mdb-card-body>
+          <!--Card content-->
 
         </div>
+        <!--Card-->
 
       </div>
-    
+
+    </div>
+
   </div>
 
 </main>

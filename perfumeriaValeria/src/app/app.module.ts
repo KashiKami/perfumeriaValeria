@@ -37,6 +37,7 @@ import { DetailClientComponent } from './detail-client/detail-client.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
 import { ListClientsComponent } from './list-clients/list-clients.component';
+import { CategoryClientComponent } from './category-client/category-client.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ListClientsComponent } from './list-clients/list-clients.component';
     DetailClientComponent,
     InventoryComponent,
     SalesComponent,
-    ListClientsComponent
+    ListClientsComponent,
+    CategoryClientComponent
   ],
   imports: [
     BrowserModule,

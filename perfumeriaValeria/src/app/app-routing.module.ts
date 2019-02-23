@@ -23,6 +23,8 @@ import { DetailOrderClientComponent } from './detail-order-client/detail-order-c
 import { DetailClientComponent } from './detail-client/detail-client.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
+import { ListClientsComponent } from './list-clients/list-clients.component';
+import { CategoryClientComponent } from './category-client/category-client.component';
 
 const routes: Routes = [
   { path: 'admin/products', component: ProductListComponent, canActivate: [AuthGuard]},
@@ -40,6 +42,8 @@ const routes: Routes = [
   { path: 'admin/orders', component: OrderListComponent, canActivate: [AuthGuard]},
   { path: 'admin/orders/edit-order/:id', component: AddOrderComponent, canActivate: [AuthGuard] },
 
+  { path: 'admin/clients', component: ListClientsComponent, canActivate: [AuthGuard] },
+
   { path: 'provider', component: ViewProviderComponent, canActivate: [AuthGuardProvider] },
 
   { path: '', component: ViewClientComponent },
@@ -48,6 +52,8 @@ const routes: Routes = [
   { path: 'order', component: OrderClientComponent, canActivate: [AuthGuardClient] },
   { path: 'orders', component: OrderListClientComponent, canActivate: [AuthGuardClient] },
   { path: 'orders/:id', component: DetailOrderClientComponent, canActivate: [AuthGuardClient] },
+
+  { path: 'category/:id', component: CategoryClientComponent, canActivate: [AuthGuardClient], runGuardsAndResolvers: "paramsChange" },
 
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin] },
   { path: 'login/:state', component: LoginComponent, canActivate: [AuthGuardLogin] },
@@ -62,7 +68,8 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })
   ],
   declarations: []
 })
