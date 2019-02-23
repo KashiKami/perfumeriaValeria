@@ -12,7 +12,8 @@ import { CategoryService } from '../services/category/category.service';
 })
 export class ViewClientComponent implements OnInit {
 
-  public products: Product[];
+  public products: Product[] = null;
+  public productsOffer: Product[] = null;
   currentUser: User;
   currentOrder: any;
 
@@ -28,6 +29,7 @@ export class ViewClientComponent implements OnInit {
   ngOnInit() {
     this.getProducts();
     this.getCategories();
+    this.getProductsOffer();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
   }
@@ -35,6 +37,12 @@ export class ViewClientComponent implements OnInit {
   getProducts(): void {
     this.productService.getProducts().subscribe((data: Product[]) => {
       this.products = data;
+    });
+  }
+
+  getProductsOffer(): void {
+    this.productService.getProductsOffer().subscribe((data: Product[]) => {
+      this.productsOffer = data;
     });
   }
 

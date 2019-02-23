@@ -92,9 +92,21 @@
 <!--Main Layout-->
 
 <mdb-carousel [isControls]="true" class="carousel slide" [animation]="'slide'">
-  <mdb-carousel-item>
+  <mdb-carousel-item *ngFor="let product of productsOffer">
+    <div class="category__item__primary category__item_1">
+      <div class="category__item__description">
+      <span class="pre_title">Hasta</span><h4>35% OFF</h4><h3>Computación</h3><p class="links">Ver ofertas</p>
+      </div>
+      <div class="category__item__image">
+        <picture><source srcset="https://http2.mlstatic.com/met-portatil-hp-pavilion-14-x360-convertible-4gb-intel-c-D_NQ_NP_944402-MCO28916741266_122018-F.webp" media="(max-width: 680px)"><source srcset="https://http2.mlstatic.com/met-portatil-hp-pavilion-14-x360-convertible-4gb-intel-c-D_NQ_NP_944402-MCO28916741266_122018-F.webp" media="(max-width: 1023px)"><img src="https://http2.mlstatic.com/met-portatil-hp-pavilion-14-x360-convertible-4gb-intel-c-D_NQ_NP_944402-MCO28916741266_122018-F.webp" alt="Computación ">
+        </picture>
+      </div>
+    </div>
+  </mdb-carousel-item>
+
+  <mdb-carousel-item *ngFor="let product of productsOffer">
     <div class="view w-100">
-      
+      {{product.name}}
     </div>
 
     <div class="carousel-caption">
@@ -104,36 +116,8 @@
       </div>
     </div>
   </mdb-carousel-item>
-  <mdb-carousel-item>
-    <div class="view">
-      <video class="video-fluid" autoplay loop>
-        <source src="https://mdbootstrap.com/img/video/animation-intro.mp4" type="video/mp4" />
-      </video>
-      <div class="mask rgba-purple-slight waves-light" mdbWavesEffect></div>
-    </div>
 
-    <div class="carousel-caption">
-      <div class="animated fadeInDown">
-        <h3 class="h3-responsive">Super light mask</h3>
-        <p>Secondary text</p>
-      </div>
-    </div>
-  </mdb-carousel-item>
-  <mdb-carousel-item>
-    <div class="view">
-      <video class="video-fluid" autoplay loop>
-        <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
-      </video>
-      <div class="mask rgba-black-strong waves-light" mdbWavesEffect></div>
-    </div>
 
-    <div class="carousel-caption">
-      <div class="animated fadeInDown">
-        <h3 class="h3-responsive">Strong mask</h3>
-        <p>Third text</p>
-      </div>
-    </div>
-  </mdb-carousel-item>
 </mdb-carousel>
 
 <main class="text-center container">
