@@ -36,6 +36,8 @@ import { DetailOrderClientComponent } from './detail-order-client/detail-order-c
 import { DetailClientComponent } from './detail-client/detail-client.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
+import { ListClientsComponent } from './list-clients/list-clients.component';
+import { CategoryClientComponent } from './category-client/category-client.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { SalesComponent } from './sales/sales.component';
     DetailOrderClientComponent,
     DetailClientComponent,
     InventoryComponent,
-    SalesComponent
+    SalesComponent,
+    ListClientsComponent,
+    CategoryClientComponent
   ],
   imports: [
     BrowserModule,
