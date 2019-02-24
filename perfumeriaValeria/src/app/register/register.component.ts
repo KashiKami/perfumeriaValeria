@@ -15,6 +15,8 @@ export class RegisterComponent implements OnInit {
   error: boolean = false;
   errorText: string = "";
 
+
+
   constructor(private clientService: ClientService,
               private router: Router,) { }
 
@@ -27,6 +29,8 @@ export class RegisterComponent implements OnInit {
       'direction': new FormControl('', [Validators.required]),
       'phone':  new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
       'identify': new FormControl('', [Validators.required,Validators.pattern('[0-9]*')]),
+
+
     });
   }
 

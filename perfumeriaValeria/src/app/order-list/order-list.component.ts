@@ -25,7 +25,7 @@ export class OrderListComponent implements OnInit {
   errorText: string = "";
 
   order: any = {};
-  
+
   aux: any = {};
 
   asyncSelectedClient: string;
@@ -58,6 +58,7 @@ export class OrderListComponent implements OnInit {
     );
   }
 
+
   ngOnInit() {
     this.addForm = this.formBuilder.group({
       "idOrder": ['', Validators.required],
@@ -73,11 +74,11 @@ export class OrderListComponent implements OnInit {
   }
 
   getOrders(): void {
-    
+
     this.orderService.getOrders().subscribe((data: Order[]) => {
       this.orders = data;
       });
-    
+
   }
 
   getClients(): void {
