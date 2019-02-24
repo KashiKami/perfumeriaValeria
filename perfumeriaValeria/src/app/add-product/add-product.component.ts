@@ -2,6 +2,9 @@ import { Component, OnInit, Inject, ViewChild, ElementRef} from '@angular/core';
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 import { DOCUMENT } from '@angular/common';
 
+import { mergeMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';  
+
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ProductService } from '../services/product/product.service';
@@ -10,6 +13,7 @@ import { HttpClient } from '@angular/common/http'
 import { Product } from '../models/product';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { CategoryService } from '../services/category/category.service';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -35,20 +39,50 @@ export class AddProductComponent implements OnInit {
 
   product: any = {};
 
+  asyncSelected: string;
+  dataSource: Observable<any>;
+
+  public categories: any[] = null;
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private productService: ProductService,
     private route: ActivatedRoute,
     private http: HttpClient,
     private sanitizer: DomSanitizer,
-    @Inject(DOCUMENT) document) {
+    private categoryService: CategoryService) {
+    this.dataSource = Observable.create((observer: any) => {
+      // Runs on every search
+      observer.next(this.asyncSelected);
+    })
+      .pipe(
+        mergeMap((token: string) => this.getProductsAsObservable(token))
+      );
   }
 
+  getProductsAsObservable(token: string): Observable<any> {
+    const query = new RegExp(token, 'i');
+    return of(
+      this.categories.filter((state: any) => {
+        return query.test(state.name);
+      })
+    );
+  }
+
+  getCategories(): void {
+    this.categoryService.getCategories().subscribe((data: Product[]) => {
+      this.categories = data;
+    });
+  }
 
   ngOnInit() {
 
     let id = this.route.snapshot.paramMap.get('id');
     this.element = document.getElementById('qr').children as HTMLCollection;
+
+    setTimeout(() => {
+      this.getCategories();
+    }, 100);
 
 
     this.addForm = this.formBuilder.group({
@@ -58,6 +92,7 @@ export class AddProductComponent implements OnInit {
       "priceIn": ['', Validators.required],
       "priceOut": ['', Validators.required],
       "discount": ['', Validators.required],
+      "category": ['', Validators.required],
       "photo": [''],
       "qr": [''],
       "video": [''],
@@ -94,6 +129,9 @@ export class AddProductComponent implements OnInit {
     } else {
       this.addForm.patchValue({ photo: this.url })
       this.productService.editProduct(this.addForm.value, id);
+      setTimeout(() => {
+        this.router.navigate(['admin/products']);
+      }, 500);
     }
     
 

@@ -3,16 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\order-list",
-    "\\src\\app\\order-list-client",
-    "\\src\\app\\provider-list",
+    "\\src\\app\\add-order",
+    "\\src\\app\\add-product",
+    "\\src\\app\\category-client",
+    "\\src\\app\\detail-client",
+    "\\src\\app\\inventory",
     "\\src\\app\\services",
-    "\\src\\app\\services\\order",
-    "\\src\\app\\services\\product",
-    "\\src\\app\\view-client",
-    "\\src\\app\\view-product",
-    "\\src\\app\\view-provider"
+    "\\src\\app\\view-client"
   ],
-  "SelectedNode": "\\src\\app\\order-list\\order-list.component.ts",
+  "SelectedNode": "\\src\\app\\view-client\\view-client.component.ts",
   "PreviewInSolutionExplorer": false
 }
