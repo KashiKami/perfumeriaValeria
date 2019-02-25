@@ -1,3 +1,9 @@
+main {
+  background-color: #e7e7e7;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
 .view {
   background: url("https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiW-fimiqDgAhXStlkKHZ12AE4QjRx6BAgBEAU&url=https%3A%2F%2Fes.123rf.com%2Fphoto_81278261_botellas-de-perfume-con-p%25C3%25A9talos-de-flores-sobre-fondo-claro-perfumer%25C3%25ADa-colecci%25C3%25B3n-de-fragancias-accesorios-d.html&psig=AOvVaw2plt1LS8p_jYcLNvQ-uIIG&ust=1549300660790176")no-repeat center center;
   background-size: cover;
@@ -5,7 +11,7 @@
 }
 
 .navbar {
-  background-color: transparent;
+  background-color: white;
 }
 
 .top-nav-collapse {
@@ -16,6 +22,7 @@
   .navbar {
     background-color: #4285F4;
   }
+
 }
 
 
@@ -31,3 +38,108 @@
   }
 }
 
+.carousel .carousel-control-next-icon {
+  background-color: black;
+}
+
+.carousel-indicators .active {
+  background-color: black;
+}
+
+mdb-carousel-item h4 {
+  font-size: 50px;
+  font-weight: 700;
+  color: #4a4a4a;
+  padding: 5px 10px 5px 20px;
+  margin: 0;
+  line-height: 1;
+}
+
+mdb-carousel-item span {
+  font-size: 24px;
+  color: #4a4a4a;
+  padding: 0 20px;
+  display: block;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: .2px;
+}
+
+mdb-carousel-item h3 {
+  font-size: 24px;
+  color: #4a4a4a;
+  padding: 0 20px;
+  display: block;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: .2px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.links {
+  font-size: 24px;
+  color: #3483fa;
+  padding: 0 10px 0 20px;
+  color: #d81b60;
+}
+
+.links:hover {
+  color: #ad1457;
+}
+
+.card:hover {
+  webkit-transition: -webkit-box-shadow .1s ease-out;
+  transition: -webkit-box-shadow .1s ease-out;
+  transition: box-shadow .1s ease-out;
+  transition: box-shadow .1s ease-out,-webkit-box-shadow .1s ease-out;
+  -webkit-box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+  box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+}
+
+.card{
+  box-shadow:none;
+}
+
+.section-header {
+  margin-bottom: 22px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: 1.2;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.section-header h1 {
+  font-size: 26px;
+  font-weight: 300;
+  margin: 0 0 0 8px;
+}
+
+.section-header a {
+  font-size: 16px;
+  margin-bottom: 2px;
+  margin: auto 0 2px;
+  margin-left: 16px;
+  color: #d81b60;
+}
+
+.section-header a:hover {
+  color: #ad1457;
+}
+
+main .offert:hover {
+  -webkit-box-shadow: 0 12px 20px 0 rgba(0,0,0,.16);
+  box-shadow: 0 12px 20px 0 rgba(0,0,0,.16);
+  -webkit-transition: -webkit-box-shadow .2s ease-out;
+  transition: -webkit-box-shadow .2s ease-out;
+  transition: box-shadow .2s ease-out;
+  transition: box-shadow .2s ease-out,-webkit-box-shadow .2s ease-out;
+}
+
+.offert {
+  background-color: white;
+  cursor: pointer;
+}

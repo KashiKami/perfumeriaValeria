@@ -1,5 +1,5 @@
 <header class="h-100">
-  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg pink navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
     <mdb-navbar-brand>
       <a class="logo navbar-brand" href="#">
         <strong>Valeria´s</strong>
@@ -58,7 +58,7 @@
   <!-- Main -->
   <div class="view intro-2" style="">
     <div class="full-bg-img">
-      <div class="mask rgba-purple-light flex-center">
+      <div class="mask rgba-pink-light flex-center">
         <div class="row pt-5 mt-3">
           <div class="col-md-12 mb-3" *ngIf="currentUser; else elseBlock">
             <div class="intro-info-content text-center">
@@ -82,7 +82,7 @@
             </div>
           </ng-template>
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -91,51 +91,44 @@
 <!--Main Navigation-->
 <!--Main Layout-->
 
-<mdb-carousel [isControls]="true" class="carousel slide" [animation]="'slide'">
-  <mdb-carousel-item *ngFor="let product of productsOffer">
-    <div class="category__item__primary category__item_1">
-      <div class="category__item__description">
-      <span class="pre_title">Hasta</span><h4>35% OFF</h4><h3>Computación</h3><p class="links">Ver ofertas</p>
-      </div>
-      <div class="category__item__image">
-        <picture><source srcset="https://http2.mlstatic.com/met-portatil-hp-pavilion-14-x360-convertible-4gb-intel-c-D_NQ_NP_944402-MCO28916741266_122018-F.webp" media="(max-width: 680px)"><source srcset="https://http2.mlstatic.com/met-portatil-hp-pavilion-14-x360-convertible-4gb-intel-c-D_NQ_NP_944402-MCO28916741266_122018-F.webp" media="(max-width: 1023px)"><img src="https://http2.mlstatic.com/met-portatil-hp-pavilion-14-x360-convertible-4gb-intel-c-D_NQ_NP_944402-MCO28916741266_122018-F.webp" alt="Computación ">
-        </picture>
-      </div>
+<main>
+  <div *ngIf="productsOffer" class="container offert">
+    <mdb-carousel [isControls]="true" class="carousel slide" [animation]="'slide'">
+      <mdb-carousel-item *ngFor="let product of productsOffer" class="container">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <img src="{{product.photo}}" class="img-fluid" alt="Imagen Producto">
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 h-100">
+          <span class="pre_title">Descuento</span>
+          <h4 class="pink-text">{{product.discount}}% OFF</h4>
+          <h3>{{product.name}}</h3>
+          <p class="links" routerLink="/product/{{product.codeBar}}">Ver oferta</p>
+        </div>
+      </mdb-carousel-item>
+
+
+    </mdb-carousel>
+  </div>
+</main>
+
+
+<main class="">
+  <div class="container" style="padding-bottom: 50px;">
+    <div class="section-header row">
+      <h1>Ultimos productos</h1>
+      <a  id="view-more">Ver todos</a>
     </div>
-  </mdb-carousel-item>
-
-  <mdb-carousel-item *ngFor="let product of productsOffer">
-    <div class="view w-100">
-      {{product.name}}
-    </div>
-
-    <div class="carousel-caption">
-      <div class="animated fadeInDown">
-        <h3 class="h3-responsive">Light mask</h3>
-        <p>First text</p>
-      </div>
-    </div>
-  </mdb-carousel-item>
-
-
-</mdb-carousel>
-
-<main class="text-center container">
-  <div class="container">
     <div class="row">
 
-
-      <div *ngFor="let product of products" class="zoom col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 p-2">
+      <div *ngFor="let product of products" class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 p-2" style="cursor: pointer;">
 
         <!--Card-->
-        <div style="height:300px;" class="card  align-items-center" routerLink="/product/{{product.codeBar}}">
+        <div style="height:300px;" class="card align-items-center" routerLink="/product/{{product.codeBar}}">
 
           <!--Card image-->
-          <div class=" overlay waves-light">
-            <img style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
+          <div class=" overlay">
+            <img style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="Imagen Producto">
           </div>
           <!--Card image-->
           <!--Card content-->
@@ -148,7 +141,7 @@
               </strong>
             </h5>
 
-            <h4 class="font-weight-bold blue-text">
+            <h4 class="font-weight-bold">
               <strong>{{product.priceOut}}$</strong>
             </h4>
 
@@ -166,3 +159,31 @@
 
 </main>
 <!--Main Layout-->
+<!-- Footer -->
+<footer class="page-footer font-small pink pt-4">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center py-2">
+      <li class="list-inline-item">
+        <h5 class="mb-1">Register for free</h5>
+      </li>
+      <li class="list-inline-item">
+        <a href="#!" class="btn btn-outline-white btn-rounded">Sign up!</a>
+      </li>
+    </ul>
+    <!-- Call to action -->
+
+  </div>
+  <!-- Footer Elements -->
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">
+    © 2018 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
