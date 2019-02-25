@@ -7,10 +7,10 @@
     "\\src\\app\\add-product",
     "\\src\\app\\category-client",
     "\\src\\app\\detail-client",
-    "\\src\\app\\inventory",
-    "\\src\\app\\services",
-    "\\src\\app\\view-client"
+    "\\src\\app\\list-clients",
+    "\\src\\assets",
+    "\\src\\assets\\img"
   ],
-  "SelectedNode": "\\src\\app\\view-client\\view-client.component.ts",
+  "SelectedNode": "\\src\\app\\app-routing.module.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -53,7 +53,7 @@ const routes: Routes = [
   { path: 'orders', component: OrderListClientComponent, canActivate: [AuthGuardClient] },
   { path: 'orders/:id', component: DetailOrderClientComponent, canActivate: [AuthGuardClient] },
 
-  { path: 'category/:id', component: CategoryClientComponent, canActivate: [AuthGuardClient], runGuardsAndResolvers: "paramsChange" },
+  { path: 'category/:id', component: CategoryClientComponent, runGuardsAndResolvers: "paramsChange" },
 
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin] },
   { path: 'login/:state', component: LoginComponent, canActivate: [AuthGuardLogin] },
