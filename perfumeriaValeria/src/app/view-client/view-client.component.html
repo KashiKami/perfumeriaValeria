@@ -1,5 +1,5 @@
 <header class="h-100">
-  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg pink navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
     <mdb-navbar-brand>
       <a class="logo navbar-brand" href="#">
         <strong>Valeria´s</strong>
@@ -11,6 +11,21 @@
           <a routerLink="" class="nav-link">
             Inicio
           </a>
+        </li>
+        <li class="nav-item waves-light dropdown" dropdown *ngFor="let category of categories">
+          <a *ngIf="category.num != 0; else elseMenu" dropdownToggle mdbWavesEffect (click)="getSubCategories(category.id)" class="nav-link dropdown-toggle waves-light">
+            {{category.name}}<span class="caret"></span>
+          </a>
+          <ng-template #elseMenu class="navbar-nav nav-flex-icons ">
+            <a routerLink="/category/{{category.id}}" class="nav-link">
+              {{category.name}}
+            </a>
+          </ng-template>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{category.id}}">{{category.name}}</a>
+            <a *ngFor="let subcategory of subCategories" class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{subcategory.id}}">{{subcategory.name}}</a>
+          </div>
+
         </li>
       </ul>
 
@@ -43,7 +58,7 @@
   <!-- Main -->
   <div class="view intro-2" style="">
     <div class="full-bg-img">
-      <div class="mask rgba-purple-light flex-center">
+      <div class="mask rgba-pink-light flex-center">
         <div class="row pt-5 mt-3">
           <div class="col-md-12 mb-3" *ngIf="currentUser; else elseBlock">
             <div class="intro-info-content text-center">
@@ -67,7 +82,7 @@
             </div>
           </ng-template>
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -75,50 +90,100 @@
 </header>
 <!--Main Navigation-->
 <!--Main Layout-->
-<main class="text-center py-5">
 
-  <div class="container">
-    <div class="row">
-      
-
-        <div *ngFor="let product of products" class="zoom col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 p-2">
-
-          <!--Card-->
-          <div style="height:300px;" class="card  align-items-center" routerLink="/product/{{product.codeBar}}">
-
-            <!--Card image-->
-            <div class=" overlay waves-light">
-              <img  style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="">
-              <a>
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <!--Card image-->
-            <!--Card content-->
-            <mdb-card-body class="text-center">
-              <!--Category & Title-->
-              
-              <h5>
-                <strong>
-                  <a  class="dark-grey-text">{{product.name}}</a>
-                </strong>
-              </h5>
-
-              <h4 class="font-weight-bold blue-text">
-                <strong>{{product.priceOut}}$</strong>
-              </h4>
-
-            </mdb-card-body>
-            <!--Card content-->
-
-          </div>
-          <!--Card-->
-
+<main>
+  <div *ngIf="productsOffer" class="container offert">
+    <mdb-carousel [isControls]="true" class="carousel slide" [animation]="'slide'">
+      <mdb-carousel-item *ngFor="let product of productsOffer" class="container">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <img src="{{product.photo}}" class="img-fluid" alt="Imagen Producto">
         </div>
 
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 h-100">
+          <span class="pre_title">Descuento</span>
+          <h4 class="pink-text">{{product.discount}}% OFF</h4>
+          <h3>{{product.name}}</h3>
+          <p class="links" routerLink="/product/{{product.codeBar}}">Ver oferta</p>
+        </div>
+      </mdb-carousel-item>
+
+
+    </mdb-carousel>
+  </div>
+</main>
+
+
+<main class="">
+  <div class="container" style="padding-bottom: 50px;">
+    <div class="section-header row">
+      <h1>Ultimos productos</h1>
+      <a  id="view-more">Ver todos</a>
+    </div>
+    <div class="row">
+
+      <div *ngFor="let product of products" class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 p-2" style="cursor: pointer;">
+
+        <!--Card-->
+        <div style="height:300px;" class="card align-items-center" routerLink="/product/{{product.codeBar}}">
+
+          <!--Card image-->
+          <div class=" overlay">
+            <img style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="Imagen Producto">
+          </div>
+          <!--Card image-->
+          <!--Card content-->
+          <mdb-card-body class="text-center">
+            <!--Category & Title-->
+
+            <h5>
+              <strong>
+                <a class="dark-grey-text">{{product.name}}</a>
+              </strong>
+            </h5>
+
+            <h4 class="font-weight-bold">
+              <strong>{{product.priceOut}}$</strong>
+            </h4>
+
+          </mdb-card-body>
+          <!--Card content-->
+
+        </div>
+        <!--Card-->
+
       </div>
-    
+
+    </div>
+
   </div>
 
 </main>
 <!--Main Layout-->
+<!-- Footer -->
+<footer class="page-footer font-small pink pt-4">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center py-2">
+      <li class="list-inline-item">
+        <h5 class="mb-1">Register for free</h5>
+      </li>
+      <li class="list-inline-item">
+        <a href="#!" class="btn btn-outline-white btn-rounded">Sign up!</a>
+      </li>
+    </ul>
+    <!-- Call to action -->
+
+  </div>
+  <!-- Footer Elements -->
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">
+    © 2018 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->

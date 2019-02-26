@@ -13,7 +13,7 @@ export class SalesComponent implements OnInit {
   products: any[] = null;
   TotalSale: any;
   
-  headElements = ['Producto', 'Cantidad', 'Precio de Venta', 'Total'];
+  headElements = ['Producto', 'Cliente', 'Cantidad', 'Precio de Venta', 'Total'];
   date: any = {};
 
   myForm: FormGroup;

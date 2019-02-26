@@ -36,18 +36,20 @@
                   </div>
                   <!-- Email -->
 
-                  <input type="email" class="form-control mb-4" placeholder="Correo" formControlName="email">
-                  <br>
-                  <div class='errors'>
-                    <p *ngIf="loginForm.get('email').dirty && loginForm.get('email').errors && loginForm.get('email').errors['required']"> El correo electronico es requerido</p>
-                    <p *ngIf="loginForm.get('email').dirty && loginForm.get('email').errors && loginForm.get('email').errors['email']"> El correo electronico ingresado tiene formato invalido</p>
+
+
+                  <div >
+                    <input required type="email" class="form-control mb-1" placeholder="Correo" formControlName="email">
+                    <p style="color:#FF0000" ion-text *ngIf="loginForm.get('email').dirty && loginForm.get('email').errors && loginForm.get('email').errors['required']"> Campo requerido</p>
+                    <p style="color:#FF0000" ion-text *ngIf="loginForm.get('email').dirty && loginForm.get('email').errors && loginForm.get('email').errors['email']"> Correo con formato incorrecto</p>
                   </div>
                   <!-- Password -->
-                  <input type="password" class="form-control mb-4" placeholder="Contraseña" formControlName="password">
                   <br>
-                  <div class='errors'>
-                    <p *ngIf="loginForm.get('password').dirty && loginForm.get('password').errors && loginForm.get('password').errors['required']"> La contraseña es requerida</p>
 
+
+                  <div class='errors'>
+                    <input required type="password" class="form-control mb-1" placeholder="Contraseña" formControlName="password">
+                    <p style="color:#FF0000" ion-text *ngIf="loginForm.get('password').dirty && loginForm.get('password').errors && loginForm.get('password').errors['required']"> Campo requerido</p>
                   </div>
                   <div class="d-flex justify-content-around">
 
@@ -74,5 +76,5 @@
   <!-- /.Main -
 
   <!-- Default form login -->
-  
+
   <!-- Default form login -->

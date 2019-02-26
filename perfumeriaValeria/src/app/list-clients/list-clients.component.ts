@@ -14,7 +14,7 @@ export class ListClientsComponent implements OnInit {
 
   clients: Client[] = [];
 
-  headElements = ['Nombre', 'Apellido', 'Identificación', 'Correo'];
+  headElements = ['Nombre', 'Identificación', 'Correo', 'Telefono'];
 
   constructor(private clientService: ClientService,
                private router: Router) { }

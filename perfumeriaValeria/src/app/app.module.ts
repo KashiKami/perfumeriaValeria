@@ -38,7 +38,11 @@ import { DetailClientComponent } from './detail-client/detail-client.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
 import { ListClientsComponent } from './list-clients/list-clients.component';
+
 import { ListProductProviderComponent } from './list-product-provider/list-product-provider.component';
+
+import { CategoryClientComponent } from './category-client/category-client.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +65,9 @@ import { ListProductProviderComponent } from './list-product-provider/list-produ
     InventoryComponent,
     SalesComponent,
     ListClientsComponent,
-    ListProductProviderComponent
+    ListProductProviderComponent,
+    CategoryClientComponent,
+
   ],
   imports: [
     BrowserModule,

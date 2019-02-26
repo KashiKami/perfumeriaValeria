@@ -1,0 +1,106 @@
+<header class="h-100">
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+  <mdb-navbar-brand>
+    <a class="logo navbar-brand" href="#">
+      <strong>Valeria´s</strong>
+    </a>
+  </mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item waves-light" mdbWavesEffect>
+        <a routerLink="" class="nav-link">
+          Inicio
+        </a>
+      </li>
+      <li class="nav-item waves-light dropdown" dropdown *ngFor="let category of categories">
+        <a *ngIf="category.num != 0; else elseMenu" dropdownToggle mdbWavesEffect (click)="getSubCategories(category.id)" class="nav-link dropdown-toggle waves-light">
+          {{category.name}}<span class="caret"></span>
+        </a>
+        <ng-template #elseMenu class="navbar-nav nav-flex-icons ">
+          <a routerLink="/category/{{category.id}}" class="nav-link">
+            {{category.name}}
+          </a>
+        </ng-template>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{category.id}}">{{category.name}}</a>
+          <a *ngFor="let subcategory of subCategories" class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{subcategory.id}}">{{subcategory.name}}</a>
+        </div>
+
+      </li>
+    </ul>
+
+    <div *ngIf="currentUser; else elseLogin" class="navbar-nav nav-flex-icons">
+      <div class="nav-item dropdown" dropdown>
+        <a dropdownToggle type="button" class="nav-link">
+          <i class="fa fa-user" style="font-size: x-large;"></i>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a routerLink="/detail-count/{{currentUser.email}}" class="dropdown-item ">{{currentUser.name}}</a>
+          <a routerLink="/orders" class="dropdown-item ">Mis pedidos</a>
+          <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+        </div>
+      </div>
+      <a routerLink="/order" class="nav-link">
+        <i class="fa fa-shopping-cart" style="font-size: x-large;"></i>
+      </a>
+    </div>
+    <ng-template #elseLogin class="navbar-nav nav-flex-icons ">
+      <ul class="navbar-nav ">
+        <li class="nav-item waves-light" mdbWavesEffect>
+          <a routerLink="/login" class="nav-link">
+            Ingresa
+          </a>
+        </li>
+      </ul>
+    </ng-template>
+  </links>
+</mdb-navbar>
+<!-- Main -->
+<!-- /.Main -->
+</header>
+
+<main class="text-center container">
+  <div *ngIf="products" class="container">
+    <div class="row">
+
+
+      <div *ngFor="let product of products" class="zoom col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 p-2">
+
+        <!--Card-->
+        <div style="height:300px;" class="card  align-items-center" routerLink="/product/{{product.codeBar}}">
+
+          <!--Card image-->
+          <div class=" overlay waves-light">
+            <img style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <!--Card image-->
+          <!--Card content-->
+          <mdb-card-body class="text-center">
+            <!--Category & Title-->
+
+            <h5>
+              <strong>
+                <a class="dark-grey-text">{{product.name}}</a>
+              </strong>
+            </h5>
+
+            <h4 class="font-weight-bold blue-text">
+              <strong>{{product.priceOut}}$</strong>
+            </h4>
+
+          </mdb-card-body>
+          <!--Card content-->
+
+        </div>
+        <!--Card-->
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
