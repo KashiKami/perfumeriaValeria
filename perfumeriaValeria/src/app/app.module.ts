@@ -42,6 +42,7 @@ import { ListClientsComponent } from './list-clients/list-clients.component';
 import { ListProductProviderComponent } from './list-product-provider/list-product-provider.component';
 
 import { CategoryClientComponent } from './category-client/category-client.component';
+import { ReportGanancyComponent } from './report-ganancy/report-ganancy.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { CategoryClientComponent } from './category-client/category-client.compo
     ListClientsComponent,
     ListProductProviderComponent,
     CategoryClientComponent,
+    ReportGanancyComponent
 
   ],
   imports: [

@@ -2,14 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app\\add-order",
-    "\\src\\app\\add-product",
-    "\\src\\app\\category-client",
-    "\\src\\app\\detail-client",
-    "\\src\\app\\list-clients",
-    "\\src\\app\\view-client",
-    "\\src\\assets\\img"
+    "\\src\\app",
+    "\\src\\app\\list-product-provider",
+    "\\src\\app\\order-list",
+    "\\src\\app\\product-list",
+    "\\src\\app\\provider-list",
+    "\\src\\app\\sales",
+    "\\src\\app\\services",
+    "\\src\\app\\services\\category",
+    "\\src\\app\\services\\provider"
   ],
-  "SelectedNode": "\\src\\styles.scss",
+  "SelectedNode": "\\src\\app\\add-product\\add-product.component.ts",
   "PreviewInSolutionExplorer": false
 }

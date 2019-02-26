@@ -21,4 +21,13 @@ export class CategoryService {
   public getSubCategories(id: any) {
     return this.http.get(`${this.baseUrl}getAllSubCategory.php?id=`+id);
   }
+
+  public addCategory(category: any) {
+    return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(category));
+  }
+
+
+  public deleteCategory(id: any) {
+    return this.http.post(`${this.baseUrl}delete.php`, JSON.stringify(id)).subscribe();
+  }
 }

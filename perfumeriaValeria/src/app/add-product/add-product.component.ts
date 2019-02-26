@@ -26,6 +26,8 @@ export class AddProductComponent implements OnInit {
 
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'photo' });
   addForm: FormGroup;
+  addCategoryForm: FormGroup;
+
   url = '';
   urlVideo = '';
   public myAngularxQrCode: string = null;
@@ -36,6 +38,8 @@ export class AddProductComponent implements OnInit {
   errorText: string = "";
 
   safeSrc: SafeResourceUrl = null;
+
+  headElements = ['#', 'Categoria'];
 
   product: any = {};
 
@@ -98,6 +102,12 @@ export class AddProductComponent implements OnInit {
       "video": [''],
       "email": ["hola@123"]
     });
+
+    this.addCategoryForm = this.formBuilder.group({
+      "name": ['', Validators.required],
+      "superCategory": ['', Validators.required]
+    });
+
     if (id != null) {
       this.productService.getOneProduct(id).subscribe(data => {
         let product = new Product(data);
@@ -174,6 +184,39 @@ export class AddProductComponent implements OnInit {
 
   closeAlert() {
     this.error = false;
+  }
+
+  addCategory() {
+    console.log(this.addCategoryForm.value);
+    this.categoryService.addCategory(this.addCategoryForm.value).subscribe((data: any) => {
+      if (data.error == 'creado exitosamente') {
+        this.getCategories();
+
+        this.dataSource = Observable.create((observer: any) => {
+          // Runs on every search
+          observer.next(this.asyncSelected);
+        })
+          .pipe(
+            mergeMap((token: string) => this.getProductsAsObservable(token))
+        );
+
+      }
+    });
+  }
+
+  deleteCategory(category: any) {
+    console.log(category);
+
+    this.categoryService.deleteCategory(category);
+    this.getCategories();
+
+    this.dataSource = Observable.create((observer: any) => {
+      // Runs on every search
+      observer.next(this.asyncSelected);
+    })
+      .pipe(
+        mergeMap((token: string) => this.getProductsAsObservable(token))
+      );
   }
 
   logOut() {
