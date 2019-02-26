@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -37,7 +38,7 @@ import { DetailClientComponent } from './detail-client/detail-client.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
 import { ListClientsComponent } from './list-clients/list-clients.component';
-
+import { ListProductProviderComponent } from './list-product-provider/list-product-provider.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { ListClientsComponent } from './list-clients/list-clients.component';
     DetailClientComponent,
     InventoryComponent,
     SalesComponent,
-    ListClientsComponent
+    ListClientsComponent,
+    ListProductProviderComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { ListClientsComponent } from './list-clients/list-clients.component';
     NgxTypeaheadModule,
     TypeaheadModule.forRoot(),
     FormsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgDatepickerModule
   ],
   providers: [AuthGuard, AuthenticationService],
   bootstrap: [AppComponent]

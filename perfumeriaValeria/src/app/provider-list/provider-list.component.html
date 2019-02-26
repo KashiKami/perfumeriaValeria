@@ -57,15 +57,33 @@
 
 <div class="container">
   <div class="d-flex p-4 col-example"></div>
+    <div class="row">
+      <div class="col">
+          <form [formGroup]="formFilter">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Nombre</label>
+                <input type="email" class="form-control" formControlName="nombre" placeholder="Filtro de nombre">
+                
+              </div>
+              <div class="md-form">
+                <ng-datepicker formControlName="fecha" [options]="filtroFechas">
+
+                </ng-datepicker>
+              </div>
+              
+            </form>
+      </div>
+    </div>
   <table mdbTable hover="true" class="m-4">
     <thead>
       <tr>
         <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
       </tr>
     </thead>
-    <tbody>
-      <tr mdbTableCol *ngFor="let provider of providers">
 
+    <tbody>
+      <tr mdbTableCol *ngFor="let provider of providersFilter">
+          
         <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
@@ -87,17 +105,25 @@
                    mdbWavesEffect (click)="delete(provider)">Si</a>
                 <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">No</a>
               </div>
+              
             </div>
             <!--/.Content-->
           </div>
         </div>
 
         <th scope="row">{{provider.name}} {{provider.lastName}}</th>
-        <td>{{provider.phone}}</td>
-        <td>{{provider.direction}}</td>
+        <td>{{provider.identify}}</td>
         <td>{{provider.email}}</td>
+        <td>{{provider.direction}}</td>
+        <td>{{provider.phone}}</td>
+        <td>{{provider.total}}</td>
+        <td>{{provider.date}}</td>
         <td><i routerLink="edit-provider/{{provider.email}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
         <td><i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i></td>
+        <a href="/admin/productProvider/view-products/{{provider.email}}/{{provider.date}}" class="btn btn-success btn-lg">
+          <span class="glyphicon glyphicon-search"></span> Ver pedidos 
+        </a>
+        
       </tr>
     </tbody>
   </table>

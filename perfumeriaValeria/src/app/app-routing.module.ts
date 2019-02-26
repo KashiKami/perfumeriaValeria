@@ -6,6 +6,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProviderListComponent } from './provider-list/provider-list.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { ListProductProviderComponent } from './list-product-provider/list-product-provider.component';
 import { AddProviderComponent } from './add-provider/add-provider.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'admin/products', component: ProductListComponent, canActivate: [AuthGuard]},
   { path: 'admin/products/add-product', component: AddProductComponent, canActivate: [AuthGuard] },
   { path: 'admin/products/edit-product/:id', component: AddProductComponent, canActivate: [AuthGuard] },
+  { path: 'admin/productProvider/view-products/:email/:date', component: ListProductProviderComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/inventory', component: InventoryComponent, canActivate: [AuthGuard] },
 
