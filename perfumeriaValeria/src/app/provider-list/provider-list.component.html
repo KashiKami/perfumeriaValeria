@@ -7,23 +7,141 @@
 
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
+
       <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos</a>
+        <div class="navbar-nav nav-flex-icons">
+          <div class="nav-item dropdown" WIDTH=60 HEIGHT=60 dropdown>
+            <a dropdownToggle  type="button" class="nav-link">
+              <div class="form-row mb-4">
+                <div class="col">
+                <img src="../../assets/img/perfume.png" ALIGN=top WIDTH=40 HEIGHT=40 class="fa fa-user" mdbWavesEffect routerLink="/admin/products">
+          </div>
+          <div class="col">
+            <br>
+            <label mdbWavesEffect routerLink="/admin/products"><b>Productos</b></label>
+          </div>
+        </div>
+
+          </a>
+        </div>
+      </div>
       </li>
+
+
       <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Pedidos</a>
+      <div class="navbar-nav nav-flex-icons">
+        <div class="nav-item dropdown" WIDTH=60 HEIGHT=60 dropdown>
+          <a dropdownToggle  type="button" class="nav-link">
+            <div class="form-row mb-4">
+            <div class="col">
+              <img src="../../assets/img/pedidos.png" ALIGN=top WIDTH=40 HEIGHT=40 class="fa fa-user" >
+            </div>
+            <div class="col">
+              <br>
+              <label >Pedidos</label>
+
+            </div>
+            </div>
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item" >Cliente</a>
+            <a class="dropdown-item" >Proveedor</a>
+          </div>
+        </div>
+      </div>
       </li>
+
+
+
       <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/sales">Reportes</a>
+        <div class="navbar-nav nav-flex-icons">
+          <div class="nav-item dropdown" WIDTH=60 HEIGHT=60 dropdown>
+            <a dropdownToggle  type="button" class="nav-link">
+        <div class="form-row mb-4">
+          <div class="col">
+            <img  src="../../assets/img/periodico.png" ALIGN=MIDDLE WIDTH=40 HEIGHT=40  class="fa fa-user" mdbWavesEffect routerLink="/admin/sales">
+          </div>
+          <div class="col">
+            <br>
+            <label  mdbWavesEffect routerLink="/admin/sales">Reportes</label>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
+        <div class="navbar-nav nav-flex-icons">
+          <div class="nav-item dropdown" WIDTH=60 HEIGHT=60 dropdown>
+            <a dropdownToggle  type="button" class="nav-link">
+        <div class="form-row mb-4">
+          <div class="col">
+            <img class="fa fa-user" mdbWavesEffect routerLink="/admin/providers" src="../../assets/img/bolsa.png" ALIGN=MIDDLE WIDTH=40 HEIGHT=40  >
+          </div>
+          <div class="col">
+            <br>
+            <label mdbWavesEffect routerLink="/admin/providers">Proveedores</label>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Ventas</a>
+        <div class="navbar-nav nav-flex-icons">
+          <div class="nav-item dropdown" WIDTH=60 HEIGHT=60 dropdown>
+            <a dropdownToggle  type="button" class="nav-link">
+        <div class="form-row mb-4">
+          <div class="col">
+            <img  src="../../assets/img/ventas.png" ALIGN=MIDDLE WIDTH=40 HEIGHT=40 class="fa fa-user" mdbWavesEffect routerLink="/admin/orders">
+          </div>
+          <div class="col">
+            <br>
+            <label mdbWavesEffect routerLink="/admin/orders"><b>Ventas</b></label>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/help">Ayuda</a>
+        <div class="navbar-nav nav-flex-icons">
+          <div class="nav-item dropdown" WIDTH=60 HEIGHT=60 dropdown>
+            <a dropdownToggle  type="button" class="nav-link">
+        <div class="form-row mb-4">
+          <div class="col">
+            <img class="fa fa-user" mdbWavesEffect routerLink="/admin/clients"  src="../../assets/img/cliente.png" ALIGN=MIDDLE WIDTH=40 HEIGHT=40>
+          </div>
+          <div class="col">
+            <br>
+            <label mdbWavesEffect routerLink="/admin/clients"><b>Clientes</b></label>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  </li>
+
+      <li class="nav-item">
+        <div class="navbar-nav nav-flex-icons">
+          <div class="nav-item dropdown" WIDTH=60 HEIGHT=60 dropdown>
+            <a dropdownToggle  type="button" class="nav-link">
+        <div class="form-row mb-4">
+          <div class="col">
+            <img class="fa fa-user" mdbWavesEffect routerLink="/admin/help"  src="../../assets/img/ayuda.png" ALIGN=MIDDLE WIDTH=40 HEIGHT=40>
+          </div>
+          <div class="col">
+            <br>
+            <label mdbWavesEffect routerLink="/admin/help"><b>Ayuda</b></label>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
       </li>
 
       <!-- Dropdown -->
@@ -40,9 +158,9 @@
     </form>
     -->
     <div class="navbar-nav nav-flex-icons">
-      <div class="nav-item dropdown" dropdown>
-        <a dropdownToggle type="button" class="nav-link">
-          <i class="fa fa-user" style="font-size: x-large;"></i>
+      <div class="nav-item dropdown" WIDTH=60 HEIGHT=60 dropdown>
+        <a dropdownToggle  type="button" class="nav-link">
+          <img src="../../assets/img/user.png" ALIGN=MIDDLE WIDTH=60 HEIGHT=60 class="fa fa-user"  style="font-size: x-large;">
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
           <a class="dropdown-item " href="#">Perfil</a>
@@ -54,6 +172,10 @@
   <!-- Collapsible content -->
 
 </mdb-navbar>
+<br>
+<br>
+<br>
+<br>
 
 <div class="container">
   <div class="d-flex p-4 col-example"></div>
@@ -63,14 +185,14 @@
               <div class="form-group">
                 <label for="exampleInputEmail1">Nombre</label>
                 <input type="email" class="form-control" formControlName="nombre" placeholder="Filtro de nombre">
-                
+
               </div>
               <div class="md-form">
                 <ng-datepicker formControlName="fecha" [options]="filtroFechas">
 
                 </ng-datepicker>
               </div>
-              
+
             </form>
       </div>
     </div>
@@ -83,7 +205,7 @@
 
     <tbody>
       <tr mdbTableCol *ngFor="let provider of providersFilter">
-          
+
         <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
@@ -105,7 +227,7 @@
                    mdbWavesEffect (click)="delete(provider)">Si</a>
                 <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">No</a>
               </div>
-              
+
             </div>
             <!--/.Content-->
           </div>
@@ -121,9 +243,9 @@
         <td><i routerLink="edit-provider/{{provider.email}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
         <td><i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i></td>
         <a href="/admin/productProvider/view-products/{{provider.email}}/{{provider.date}}" class="btn btn-success btn-lg">
-          <span class="glyphicon glyphicon-search"></span> Ver pedidos 
+          <span class="glyphicon glyphicon-search"></span> Ver pedidos
         </a>
-        
+
       </tr>
     </tbody>
   </table>
