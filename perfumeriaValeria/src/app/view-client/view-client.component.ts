@@ -14,6 +14,7 @@ export class ViewClientComponent implements OnInit {
 
   public products: Product[] = null;
   public productsOffer: Product[] = null;
+
   currentUser: User;
   currentOrder: any;
 

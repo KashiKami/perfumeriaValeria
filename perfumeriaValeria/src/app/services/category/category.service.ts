@@ -22,6 +22,10 @@ export class CategoryService {
     return this.http.get(`${this.baseUrl}getAllSubCategory.php?id=`+id);
   }
 
+  public getSubCategoriesMenuLeft() {
+    return this.http.get(`${this.baseUrl}getAllCategories.php`);
+  }
+
   public addCategory(category: any) {
     return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(category));
   }

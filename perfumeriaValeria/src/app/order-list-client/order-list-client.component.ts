@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import { Order } from '../models/order';
 import { ClientService } from '../services/client/client.service';
 import { Router, ActivatedRoute } from "@angular/router";
+import { CategoryService } from '../services/category/category.service';
 
 @Component({
   selector: 'app-order-list-client',
@@ -16,14 +17,19 @@ export class OrderListClientComponent implements OnInit {
   currentUser: User;
   currentOrder: any;
 
+  public categories: any[] = null;
+  public subCategories: any[] = null;
+
   headElements = ['#', 'Fecha'];
 
   constructor(private clientService: ClientService,
-              private router: Router) { }
+              private router: Router,
+              private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
+    this.getCategories();
   }
 
   getProcedure() {
@@ -43,6 +49,20 @@ export class OrderListClientComponent implements OnInit {
     this.order.email = this.currentUser.email;
     this.order.state = 'D';
     this.getOrders();
+  }
+
+  getCategories(): void {
+    this.categoryService.getCategoriesTwo().subscribe((data: any[]) => {
+      this.categories = data;
+    });
+  }
+
+  getSubCategories(id: any): void {
+    this.subCategories = null;
+    this.categoryService.getSubCategories(id).subscribe((data: any[]) => {
+      this.subCategories = data;
+    });
+
   }
 
   getOrders(): void {

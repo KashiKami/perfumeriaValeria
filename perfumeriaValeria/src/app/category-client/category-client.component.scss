@@ -1,0 +1,39 @@
+main {
+  background-color: #e7e7e7;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  margin-top: 50px;
+  height: -webkit-fill-available;
+}
+
+
+
+
+.subCategory {
+  padding-left: 20px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    padding-left: 100px;
+  }
+}
+
+
+@media (min-width: 992px) {
+  .container {
+    padding-left: 100px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 50px;
+  }
+}
+
+@media (min-width: 576px and up) {
+  .container {
+    padding-left: 50px;
+  }
+}

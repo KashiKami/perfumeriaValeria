@@ -18,6 +18,7 @@ export class CategoryClientComponent implements OnInit, OnDestroy {
   public products: Product[] = null;
   public categories: any[] = null;
   public subCategories: any[] = null;
+  public subCategoriesMenuLeft: any[] = null;
 
   constructor(private productService: ProductService,
               private categoryService: CategoryService,
@@ -36,6 +37,7 @@ export class CategoryClientComponent implements OnInit, OnDestroy {
     this.products = null;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getCategories();
+    this.getSubCategoriesMenuLeft();
     this.getProducts();
   }
 
@@ -62,6 +64,14 @@ export class CategoryClientComponent implements OnInit, OnDestroy {
     this.subCategories = null;
     this.categoryService.getSubCategories(id).subscribe((data: any[]) => {
       this.subCategories = data;
+    });
+
+  }
+
+  getSubCategoriesMenuLeft(): void {
+    this.subCategoriesMenuLeft = null;
+    this.categoryService.getSubCategoriesMenuLeft().subscribe((data: any[]) => {
+      this.subCategoriesMenuLeft = data;
     });
 
   }

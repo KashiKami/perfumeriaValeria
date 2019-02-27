@@ -1,5 +1,5 @@
 <header class="h-100">
-  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg cyan navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
     <mdb-navbar-brand>
       <a class="logo navbar-brand" href="#">
         <strong>Valeria´s</strong>
@@ -12,6 +12,21 @@
             Inicio
           </a>
         </li>
+        <li class="nav-item waves-light dropdown" dropdown *ngFor="let category of categories">
+          <a *ngIf="category.num != 0; else elseMenu" dropdownToggle mdbWavesEffect (click)="getSubCategories(category.id)" class="nav-link dropdown-toggle waves-light">
+            {{category.name}}<span class="caret"></span>
+          </a>
+          <ng-template #elseMenu class="navbar-nav nav-flex-icons ">
+            <a routerLink="/category/{{category.id}}" class="nav-link">
+              {{category.name}}
+            </a>
+          </ng-template>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{category.id}}">{{category.name}}</a>
+            <a *ngFor="let subcategory of subCategories" class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{subcategory.id}}">{{subcategory.name}}</a>
+          </div>
+
+        </li>
       </ul>
 
       <div *ngIf="currentUser; else elseLogin" class="navbar-nav nav-flex-icons">
@@ -20,7 +35,7 @@
             <i class="fa fa-user" style="font-size: x-large;"></i>
           </a>
           <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-            <a class="dropdown-item ">{{currentUser.name}}</a>
+            <a routerLink="/detail-count/{{currentUser.email}}" class="dropdown-item ">{{currentUser.name}}</a>
             <a routerLink="/orders" class="dropdown-item ">Mis pedidos</a>
             <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
           </div>
@@ -43,7 +58,7 @@
   <!-- Main -->
   <div class="view intro-2" style="">
     <div class="full-bg-img">
-      <div class="mask rgba-purple-light flex-center">
+      <div class="mask light-blue lighten-3 flex-center">
         <div class="row pt-5 mt-3">
           <div class="col-md-12 mb-3" *ngIf="currentUser; else elseBlock">
             <div class="intro-info-content text-center">
