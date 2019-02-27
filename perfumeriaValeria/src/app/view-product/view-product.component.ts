@@ -21,6 +21,8 @@ export class ViewProductComponent implements OnInit {
   public categories: any[] = null;
   public subCategories: any[] = null;
 
+  public products: Product[] = null;
+
   constructor(private router: Router,
               private productService: ProductService,
               private route: ActivatedRoute,
@@ -34,6 +36,7 @@ export class ViewProductComponent implements OnInit {
     this.currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
 
     this.getCategories();
+    this.getProducts();
 
     this.productService.getOneProduct(id).subscribe(data => {
       this.product = data;
@@ -46,6 +49,12 @@ export class ViewProductComponent implements OnInit {
     this.clienService.addProduct(this.productAdd, this.currentOrder.id);
       this.router.navigate(['/order']);
     }, 300);
+  }
+
+  getProducts(): void {
+    this.productService.getProducts().subscribe((data: Product[]) => {
+      this.products = data;
+    });
   }
 
   getCategories(): void {

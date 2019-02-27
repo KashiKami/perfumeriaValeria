@@ -8,12 +8,9 @@
     "\\src\\app\\order-client",
     "\\src\\app\\order-list-client",
     "\\src\\app\\product-list",
-    "\\src\\app\\register",
-    "\\src\\app\\services",
-    "\\src\\app\\services\\client",
     "\\src\\app\\view-client",
     "\\src\\app\\view-product"
   ],
-  "SelectedNode": "\\src\\app\\view-client\\view-client.component.html",
+  "SelectedNode": "\\src\\app\\view-product\\view-product.component.html",
   "PreviewInSolutionExplorer": false
 }

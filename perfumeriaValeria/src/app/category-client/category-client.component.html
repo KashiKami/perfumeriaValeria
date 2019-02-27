@@ -94,7 +94,7 @@
     <div class="row" style="padding-bottom: 50px;">
       <div class="row col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 container">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item" style="background-color:#e7e7e7;width:100%">Categorias</li>
+          <li class="list-group-item title" style="background-color:#e7e7e7;width:100%">Categorias</li>
           <div *ngFor="let category of categories">
             <li routerLink="/category/{{category.id}}"  class="list-group-item category" style="background-color:#e7e7e7;width:100%" (click)="getSubCategories(category.id)">{{category.name}}</li>
             <div *ngFor="let subcategory of subCategoriesMenuLeft">
