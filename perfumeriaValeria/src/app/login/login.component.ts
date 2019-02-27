@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from '../services/client/client.service';
 import { formatDate } from '@angular/common';
+import { CategoryService } from '../services/category/category.service';
 
 @Component({
   selector: 'app-login',
@@ -22,14 +23,18 @@ export class LoginComponent implements OnInit {
   error: boolean = false;
   textError: string = "";
 
+  public categories: any[] = null;
+  public subCategories: any[] = null;
+
   constructor(private authenticationService: AuthenticationService,
               private router: Router,
               private clientService: ClientService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private categoryService: CategoryService) { }
 
   ngOnInit() {
     let state = this.route.snapshot.paramMap.get('state');
-
+    this.getCategories();
     if (state) {
       this.error = true;
       this.textError = "creado exitosamente";
@@ -71,12 +76,27 @@ export class LoginComponent implements OnInit {
         } else if (this.currentUser.typeUser == 'C') {
           let myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
           this.order.date = myDate;
+          console.log(this.order);
           this.clientService.createOrderClient(this.order);
           this.router.navigate(['viewClient']);
         }
       }
     }
       , 500);
+  }
+
+  getCategories(): void {
+    this.categoryService.getCategoriesTwo().subscribe((data: any[]) => {
+      this.categories = data;
+    });
+  }
+
+  getSubCategories(id: any): void {
+    this.subCategories = null;
+    this.categoryService.getSubCategories(id).subscribe((data: any[]) => {
+      this.subCategories = data;
+    });
+
   }
 
   closeAlert() {

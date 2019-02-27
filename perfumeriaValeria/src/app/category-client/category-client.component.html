@@ -1,106 +1,137 @@
 <header class="h-100">
-<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
-  <mdb-navbar-brand>
-    <a class="logo navbar-brand" href="#">
-      <strong>Valeria´s</strong>
-    </a>
-  </mdb-navbar-brand>
-  <links>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item waves-light" mdbWavesEffect>
-        <a routerLink="" class="nav-link">
-          Inicio
-        </a>
-      </li>
-      <li class="nav-item waves-light dropdown" dropdown *ngFor="let category of categories">
-        <a *ngIf="category.num != 0; else elseMenu" dropdownToggle mdbWavesEffect (click)="getSubCategories(category.id)" class="nav-link dropdown-toggle waves-light">
-          {{category.name}}<span class="caret"></span>
-        </a>
-        <ng-template #elseMenu class="navbar-nav nav-flex-icons ">
-          <a routerLink="/category/{{category.id}}" class="nav-link">
-            {{category.name}}
-          </a>
-        </ng-template>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{category.id}}">{{category.name}}</a>
-          <a *ngFor="let subcategory of subCategories" class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{subcategory.id}}">{{subcategory.name}}</a>
-        </div>
-
-      </li>
-    </ul>
-
-    <div *ngIf="currentUser; else elseLogin" class="navbar-nav nav-flex-icons">
-      <div class="nav-item dropdown" dropdown>
-        <a dropdownToggle type="button" class="nav-link">
-          <i class="fa fa-user" style="font-size: x-large;"></i>
-        </a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a routerLink="/detail-count/{{currentUser.email}}" class="dropdown-item ">{{currentUser.name}}</a>
-          <a routerLink="/orders" class="dropdown-item ">Mis pedidos</a>
-          <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
-        </div>
-      </div>
-      <a routerLink="/order" class="nav-link">
-        <i class="fa fa-shopping-cart" style="font-size: x-large;"></i>
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg cyan navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+    <mdb-navbar-brand>
+      <a class="logo navbar-brand" href="#">
+        <strong>Valeria´s</strong>
       </a>
-    </div>
-    <ng-template #elseLogin class="navbar-nav nav-flex-icons ">
-      <ul class="navbar-nav ">
+    </mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a routerLink="/login" class="nav-link">
-            Ingresa
+          <a routerLink="" class="nav-link">
+            Inicio
           </a>
         </li>
+        <li class="nav-item waves-light dropdown" dropdown *ngFor="let category of categories">
+          <a *ngIf="category.num != 0; else elseMenu" dropdownToggle mdbWavesEffect (click)="getSubCategories(category.id)" class="nav-link dropdown-toggle waves-light">
+            {{category.name}}<span class="caret"></span>
+          </a>
+          <ng-template #elseMenu class="navbar-nav nav-flex-icons ">
+            <a routerLink="/category/{{category.id}}" class="nav-link">
+              {{category.name}}
+            </a>
+          </ng-template>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{category.id}}">{{category.name}}</a>
+            <a *ngFor="let subcategory of subCategories" class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{subcategory.id}}">{{subcategory.name}}</a>
+          </div>
+
+        </li>
       </ul>
-    </ng-template>
-  </links>
-</mdb-navbar>
-<!-- Main -->
-<!-- /.Main -->
+
+      <div *ngIf="currentUser; else elseLogin" class="navbar-nav nav-flex-icons">
+        <div class="nav-item dropdown" dropdown>
+          <a dropdownToggle type="button" class="nav-link">
+            <i class="fa fa-user" style="font-size: x-large;"></i>
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a routerLink="/detail-count/{{currentUser.email}}" class="dropdown-item ">{{currentUser.name}}</a>
+            <a routerLink="/orders" class="dropdown-item ">Mis pedidos</a>
+            <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+          </div>
+        </div>
+        <a routerLink="/order" class="nav-link">
+          <i class="fa fa-shopping-cart" style="font-size: x-large;"></i>
+        </a>
+      </div>
+      <ng-template #elseLogin class="navbar-nav nav-flex-icons ">
+        <ul class="navbar-nav ">
+          <li class="nav-item waves-light" mdbWavesEffect>
+            <a routerLink="/login" class="nav-link">
+              Ingresa
+            </a>
+          </li>
+        </ul>
+      </ng-template>
+    </links>
+  </mdb-navbar>
+  <!-- Main -->
+  <div class="view intro-2" style="">
+    <div class="full-bg-img">
+      <div class="mask light-blue lighten-3 flex-center">
+        <div class="row pt-5 mt-3">
+          <div class="col-md-12 mb-3" *ngIf="currentUser; else elseBlock">
+            <div class="intro-info-content text-center">
+              <h1 class="display-3 mb-5 wow fadeInDown animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
+                PERFUMERIA
+                <a class="black-text font-weight-bold">VALERIA</a>
+              </h1>
+              <h5 class="text-uppercase mb-5 mt-1 font-weight-bold wow fadeInDown animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;"></h5>
+              <a routerLink="/orders" class="btn btn-outline-indigo btn-lg wow fadeInDown waves-effect waves-light animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">Mis Pedidos</a>
+            </div>
+          </div>
+          <ng-template #elseBlock>
+            <div class="intro-info-content text-center">
+              <h1 class="display-3 mb-5 wow fadeInDown animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
+                PERFUMERIA
+                <a class="black-text font-weight-bold">VALERIA</a>
+              </h1>
+              <h5 class="text-uppercase mb-5 mt-1 font-weight-bold wow fadeInDown animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;"></h5>
+              <a routerLink="/login" class="btn btn-outline-indigo btn-lg wow fadeInDown waves-effect waves-light animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">Ingresa</a>
+              <a routerLink="/register" class="btn btn-indigo btn-lg wow fadeInDown waves-effect waves-light animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">Registrate</a>
+            </div>
+          </ng-template>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /.Main -->
 </header>
 
-<main class="text-center container">
-  <div *ngIf="products" class="container">
-    <div class="row">
-
-
-      <div *ngFor="let product of products" class="zoom col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 p-2">
-
-        <!--Card-->
-        <div style="height:300px;" class="card  align-items-center" routerLink="/product/{{product.codeBar}}">
-
-          <!--Card image-->
-          <div class=" overlay waves-light">
-            <img style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
+<main>
+  <div class="container">
+    <div class="row" style="padding-bottom: 50px;">
+      <div class="row col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 container">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" style="background-color:#e7e7e7;width:100%">Categorias</li>
+          <div *ngFor="let category of categories">
+            <li routerLink="/category/{{category.id}}"  class="list-group-item category" style="background-color:#e7e7e7;width:100%" (click)="getSubCategories(category.id)">{{category.name}}</li>
+            <div *ngFor="let subcategory of subCategoriesMenuLeft">
+              <li routerLink="/category/{{subcategory.id}}" *ngIf="category.id == subcategory.superCategory"  class="list-group-item subCategory" style="background-color:#e7e7e7;width:100%">{{subcategory.name}}</li>
+            </div>
           </div>
-          <!--Card image-->
-          <!--Card content-->
-          <mdb-card-body class="text-center">
-            <!--Category & Title-->
+        </ul>
+      </div>
+      <div class="row col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+        <div *ngFor="let product of products" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 p-2" style="cursor: pointer;">
 
-            <h5>
-              <strong>
-                <a class="dark-grey-text">{{product.name}}</a>
-              </strong>
-            </h5>
+          <!--Card-->
+          <div style="height:300px;" class="card align-items-center" routerLink="/product/{{product.codeBar}}">
 
-            <h4 class="font-weight-bold blue-text">
-              <strong>{{product.priceOut}}$</strong>
-            </h4>
-
-          </mdb-card-body>
-          <!--Card content-->
-
+            <!--Card image-->
+            <div class=" overlay">
+              <img style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="Imagen Producto">
+            </div>
+            <!--Card image-->
+            <!--Card content-->
+            <mdb-card-body class="text-center">
+              <!--Category & Title-->
+              <h5>
+                <strong>
+                  <a class="dark-grey-text">{{product.name}}</a>
+                </strong>
+              </h5>
+              <h4 class="font-weight-bold">
+                <strong>{{product.priceOut}}$</strong>
+              </h4>
+            </mdb-card-body>
+            <!--Card content-->
+          </div>
+          <!--Card-->
         </div>
-        <!--Card-->
-
       </div>
 
     </div>
-
   </div>
-
 </main>

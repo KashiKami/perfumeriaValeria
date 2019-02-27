@@ -1,19 +1,35 @@
 <header class="h-100">
-  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
-    <mdb-navbar-brand>
-      <a class="logo navbar-brand" href="#">
-        <strong>Valeria´s</strong>
-      </a>
-    </mdb-navbar-brand>
-    <links>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a routerLink="" class="nav-link">
-            Inicio
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg cyan navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+  <mdb-navbar-brand>
+    <a class="logo navbar-brand" href="#">
+      <strong>Valeria´s</strong>
+    </a>
+  </mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item waves-light" mdbWavesEffect>
+        <a routerLink="" class="nav-link">
+          Inicio
+        </a>
+      </li>
+      <li class="nav-item waves-light dropdown" dropdown *ngFor="let category of categories">
+        <a *ngIf="category.num != 0; else elseMenu" dropdownToggle mdbWavesEffect (click)="getSubCategories(category.id)" class="nav-link dropdown-toggle waves-light">
+          {{category.name}}<span class="caret"></span>
+        </a>
+        <ng-template #elseMenu class="navbar-nav nav-flex-icons ">
+          <a routerLink="/category/{{category.id}}" class="nav-link">
+            {{category.name}}
           </a>
-        </li>
-      </ul>
-    </links>
+        </ng-template>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{category.id}}">{{category.name}}</a>
+          <a *ngFor="let subcategory of subCategories" class="dropdown-item waves-light" mdbWavesEffect routerLink="/category/{{subcategory.id}}">{{subcategory.name}}</a>
+        </div>
+
+      </li>
+    </ul>
+
+  </links>
   </mdb-navbar>
   <!-- Main -->
   <div class="view intro-2" style="">
@@ -38,8 +54,8 @@
 
 
 
-                  <div >
-                    <input required type="email" class="form-control mb-1" placeholder="Correo" formControlName="email">
+                  <div>
+                    <input required type="email" class="form-control mb-1" placeholder="Correo" formControlName="email" [(ngModel)]="order.email">
                     <p style="color:#FF0000" ion-text *ngIf="loginForm.get('email').dirty && loginForm.get('email').errors && loginForm.get('email').errors['required']"> Campo requerido</p>
                     <p style="color:#FF0000" ion-text *ngIf="loginForm.get('email').dirty && loginForm.get('email').errors && loginForm.get('email').errors['email']"> Correo con formato incorrecto</p>
                   </div>
@@ -72,7 +88,7 @@
       </div>
     </div>
   </div>
-  </header>
+</header>
   <!-- /.Main -
 
   <!-- Default form login -->

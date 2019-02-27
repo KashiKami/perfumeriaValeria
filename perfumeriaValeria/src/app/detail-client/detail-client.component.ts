@@ -3,6 +3,7 @@ import { ProviderService } from '../services/provider/provider.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { User } from '../models/user';
+import { CategoryService } from '../services/category/category.service';
 
 
 @Component({
@@ -17,10 +18,14 @@ export class DetailClientComponent implements OnInit {
   currentUser: User;
   currentOrder: any;
 
+  public categories: any[] = null;
+  public subCategories: any[] = null;
+
   constructor(private providerService: ProviderService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private categoryService: CategoryService) { }
 
   ngOnInit() {
 
@@ -38,6 +43,8 @@ export class DetailClientComponent implements OnInit {
       "phone": ['', Validators.required],
       "identify": ['', Validators.required]
     });
+
+    this.getCategories();
 
     if (email != null) {
       this.providerService.getOneProvider(email).subscribe(data => {
@@ -57,6 +64,20 @@ export class DetailClientComponent implements OnInit {
       this.providerService.createProvider(this.addForm.value);
     }
     this.router.navigate(['admin/providers']);
+  }
+
+  getCategories(): void {
+    this.categoryService.getCategoriesTwo().subscribe((data: any[]) => {
+      this.categories = data;
+    });
+  }
+
+  getSubCategories(id: any): void {
+    this.subCategories = null;
+    this.categoryService.getSubCategories(id).subscribe((data: any[]) => {
+      this.subCategories = data;
+    });
+
   }
 
   logOut() {

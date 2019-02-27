@@ -1,5 +1,5 @@
 <header class="h-100">
-  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg pink navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg cyan navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
     <mdb-navbar-brand>
       <a class="logo navbar-brand" href="#">
         <strong>Valeria´s</strong>
@@ -58,7 +58,7 @@
   <!-- Main -->
   <div class="view intro-2" style="">
     <div class="full-bg-img">
-      <div class="mask rgba-pink-light flex-center">
+      <div class="mask light-blue lighten-3 flex-center">
         <div class="row pt-5 mt-3">
           <div class="col-md-12 mb-3" *ngIf="currentUser; else elseBlock">
             <div class="intro-info-content text-center">
@@ -67,7 +67,7 @@
                 <a class="black-text font-weight-bold">VALERIA</a>
               </h1>
               <h5 class="text-uppercase mb-5 mt-1 font-weight-bold wow fadeInDown animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;"></h5>
-              <a routerLink="/orders" class="btn btn-outline-indigo btn-lg wow fadeInDown waves-effect waves-light animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">Mis Pedidos</a>
+              <a routerLink="/orders" class="btn btn-outline-pink btn-lg wow fadeInDown waves-effect waves-light animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">Mis Pedidos</a>
             </div>
           </div>
           <ng-template #elseBlock>
@@ -94,12 +94,12 @@
 <main>
   <div *ngIf="productsOffer" class="container offert">
     <mdb-carousel [isControls]="true" class="carousel slide" [animation]="'slide'">
-      <mdb-carousel-item *ngFor="let product of productsOffer" class="container">
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+      <mdb-carousel-item *ngFor="let product of productsOffer" class="container" >
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6"  routerLink="/product/{{product.codeBar}}">
           <img src="{{product.photo}}" class="img-fluid" alt="Imagen Producto">
         </div>
 
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 h-100">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 h-100"  routerLink="/product/{{product.codeBar}}">
           <span class="pre_title">Descuento</span>
           <h4 class="pink-text">{{product.discount}}% OFF</h4>
           <h3>{{product.name}}</h3>
@@ -160,21 +160,30 @@
 </main>
 <!--Main Layout-->
 <!-- Footer -->
-<footer class="page-footer font-small pink pt-4">
+<footer class="page-footer font-small cyan pt-4">
 
-  <!-- Footer Elements -->
-  <div class="container">
+  <div class="container-fluid text-center text-md-left">
 
-    <!-- Call to action -->
-    <ul class="list-unstyled list-inline text-center py-2">
-      <li class="list-inline-item">
-        <h5 class="mb-1">Register for free</h5>
-      </li>
-      <li class="list-inline-item">
-        <a href="#!" class="btn btn-outline-white btn-rounded">Sign up!</a>
-      </li>
-    </ul>
-    <!-- Call to action -->
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase">Footer Content</h5>
+        <p>Here you can use rows and columns here to organize your footer content.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
 
   </div>
   <!-- Footer Elements -->

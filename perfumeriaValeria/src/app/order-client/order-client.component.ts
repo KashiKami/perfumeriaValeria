@@ -7,6 +7,7 @@ import { User } from '../models/user';
 import { ClientService } from '../services/client/client.service';
 
 import { formatDate } from '@angular/common';
+import { CategoryService } from '../services/category/category.service';
 
 
 @Component({
@@ -16,26 +17,51 @@ import { formatDate } from '@angular/common';
 })
 export class OrderClientComponent implements OnInit {
 
-  public products: Product[];
+  public products: Product[] = null;
   currentUser: User;
   currentOrder: any;
   order: any = {};
+  isFull: boolean = false;
+
+  public categories: any[] = null;
+  public subCategories: any[] = null;
 
   constructor(private orderService: OrderService,
               private router: Router,
-              private clientService: ClientService) { }
+              private clientService: ClientService,
+              private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
     this.getProducts();
+    this.getCategories();
   }
 
 
   getProducts(): void {
     this.orderService.getProducts(this.currentOrder.id).subscribe((data: Product[]) => {
       this.products = data;
+      if (this.products.length != 0) {
+        this.isFull = true;
+      } else if(this.products.length == 0) {
+        this.isFull = false;
+      }
     });
+  }
+
+  getCategories(): void {
+    this.categoryService.getCategoriesTwo().subscribe((data: any[]) => {
+      this.categories = data;
+    });
+  }
+
+  getSubCategories(id: any): void {
+    this.subCategories = null;
+    this.categoryService.getSubCategories(id).subscribe((data: any[]) => {
+      this.subCategories = data;
+    });
+
   }
 
   logOut() {
