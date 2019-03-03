@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\add-order",
+    "\\src\\app\\add-product",
     "\\src\\app\\category-client",
+    "\\src\\app\\inventory",
     "\\src\\app\\order-client",
     "\\src\\app\\order-list-client",
-    "\\src\\app\\product-list",
-    "\\src\\app\\view-client",
-    "\\src\\app\\view-product"
+    "\\src\\app\\provider-list"
   ],
-  "SelectedNode": "\\src\\app\\view-product\\view-product.component.html",
+  "SelectedNode": "\\src\\app\\add-order\\add-order.component.html",
   "PreviewInSolutionExplorer": false
 }
