@@ -28,6 +28,8 @@ export class OrderListComponent implements OnInit {
 
   aux: any = {};
 
+  daterangepickerModel: Date[];
+
   asyncSelectedClient: string;
   dataSourceClient: Observable<any>;
 
@@ -35,11 +37,14 @@ export class OrderListComponent implements OnInit {
 
   addForm: FormGroup;
 
+
   constructor(private orderService: OrderService,
               private clientService: ClientService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private productInventoryService: ProducInventoryService) {
+              private productInventoryService: ProducInventoryService,
+              private route: ActivatedRoute) {
+
     this.dataSourceClient = Observable.create((observer: any) => {
       // Runs on every search
       observer.next(this.asyncSelectedClient);
@@ -60,25 +65,45 @@ export class OrderListComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.addForm = this.formBuilder.group({
       "idOrder": ['', Validators.required],
       "email": ['', Validators.required],
       "date": ['', Validators.required]
     });
 
-      this.getOrders();
+    this.getOrders();
+
+   
 
     setTimeout(() => {
       this.getClients();
     }, 100);
   }
 
-  getOrders(): void {
+  onKey(event: any) { // without type info
+    let name = event.target.value;
+    if (name != '') {
+      this.orders = this.orders.filter(order => order.name.toUpperCase().includes(name.toUpperCase()));
+    } else {
+      this.getOrders();
+    }
+  }
 
+  handler(): void {
+    this.orders = this.orders.filter(order => 
+      this.daterangepickerModel[0].getTime() <= new Date(order.date).getTime() && this.daterangepickerModel[1].getTime() > new Date(order.date).getTime());
+  }
+
+  getOrders(): void {
     this.orderService.getOrders().subscribe((data: Order[]) => {
       this.orders = data;
-      });
+      let email = this.route.snapshot.paramMap.get('email');
 
+      if (email != null) {
+        this.orders = this.orders.filter(order => order.email == email);
+      }
+    });
   }
 
   getClients(): void {

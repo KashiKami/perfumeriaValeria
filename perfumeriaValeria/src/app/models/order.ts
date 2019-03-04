@@ -4,11 +4,13 @@ import { Product } from "./product";
 
 export class Order {
   id: number;
-  date: Date;
+  date: string;
   state: State;
   client: Client;
   products: Array<Product>;
   value: number;
+  email: string;
+  name: string;
   
 
   getValue():number {

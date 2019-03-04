@@ -53,11 +53,10 @@ export class CategoryClientComponent implements OnInit, OnDestroy {
   }
 
   filter(text: any) {
-    console.log(text)
     if (text == '') {
       this.getProducts();
     } else {
-      this.products = this.products.filter(product => product.name.includes(text));
+      this.products = this.products.filter(product => product.name.toUpperCase().includes(text.toUpperCase()));
     }
 
   }
