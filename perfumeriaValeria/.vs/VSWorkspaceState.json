@@ -3,17 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\category-client",
     "\\src\\app\\detail-client",
     "\\src\\app\\detail-order-client",
     "\\src\\app\\list-clients",
-    "\\src\\app\\models",
-    "\\src\\app\\order-list",
-    "\\src\\app\\product-list",
-    "\\src\\app\\sales",
-    "\\src\\app\\services",
-    "\\src\\app\\services\\client",
-    "\\src\\app\\services\\order"
+    "\\src\\app\\order-client",
+    "\\src\\app\\register",
+    "\\src\\app\\view-product"
   ],
-  "SelectedNode": "\\src\\app\\category-client\\category-client.component.ts",
+  "SelectedNode": "\\src\\app\\order-client\\order-client.component.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -9,6 +9,8 @@ import { ClientService } from '../services/client/client.service';
 import { formatDate } from '@angular/common';
 import { CategoryService } from '../services/category/category.service';
 
+import { ToastrManager } from 'ng6-toastr-notifications';
+
 
 @Component({
   selector: 'app-order-client',
@@ -29,7 +31,8 @@ export class OrderClientComponent implements OnInit {
   constructor(private orderService: OrderService,
               private router: Router,
               private clientService: ClientService,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              public toastr: ToastrManager) { }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -82,7 +85,13 @@ export class OrderClientComponent implements OnInit {
     this.order.date = myDate;
     this.order.email = this.currentUser.email;
     setTimeout(() => {
-    this.clientService.createOrderClient(this.order);  
+      this.clientService.createOrderClient(this.order);
+      this.showSuccess();
+      this.router.navigate(['/orders']);
     }, 200);
+  }
+
+  showSuccess() {
+    this.toastr.successToastr('Pedido Realizao', 'Esta hecho!');
   }
 }
