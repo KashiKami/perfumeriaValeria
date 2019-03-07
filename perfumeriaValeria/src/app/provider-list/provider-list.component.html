@@ -204,7 +204,7 @@
     </thead>
 
     <tbody>
-      <tr mdbTableCol *ngFor="let provider of providersFilter">
+      <tr mdbTableCol *ngFor="let order of providersFilter">
 
         <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel" aria-hidden="true">
@@ -233,16 +233,13 @@
           </div>
         </div>
 
-        <th scope="row">{{provider.name}} {{provider.lastName}}</th>
-        <td>{{provider.identify}}</td>
-        <td>{{provider.email}}</td>
-        <td>{{provider.direction}}</td>
-        <td>{{provider.phone}}</td>
-        <td>{{provider.total}}</td>
-        <td>{{provider.date}}</td>
-        <td><i routerLink="edit-provider/{{provider.email}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
+        <th scope="row"> {{order.id}}</th>  
+        <td>{{order.name}} {{order.lastName}}</td>      
+        <td>{{order.email}}</td>
+        <td>{{order.date}}</td>
+        <td><i routerLink="edit-provider/{{order.email}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
         <td><i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i></td>
-        <a href="/admin/productProvider/view-products/{{provider.email}}/{{provider.date}}" class="btn btn-success btn-lg">
+        <a href="/admin/productProvider/view-products/{{order.id}}" class="btn btn-success btn-lg">
           <span class="glyphicon glyphicon-search"></span> Ver pedidos
         </a>
 
@@ -252,7 +249,72 @@
 </div>
 
 
-<button routerLink="add-provider" class="btn red waves-light position-fixed"
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-success modal-side modal-bottom-right" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading">Crear Pedido</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <form class="" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+          <div *ngIf="error" #alert class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{errorText}}
+          </div>
+
+          <div class="modal-body mx-3">
+            <!-- LastName -->
+            <div class="md-form">
+              <i class="fa fa-hashtag prefix grey-text"></i>
+              <input mdbInputDirective type="text" id="idOrder" autocomplete="off" class="form-control" formControlName="idOrder" [(ngModel)]="aux.idOrder">
+              <label for="idOrder" class="">Numero</label>
+            </div>
+
+            <!-- Email -->
+            <div class="md-form">
+              <div class="row">
+                <div class="col-sm-3">
+                    <h4 class="page-header">Proveedor</h4>
+                    <select [(ngModel)]="opcionSeleccionado" class="form-control" formControlName="email">
+                        <option value="0">Selecciona una opción</option>
+                        <option *ngFor="let provider of providers">
+                          {{provider.email}}
+                        </option>
+                    </select>
+                </div>
+                </div>
+            </div>
+
+            <!-- Sign in button -->
+
+
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button mdbBtn color="success" class="waves-light" mdbWavesEffect>Agregar</button>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<button (click)="frame.show()" class="btn green waves-light position-fixed"
         style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem">
   <i class="fa fa-plus"></i>
 </button>
+

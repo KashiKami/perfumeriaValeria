@@ -1,6 +1,6 @@
 
 export class ProductProvider {
-    provider:string;
+  provider:string;
   date: string;
   product: string;
   price:string;

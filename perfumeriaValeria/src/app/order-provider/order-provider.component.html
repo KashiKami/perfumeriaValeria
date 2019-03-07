@@ -57,41 +57,56 @@
 
 <!--form create product -->
 <div class="d-flex p-3 col-example"></div>
-<form class="p-5  container col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8" [formGroup]="addForm">
+<form class="p-5  container col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8" [formGroup]="addForm" (ngSubmit)="addProduct()">
   <p class="h4 mb-4 text-center">Producto</p>
   <div class="row aling-center">
     <!-- Name -->
 
-    <div class="md-form  col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-      <div class="md-form">
-        <div class="row">
-          <div class="col-sm-3">
-            <select class="form-control" formControlName="codeBar">
-              <option value="0">Producto</option>
-              <option value="{{product.codeBar}}" *ngFor="let product of allProducts">
-                {{product.name}}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+    <div class="modal-body mx-3">
+            <!-- LastName -->
+            <div class="md-form">
+              <i class="fa fa-hashtag prefix grey-text"></i>
+              <input mdbInputDirective type="text" id="idOrder" autocomplete="off" class="form-control" formControlName="idOrder" [(ngModel)]="aux.idOrder">
+              <label for="idOrder" class="">Numero</label>
+            </div>
 
+            <!-- Email -->
+            <div class="md-form">
+              <i class="fa fa-user prefix grey-text"></i>
+              <input formControlName="email" type="text" autocomplete="off" id="email" mdbInputDirective [(ngModel)]="asyncSelectedClient"
+                     [typeaheadScrollable]="true"
+                     [typeahead]="dataSourceClient"
+                     typeaheadOptionField="email"
+                     class="form-control">
+              <label for="email" class="">Cliente</label>
+            </div>
+          </div>
+            
+              <div class="md-form">
+                <div class="row">
+                  <div class="col-sm-3">
+                      <h4 class="page-header">Proveedor</h4>
+                      <select [(ngModel)]="opcionSeleccionado" class="form-control" formControlName="email">
+                          <option value="0">Selecciona un producto</option>
+                          <option *ngFor="let provider of providers">
+                            {{provider.email}}
+                          </option>
+                      </select>
+                  </div>
+                  </div>
+              
+      <label for="codeBar" class="">Producto</label>
     </div>
 
     <div class="md-form col-9 col-sm-10 col-md-4 col-lg-4 col-xl-4">
       <i class="fa fa-hashtag prefix grey-text"></i>
-      <input mdbInputDirective type="text" class="form-control mb-4 " formControlName="amount">
+      <input mdbInputDirective type="text" id="amount" class="form-control mb-4 " formControlName="amount">
       <label for="amount" class="">Cantidad</label>
     </div>
-    <div class="md-form col-9 col-sm-10 col-md-4 col-lg-4 col-xl-4">
-      <i class="fa fa-hashtag prefix grey-text"></i>
-      <input mdbInputDirective type="text" class="form-control mb-4 " formControlName="priceIn">
-      <label for="amount" class="">Precio</label>
-    </div>
 
 
-    <button style="border-radius: 50%;width:55px;height:55px;padding:0.5rem;z-index:1;" (click)="onSubmit()"
-      class="form-group" mdbBtn color="success" mdbWavesEffect>
+    <button style="border-radius: 50%;width:55px;height:55px;padding:0.5rem;z-index:1;"
+            class="form-group" mdbBtn color="success" mdbWavesEffect>
       <i class="fa fa-plus"></i>
     </button>
 
@@ -102,7 +117,7 @@
 
 </form>
 <button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem;z-index:1;"
-  class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
+        class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
   <i class="fa fa-check"></i>
 </button>
 <!-- form create product -->
@@ -121,7 +136,7 @@
             <!-- Table head -->
             <thead class="mdb-color lighten-5">
               <tr style="background-color:white;">
-
+                <th></th>
                 <th class="font-weight-bold">
                   <strong>Producto</strong>
                 </th>
@@ -146,7 +161,7 @@
               <!-- First row -->
               <tr *ngFor="let product of products" style="vertical-align:middle;">
                 <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
-                  aria-labelledby="myModalLabel" aria-hidden="true">
+                     aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
                     <!--Content-->
                     <div class="modal-content text-center">
@@ -162,34 +177,32 @@
 
                       <!--Footer-->
                       <div class="modal-footer justify-content-center">
-                        <a mdbBtn color="succsess" outline="true" class="waves-effect" mdbWavesEffect
-                          (click)="delete(product)">Si</a>
-                        <a (click)="frame.hide()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect
-                          data-dismiss="modal" this.photo=product.photo;>No</a>
+                        <a mdbBtn color="succsess" outline="true" class="waves-effect"
+                           mdbWavesEffect (click)="delete(product)">Si</a>
+                        <a (click)="frame.hide()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" this.photo=product.photo;>No</a>
                       </div>
                     </div>
                     <!--/.Content-->
                   </div>
                 </div>
-
+                <th scope="row">
+                  <img [src]="product.photo" alt="" class="img-fluid z-depth-0">
+                </th>
                 <td>
                   <h5 class="mt-3">
-                    <strong>{{product.NAME}}</strong>
+                    <strong>{{product.name}}</strong>
                   </h5>
                 </td>
                 <td></td>
-                <td>{{product.priceIn}}</td>
+                <td>{{product.priceOut}}</td>
                 <td class="font-weight-bold">
-                  <input [disabled]="disable" type="number" value="{{product.amount}}" aria-label="Search"
-                    class="form-control" style="width: 100px">
+                  <input [disabled]="disable" type="number" value="{{product.amount}}" aria-label="Search" class="form-control" style="width: 100px">
                 </td>
                 <td>{{product.total}}</td>
-                <td><i (click)="disable = !disable" class="float-right p-2 fa fa-pencil green-text fa-lg"
-                    aria-hidden="true"></i></td>
+                <td><i (click)="disable = !disable" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
 
                 <td>
-                  <button (click)="frame.show()" type="button" class="btn btn-sm btn-primary waves-effect waves-light"
-                    data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove item">
+                  <button (click)="frame.show()" type="button" class="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove item">
                     X
                   </button>
                 </td>
@@ -228,3 +241,4 @@
   <!--Grid column-->
 
 </div>
+
