@@ -1,3 +1,6 @@
+
+
+
 <header class="h-100">
   <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg cyan navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
     <mdb-navbar-brand>
@@ -94,11 +97,21 @@
     <div class="row" style="padding-bottom: 50px;">
       <div class="row col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 container">
         <ul class="list-group list-group-flush">
+          <div class="md-form input-group mb-3">
+            <input type="text" class="form-control" placeholder="Producto" aria-label="Producto" [(ngModel)]="filterText"
+                   aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button (click)="filter(filterText)" mdbBtn color="default" size="md" class="m-0 px-3 py-2" type="button" id="button-addon2"
+                      mdbWavesEffect>
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
           <li class="list-group-item title" style="background-color:#e7e7e7;width:100%">Categorias</li>
           <div *ngFor="let category of categories">
-            <li routerLink="/category/{{category.id}}"  class="list-group-item category" style="background-color:#e7e7e7;width:100%" (click)="getSubCategories(category.id)">{{category.name}}</li>
+            <li routerLink="/category/{{category.id}}" class="list-group-item category" style="background-color:#e7e7e7;width:100%" (click)="getSubCategories(category.id)">{{category.name}}</li>
             <div *ngFor="let subcategory of subCategoriesMenuLeft">
-              <li routerLink="/category/{{subcategory.id}}" *ngIf="category.id == subcategory.superCategory"  class="list-group-item subCategory" style="background-color:#e7e7e7;width:100%">{{subcategory.name}}</li>
+              <li routerLink="/category/{{subcategory.id}}" *ngIf="category.id == subcategory.superCategory" class="list-group-item subCategory" style="background-color:#e7e7e7;width:100%">{{subcategory.name}}</li>
             </div>
           </div>
         </ul>

@@ -45,6 +45,9 @@ import { CategoryClientComponent } from './category-client/category-client.compo
 import { ReportGanancyComponent } from './report-ganancy/report-ganancy.component';
 import { OrderProviderComponent } from './order-provider/order-provider.component';
 
+import { ToastrModule } from 'ng6-toastr-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +88,9 @@ import { OrderProviderComponent } from './order-provider/order-provider.componen
     TypeaheadModule.forRoot(),
     FormsModule,
     BsDatepickerModule.forRoot(),
-    NgDatepickerModule
+    NgDatepickerModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [AuthGuard, AuthenticationService],
   bootstrap: [AppComponent]

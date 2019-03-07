@@ -5,6 +5,7 @@ import { Product } from '../models/product';
 import { Router, ActivatedRoute } from "@angular/router";
 import { ClientService } from '../services/client/client.service';
 import { CategoryService } from '../services/category/category.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-view-product',
@@ -27,7 +28,8 @@ export class ViewProductComponent implements OnInit {
               private productService: ProductService,
               private route: ActivatedRoute,
               private clienService: ClientService,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              public toastr: ToastrManager) { }
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
@@ -46,7 +48,8 @@ export class ViewProductComponent implements OnInit {
   addProduct() {
     this.productAdd.codeBar = this.product.codeBar;
     setTimeout(() => {
-    this.clienService.addProduct(this.productAdd, this.currentOrder.id);
+      this.clienService.addProduct(this.productAdd, this.currentOrder.id);
+      this.showSuccess();
       this.router.navigate(['/order']);
     }, 300);
   }
@@ -68,7 +71,10 @@ export class ViewProductComponent implements OnInit {
     this.categoryService.getSubCategories(id).subscribe((data: any[]) => {
       this.subCategories = data;
     });
+  }
 
+  showSuccess() {
+    this.toastr.successToastr('Producto agregado.', 'Esta hecho!');
   }
 
 }

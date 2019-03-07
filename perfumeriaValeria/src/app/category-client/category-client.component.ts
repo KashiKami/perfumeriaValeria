@@ -5,6 +5,10 @@ import { Product } from '../models/product';
 import { ProductService } from '../services/product/product.service';
 import { CategoryService } from '../services/category/category.service';
 
+import { from } from 'rxjs/observable/from';
+import { filter } from 'rxjs/operators';
+
+
 @Component({
   selector: 'app-category-client',
   templateUrl: './category-client.component.html',
@@ -16,6 +20,7 @@ export class CategoryClientComponent implements OnInit, OnDestroy {
 
   currentUser: User;
   public products: Product[] = null;
+  public productsFilter: Product[] = null;
   public categories: any[] = null;
   public subCategories: any[] = null;
   public subCategoriesMenuLeft: any[] = null;
@@ -45,6 +50,15 @@ export class CategoryClientComponent implements OnInit, OnDestroy {
     if (this.navigationSubscription) {
       this.navigationSubscription.unsubscribe();
     }
+  }
+
+  filter(text: any) {
+    if (text == '') {
+      this.getProducts();
+    } else {
+      this.products = this.products.filter(product => product.name.toUpperCase().includes(text.toUpperCase()));
+    }
+
   }
 
   getProducts(): void {

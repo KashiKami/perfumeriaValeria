@@ -39,11 +39,13 @@ const routes: Routes = [
   { path: 'admin/sales', component: SalesComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/providers', component: ProviderListComponent, canActivate: [AuthGuard] },
+  
   { path: 'admin/providers/add-provider', component: AddProviderComponent, canActivate: [AuthGuard] },
   { path: 'admin/providers/edit-provider/:email', component: AddProviderComponent, canActivate: [AuthGuard] },
   { path: 'admin/orderProvider/create-order', component: OrderProviderComponent, canActivate: [AuthGuard] },
 
-  { path: 'admin/orders', component: OrderListComponent, canActivate: [AuthGuard]},
+  { path: 'admin/orders', component: OrderListComponent, canActivate: [AuthGuard] },
+  { path: 'admin/orders/:email', component: OrderListComponent, canActivate: [AuthGuard] },
   { path: 'admin/orders/edit-order/:id', component: AddOrderComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/clients', component: ListClientsComponent, canActivate: [AuthGuard] },

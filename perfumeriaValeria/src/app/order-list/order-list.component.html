@@ -179,6 +179,17 @@
 
 <div class="container">
   <div class="d-flex p-4 col-example table-responsive"></div>
+  <div class="row">
+    <div class="form-group col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <label for="exampleInputEmail1">Nombre</label>
+      <input (keyup)="onKey($event)" type="email" class="form-control" placeholder="Filtro de nombre">
+
+    </div>
+      <div class="form-group md-form col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <input type="text" readonly class="form-control mb-3"
+               placeholder="Fecha" bsDaterangepicker (onHidden)="handler()" [(ngModel)]="daterangepickerModel"/>
+      </div>
+  </div>
   <table mdbTable hover="true" class="m-4 table product-table">
 
     <thead>

@@ -19,6 +19,10 @@ export class ClientService {
     return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(client));
   }
 
+  public getAllOrder(email: any) {
+    return this.http.post(`${this.baseUrl}getAllOrder.php`, JSON.stringify(email));
+  }
+
 
   confirmOrder(id: any) {
     return this.http.post(`${this.baseUrl}confirmOrder.php`, JSON.stringify(id)).subscribe();

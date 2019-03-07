@@ -3,6 +3,7 @@ import {FormGroup, Validators, FormControl } from "@angular/forms";
 import { ClientService } from '../services/client/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../services/category/category.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private clientService: ClientService,
               private router: Router,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              public toastr: ToastrManager) { }
 
   ngOnInit() {
     this.addForm = new FormGroup({
@@ -44,7 +46,8 @@ export class RegisterComponent implements OnInit {
         this.error = true;
         this.errorText = data.error;
       } else if (data.error == 'creado exitosamente') {
-        this.router.navigate(['/login/'+true]);
+        this.showSuccess();
+        this.router.navigate(['/login']);
       }
     });
   }
@@ -65,5 +68,9 @@ export class RegisterComponent implements OnInit {
 
   closeAlert() {
     this.error = false;
+  }
+
+  showSuccess() {
+    this.toastr.successToastr('Registro completo', 'Esta hecho!');
   }
 }
