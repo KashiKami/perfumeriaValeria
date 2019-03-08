@@ -26,13 +26,17 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
 import { ListClientsComponent } from './list-clients/list-clients.component';
 import { CategoryClientComponent } from './category-client/category-client.component';
+<<<<<<< HEAD
 import { ViewClientOrderComponent } from './view-client-order/view-client-order.component';
+=======
+import { OrderProviderComponent } from './order-provider/order-provider.component';
+>>>>>>> 8bc1027bad987cbd1b696a93a21f60799a7fac5e
 
 const routes: Routes = [
   { path: 'admin/products', component: ProductListComponent, canActivate: [AuthGuard]},
   { path: 'admin/products/add-product', component: AddProductComponent, canActivate: [AuthGuard] },
   { path: 'admin/products/edit-product/:id', component: AddProductComponent, canActivate: [AuthGuard] },
-  { path: 'admin/productProvider/view-products/:email/:date', component: ListProductProviderComponent, canActivate: [AuthGuard] },
+  { path: 'admin/productProvider/view-products/:id', component: ListProductProviderComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/inventory', component: InventoryComponent, canActivate: [AuthGuard] },
 
@@ -42,6 +46,7 @@ const routes: Routes = [
   
   { path: 'admin/providers/add-provider', component: AddProviderComponent, canActivate: [AuthGuard] },
   { path: 'admin/providers/edit-provider/:email', component: AddProviderComponent, canActivate: [AuthGuard] },
+  { path: 'admin/orderProvider/create-order', component: OrderProviderComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/orders', component: OrderListComponent, canActivate: [AuthGuard] },
   { path: 'admin/orders/:email', component: OrderListComponent, canActivate: [AuthGuard] },

@@ -43,6 +43,7 @@ import { ListProductProviderComponent } from './list-product-provider/list-produ
 
 import { CategoryClientComponent } from './category-client/category-client.component';
 import { ReportGanancyComponent } from './report-ganancy/report-ganancy.component';
+import { OrderProviderComponent } from './order-provider/order-provider.component';
 
 import { ToastrModule } from 'ng6-toastr-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -73,7 +74,11 @@ import { ViewClientOrderComponent } from './view-client-order/view-client-order.
     ListProductProviderComponent,
     CategoryClientComponent,
     ReportGanancyComponent,
+<<<<<<< HEAD
     ViewClientOrderComponent
+=======
+    OrderProviderComponent
+>>>>>>> 8bc1027bad987cbd1b696a93a21f60799a7fac5e
 
   ],
   imports: [
