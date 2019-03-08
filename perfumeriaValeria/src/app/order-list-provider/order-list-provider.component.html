@@ -233,8 +233,8 @@
         <td>{{order.total}}</td>
         <td>{{order.date}}</td>
         <td>
-          <i *ngIf="order.state == 'D' " routerLink="/admin/orders/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"></i>
-          <i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i>
+          <i routerLink="/admin/orders/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"></i>
+          <i routerLink="/admin/orderProvider/edit-order/{{order.id}}" class="float-right p-2 fa fa-edit green-text fa-lg" aria-hidden="true"></i>
         </td>
       </tr>
     </tbody>

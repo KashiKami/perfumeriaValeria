@@ -27,6 +27,8 @@ export class OrderProviderComponent implements OnInit {
 
   public disable: boolean = false;
 
+  private order: any = {};
+
   addForm: FormGroup;
 
   constructor(private orderProviderService: OrderProviderService,
@@ -67,7 +69,8 @@ export class OrderProviderComponent implements OnInit {
   }
 
   delete(product: any) {
-    this.orderProviderService.deleteProduct(product);
+    let id = this.route.snapshot.paramMap.get('id');
+    this.orderProviderService.deleteProduct(product, id);
     setTimeout(() => {
       this.getProducts();
     }, 100);
@@ -78,7 +81,7 @@ export class OrderProviderComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     this.orderProviderService.addProduct(this.addForm.value, id).subscribe((data: any) => {
       if (data.error && data.error != 'creado exitosamente') {
-        
+        this.showAlarm(data.error);
       } else if (data.error == 'creado exitosamente') {
         this.showSuccess();
         setTimeout(() => {
@@ -89,6 +92,13 @@ export class OrderProviderComponent implements OnInit {
   
   }
 
+  verify(){
+    this.order.id = this.route.snapshot.paramMap.get('id');
+    this.orderProviderService.addInventory(this.order);
+    this.showSuccessM('Pedido realizado correctamente');
+    this.router.navigate(['admin/products']);
+  }
+
   logOut() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['viewClient']);
@@ -96,6 +106,14 @@ export class OrderProviderComponent implements OnInit {
 
   showSuccess() {
     this.toastr.successToastr('Producto agregado', 'Esta hecho!');
+  }
+
+  showSuccessM(text: any) {
+    this.toastr.successToastr(text, 'Esta hecho!');
+  }
+
+  showAlarm(text: any) {
+    this.toastr.warningToastr(text, 'Cuidado!');
   }
 
 }

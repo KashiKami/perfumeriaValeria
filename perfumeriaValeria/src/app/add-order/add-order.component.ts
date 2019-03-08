@@ -65,7 +65,8 @@ export class AddOrderComponent implements OnInit {
   }
 
   delete(product: any) {
-    this.orderService.deleteProduct(product);
+    let id = this.route.snapshot.paramMap.get('id');
+    this.orderService.deleteProduct(product, id);
     setTimeout(() => {
       this.getProducts();
     }, 100);

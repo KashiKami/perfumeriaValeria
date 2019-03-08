@@ -31,8 +31,8 @@ export class OrderService {
     return this.http.post(`${this.baseUrl}delete.php`, JSON.stringify(order)).subscribe();
   }
 
-  deleteProduct(product: any) {
-    return this.http.post(`${this.baseUrl}deleteProduct.php`, JSON.stringify(product)).subscribe();
+  deleteProduct(product: any, idOrder: any) {
+    return this.http.post(`${this.baseUrl}deleteProduct.php?id=`+idOrder, JSON.stringify(product)).subscribe();
   }
 
   editOrder(order: any) {
