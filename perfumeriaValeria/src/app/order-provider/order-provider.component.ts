@@ -11,6 +11,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Client } from '../models/client';
 import { ClientService } from '../services/client/client.service';
 import { ProductService } from '../services/product/product.service';
+import { OrderProviderService } from '../services/orderProvider/order-provider.service';
+
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-order-provider',
@@ -18,6 +21,7 @@ import { ProductService } from '../services/product/product.service';
   styleUrls: ['./order-provider.component.scss']
 })
 export class OrderProviderComponent implements OnInit {
+
   public products: Product[] = null;
   public availableProducts: Product[];
 
@@ -25,37 +29,19 @@ export class OrderProviderComponent implements OnInit {
 
   addForm: FormGroup;
 
-  asyncSelectedClient: string;
-  dataSourceClient: Observable<any>;
-
-  constructor(private orderService: OrderService,
-              private clientService: ClientService,
+  constructor(private orderProviderService: OrderProviderService,
               private productServie: ProductService,
               private router: Router,
               private route: ActivatedRoute,
-              private formBuilder: FormBuilder) {
-    this.dataSourceClient = Observable.create((observer: any) => {
-      // Runs on every search
-      observer.next(this.asyncSelectedClient);
-    })
-      .pipe(
-        mergeMap((token: string) => this.getProvidersAsObservable(token))
-      );
-  }
-
-  getProvidersAsObservable(token: string): Observable<any> {
-    const query = new RegExp(token, 'i');
-    return of(
-      this.availableProducts.filter((state: any) => {
-        return query.test(state.name);
-      })
-    );
+              private formBuilder: FormBuilder,
+              public toastr: ToastrManager) {
   }
 
   ngOnInit() {
     this.addForm = this.formBuilder.group({
       "codeBar": ['', Validators.required],
-      "amount": ['', Validators.required]
+      "amount": ['', Validators.required],
+      "priceIn": ['', Validators.required]
     });
 
     setTimeout(() => {
@@ -69,7 +55,7 @@ export class OrderProviderComponent implements OnInit {
 
   getProducts(): void {
     let id = this.route.snapshot.paramMap.get('id');
-    this.orderService.getProducts(id).subscribe((data: Product[]) => {
+    this.orderProviderService.getProducts(id).subscribe((data: Product[]) => {
       this.products = data;
     });
   }
@@ -81,18 +67,26 @@ export class OrderProviderComponent implements OnInit {
   }
 
   delete(product: any) {
-    this.orderService.deleteProduct(product);
+    this.orderProviderService.deleteProduct(product);
     setTimeout(() => {
       this.getProducts();
     }, 100);
   }
 
   addProduct() {
+    console.log(this.addForm.value);
     let id = this.route.snapshot.paramMap.get('id');
-    this.orderService.addProduct(this.addForm.value, id);
-    setTimeout(() => {
-      this.getProducts();
-    }, 100);
+    this.orderProviderService.addProduct(this.addForm.value, id).subscribe((data: any) => {
+      if (data.error && data.error != 'creado exitosamente') {
+        
+      } else if (data.error == 'creado exitosamente') {
+        this.showSuccess();
+        setTimeout(() => {
+          this.getProducts();
+        }, 100);
+      }
+    });
+  
   }
 
   logOut() {
@@ -100,5 +94,8 @@ export class OrderProviderComponent implements OnInit {
     this.router.navigate(['viewClient']);
   }
 
+  showSuccess() {
+    this.toastr.successToastr('Producto agregado', 'Esta hecho!');
+  }
 
 }

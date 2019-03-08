@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Client } from '../models/client';
 import { ClientService } from '../services/client/client.service';
 import { ProductService } from '../services/product/product.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-add-order',
@@ -26,31 +27,13 @@ export class AddOrderComponent implements OnInit {
 
   addForm: FormGroup;
 
-  asyncSelectedClient: string;
-  dataSourceClient: Observable<any>;
-
   constructor(private orderService: OrderService,
               private clientService: ClientService,
               private productServie: ProductService,
               private router: Router,
               private route: ActivatedRoute,
-              private formBuilder: FormBuilder) {
-    this.dataSourceClient = Observable.create((observer: any) => {
-      // Runs on every search
-      observer.next(this.asyncSelectedClient);
-    })
-      .pipe(
-        mergeMap((token: string) => this.getProvidersAsObservable(token))
-      );
-  }
-
-  getProvidersAsObservable(token: string): Observable<any> {
-    const query = new RegExp(token, 'i');
-    return of(
-      this.availableProducts.filter((state: any) => {
-        return query.test(state.name);
-      })
-    );
+              private formBuilder: FormBuilder,
+              public toastr: ToastrManager) {
   }
 
   ngOnInit() {
@@ -90,15 +73,31 @@ export class AddOrderComponent implements OnInit {
 
   addProduct() {
     let id = this.route.snapshot.paramMap.get('id');
-    this.orderService.addProduct(this.addForm.value, id);
-    setTimeout(() => {
-      this.getProducts();
-    }, 100);
+    this.orderService.addProduct(this.addForm.value, id).subscribe((data: any) => {
+      if (data.error && data.error != 'creado exitosamente') {
+        this.showAlarm(data.error);
+      } else if (data.error == 'creado exitosamente') {
+        this.showSuccess();
+        setTimeout(() => {
+          this.getProducts();
+        }, 100);
+      }
+    });
+
   }
 
   logOut() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['viewClient']);
+  }
+
+  
+  showSuccess() {
+    this.toastr.successToastr('Producto agregado', 'Esta hecho!');
+  }
+
+  showAlarm(text: any) {
+    this.toastr.warningToastr(text, 'Cuidado!');
   }
 
 }
