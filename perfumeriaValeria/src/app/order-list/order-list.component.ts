@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { formatDate } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 import { ProducInventoryService } from '../services/productInventory/produc-inventory.service';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas';  
 
 @Component({
   selector: 'app-order-list',
@@ -28,6 +30,8 @@ export class OrderListComponent implements OnInit {
 
   aux: any = {};
 
+  daterangepickerModel: Date[];
+
   asyncSelectedClient: string;
   dataSourceClient: Observable<any>;
 
@@ -35,11 +39,14 @@ export class OrderListComponent implements OnInit {
 
   addForm: FormGroup;
 
+
   constructor(private orderService: OrderService,
               private clientService: ClientService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private productInventoryService: ProducInventoryService) {
+              private productInventoryService: ProducInventoryService,
+              private route: ActivatedRoute) {
+
     this.dataSourceClient = Observable.create((observer: any) => {
       // Runs on every search
       observer.next(this.asyncSelectedClient);
@@ -60,25 +67,48 @@ export class OrderListComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.addForm = this.formBuilder.group({
       "idOrder": ['', Validators.required],
       "email": ['', Validators.required],
       "date": ['', Validators.required]
     });
 
-      this.getOrders();
+    this.getOrders();
+
+    this.orderService.getOrders().subscribe((data: Order[]) => {
+      this.orders = data;
+      let email = this.route.snapshot.paramMap.get('email');
+
+      if (email != null) {
+        this.orders = this.orders.filter(order => order.email == email);
+      }
+    });
 
     setTimeout(() => {
       this.getClients();
     }, 100);
   }
 
-  getOrders(): void {
+  onKey(event: any) { // without type info
+    let name = event.target.value;
+    if (name != '') {
+      this.orders = this.orders.filter(order => order.name.toUpperCase().includes(name.toUpperCase()));
+    } else {
+      console.log("hola");
+      this.getOrders();
+    }
+  }
 
+  handler(): void {
+    this.orders = this.orders.filter(order => 
+      this.daterangepickerModel[0].getTime() <= new Date(order.date).getTime() && this.daterangepickerModel[1].getTime() > new Date(order.date).getTime());
+  }
+
+  getOrders(): void {
     this.orderService.getOrders().subscribe((data: Order[]) => {
       this.orders = data;
-      });
-
+    });
   }
 
   getClients(): void {
@@ -135,6 +165,24 @@ export class OrderListComponent implements OnInit {
       this.getOrders();
     }, 100);
   }
+
+  public getReportPdf()  
+  {  
+    var data = document.getElementById('contentToConvert');  
+    html2canvas(data).then(canvas => {  
+      // Few necessary setting options  
+      var imgWidth = 208;   
+      var pageHeight = 295;    
+      var imgHeight = canvas.height * imgWidth / canvas.width;  
+      var heightLeft = imgHeight;  
+  
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      var position = 0;  
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+      pdf.save('MYPdf.pdf'); // Generated PDF   
+    });  
+  }  
 
   closeAlert() {
     this.error = false;

@@ -5,6 +5,7 @@ import { Product } from '../models/product';
 import { Router, ActivatedRoute } from "@angular/router";
 import { ClientService } from '../services/client/client.service';
 import { CategoryService } from '../services/category/category.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-view-product',
@@ -21,11 +22,14 @@ export class ViewProductComponent implements OnInit {
   public categories: any[] = null;
   public subCategories: any[] = null;
 
+  public products: Product[] = null;
+
   constructor(private router: Router,
               private productService: ProductService,
               private route: ActivatedRoute,
               private clienService: ClientService,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              public toastr: ToastrManager) { }
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
@@ -34,6 +38,7 @@ export class ViewProductComponent implements OnInit {
     this.currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
 
     this.getCategories();
+    this.getProducts();
 
     this.productService.getOneProduct(id).subscribe(data => {
       this.product = data;
@@ -43,9 +48,16 @@ export class ViewProductComponent implements OnInit {
   addProduct() {
     this.productAdd.codeBar = this.product.codeBar;
     setTimeout(() => {
-    this.clienService.addProduct(this.productAdd, this.currentOrder.id);
+      this.clienService.addProduct(this.productAdd, this.currentOrder.id);
+      this.showSuccess();
       this.router.navigate(['/order']);
     }, 300);
+  }
+
+  getProducts(): void {
+    this.productService.getProducts().subscribe((data: Product[]) => {
+      this.products = data;
+    });
   }
 
   getCategories(): void {
@@ -59,7 +71,10 @@ export class ViewProductComponent implements OnInit {
     this.categoryService.getSubCategories(id).subscribe((data: any[]) => {
       this.subCategories = data;
     });
+  }
 
+  showSuccess() {
+    this.toastr.successToastr('Producto agregado.', 'Esta hecho!');
   }
 
 }

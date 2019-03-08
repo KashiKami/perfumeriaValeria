@@ -182,14 +182,20 @@
     <thead>
       <tr>
         <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
+        <td></td>
       </tr>
     </thead>
     <tbody>
       <tr mdbTableCol *ngFor="let client of clients">
-        <th scope="row">{{client.name}} {{client.lastName}}</th>
+        <th >{{client.name}} {{client.lastName}}</th>
         <td>{{client.identify}}</td>
         <td>{{client.email}}</td>
         <td>{{client.phone}}</td>
+        <td><button routerLink="/admin/orders/{{client.email}}" type="submit"
+        class="form-group" mdbBtn color="success" mdbWavesEffect>
+  <i class="fa fa-view"></i>
+  Ver Pedidos
+</button></td>
       </tr>
     </tbody>
   </table>

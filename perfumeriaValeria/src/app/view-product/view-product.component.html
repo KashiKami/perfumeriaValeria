@@ -89,40 +89,87 @@
   <!-- /.Main -->
 </header>
 
-<div class="text-center p-5 container md-form col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8" style="margin-top:100px;">
-  <div class="row">
-  <div class="view overlay zoom col-12 col-sm-12 col-md-6 col-lg-6 col-xl-8 p-8" style="padding:10px;">
-    <img src="{{product.photo}}" class="img-fluid " alt="zoom">
-    <div class="mask flex-center waves-effect waves-light">
-      <p class="white-text">Zoom effect</p>
-    </div>
-  </div>
-  <div class="md-form input-group col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 p-4">
-
-    <div class=" wow fadeInDown animated text-left text-justify" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
-      <h1>{{product.name}}</h1>
-      {{product.description}}
-      <a class="black-text font-weight-bold">{{product.priceIn}} $</a>
-    </div>
-
-    <div *ngIf="currentUser; else elseBuy" class="input-group-append" style="height:30px;">
-      <input type="number" class="form-control" placeholder="0" aria-label="Recipient's username"
-             aria-describedby="button-addon2" [(ngModel)]="productAdd.amount">
-      <button (click)="addProduct()" mdbBtn color="default" size="md" class="m-0 px-3 py-2" type="button" id="button-addon2"
-              mdbWavesEffect>
-        Comprar
-      </button>
-    </div>
-    <ng-template #elseBuy>
-      <div class="input-group-append" style="height:30px;">
-        <button routerLink="/login" mdbBtn color="default" size="md" class="m-0 px-3 py-2" type="button" id="button-addon2"
-                mdbWavesEffect>
-          Comprar
-        </button>
+<main>
+  <div class="text-center container col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8" >
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-8 p-8">
+        <img src="{{product.photo}}" class="img-fluid ">
+        <div class="mask flex-center waves-effect waves-light">
+          <p class="white-text">Zoom effect</p>
         </div>
-    </ng-template>
+      </div>
+      <div class="md-form input-group col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 p-4">
+
+        <div class=" wow fadeInDown animated text-left text-justify" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
+          <h1>{{product.name}}</h1>
+          {{product.description}}
+          <a class="black-text font-weight-bold">{{product.priceIn}} $</a>
+        </div>
+
+        <div *ngIf="currentUser; else elseBuy" class="input-group-append" style="height:30px;">
+          <input type="number" class="form-control" placeholder="0" aria-label="Recipient's username"
+                 aria-describedby="button-addon2" [(ngModel)]="productAdd.amount">
+          <button (click)="addProduct()" mdbBtn color="default" size="md" class="m-0 px-3 py-2" type="button" id="button-addon2"
+                  mdbWavesEffect>
+            Comprar
+          </button>
+        </div>
+        <ng-template #elseBuy>
+          <div class="input-group-append" style="height:30px;">
+            <button routerLink="/login" mdbBtn color="default" size="md" class="m-0 px-3 py-2" type="button" id="button-addon2"
+                    mdbWavesEffect>
+              Agregar al carro de la compra
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
   </div>
-  </div>
-</div>
+  <!--Section: Products v.5-->
+  <section class="text-center pb-3 my-5 container">
+    <!--Section heading-->
+    <h2 class="h1 py-5">Mas productos</h2>
+
+    <!--Carousel Wrapper-->
+    <mdb-carousel [isControls]="true" class="carousel slide" [animation]="'slide'">
+      <!--First slide-->
+      <mdb-slide *ngFor="let product of products; let i=index">
+        <div *ngFor="let product of products" class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 p-2" style="cursor: pointer;">
+
+          <!--Card-->
+          <div style="height:300px;" class="card align-items-center" routerLink="/product/{{product.codeBar}}">
+
+            <!--Card image-->
+            <div class=" overlay">
+              <img style="height:200px;width:200px;margin-top:10px;" src="{{product.photo}}" alt="Imagen Producto">
+            </div>
+            <!--Card image-->
+            <!--Card content-->
+            <mdb-card-body class="text-center">
+              <!--Category & Title-->
+
+              <h5>
+                <strong>
+                  <a class="dark-grey-text">{{product.name}}</a>
+                </strong>
+              </h5>
+
+              <h4 class="font-weight-bold">
+                <strong>{{product.priceIn}}$</strong>
+              </h4>
+
+            </mdb-card-body>
+            <!--Card content-->
+
+          </div>
+        </div>
+      </mdb-slide>
+      <!--/First slide-->
+    </mdb-carousel>
+    <!--/.Carousel Wrapper-->
+
+  </section>
+  <!--Section: Products v.5-->
+</main>
 
 

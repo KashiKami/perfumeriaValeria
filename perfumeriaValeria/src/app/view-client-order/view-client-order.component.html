@@ -1,0 +1,152 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg indigo navbar-dark fixed-top scrolling-navbar">
+
+  <!-- Navbar brand -->
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Pedidos</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/sales">Reportes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Ventas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/help">Ayuda</a>
+      </li>
+
+      <!-- Dropdown -->
+
+
+    </ul>
+    <!-- Links -->
+    <!-- Search form -->
+    <!--
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
+      </div>
+    </form>
+    -->
+    <div class="navbar-nav nav-flex-icons">
+      <div class="nav-item dropdown" dropdown>
+        <a dropdownToggle type="button" class="nav-link">
+          <i class="fa fa-user" style="font-size: x-large;"></i>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item " href="#">Perfil</a>
+          <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+        </div>
+      </div>
+    </div>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+
+<!--form create product -->
+<div class="d-flex p-3 col-example"></div>
+<div class="container" style="margin-top: 100px;" id="contentToConvert">
+  <!--Grid column-->
+  <div class="">
+
+    <div class="card">
+      <div class="card-body">
+        <!-- Shopping Cart table -->
+        <div class="table-responsive">
+
+          <table class="table product-table">
+
+            <!-- Table head -->
+            <thead class="mdb-color lighten-5">
+              <tr style="background-color:white;">
+                <th></th>
+                <th class="font-weight-bold">
+                  <strong>Producto</strong>
+                </th>
+                <th></th>
+                <th class="font-weight-bold">
+                  <strong>Precio</strong>
+                </th>
+                <th class="font-weight-bold">
+                  <strong>Cantidad</strong>
+                </th>
+                <th class="font-weight-bold">
+                  <strong>Total</strong>
+                </th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <!-- /.Table head -->
+            <!-- Table body -->
+            <tbody *ngIf="products">
+
+              <!-- First row -->
+              <tr *ngFor="let product of products" style="vertical-align:middle;">
+                <th scope="row">
+                  <img [src]="product.photo" alt="" class="img-fluid z-depth-0">
+                </th>
+                <td>
+                  <h5 class="mt-3">
+                    <strong>{{product.name}}</strong>
+                  </h5>
+                </td>
+                <td></td>
+                <td>{{product.priceOut}}</td>
+                <td class="font-weight-bold">
+                  <input [disabled]="disable" type="number" value="{{product.amount}}" aria-label="Search" class="form-control" style="width: 100px">
+                </td>
+                <td>{{product.total}}</td>
+              </tr>
+              <tr>
+                <td colspan="3"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <h4 class="mt-2">
+                    <strong>Total</strong>
+                  </h4>
+                </td>
+                <td *ngIf="products[0]" class="text-right">
+                  <h4 class="mt-2">
+                    <strong>{{products[0].totalOrder}}</strong>
+                  </h4>
+                </td>
+              </tr>
+
+              <!-- /.First row -->
+            </tbody>
+            <!-- /.Table body -->
+
+          </table>
+
+        </div>
+        <!-- /.Shopping Cart table -->
+
+      </div>
+
+    </div>
+
+  </div>
+  <!--Grid column-->
+
+</div>
+
+<button (click)="getReportPdf()" class="btn blue waves-light position-fixed"
+        style="left:20px; bottom:20px">
+        <mdb-icon fa icon="file-pdf"></mdb-icon>
+  Generar reporte
+</button>

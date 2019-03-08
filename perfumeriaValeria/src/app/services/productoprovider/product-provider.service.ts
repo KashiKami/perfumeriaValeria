@@ -10,12 +10,11 @@ export class ProductProviderService {
 
   constructor(private http: HttpClient) { }
 
-  public getProducts(email:any,date:any) {
-    const data={
-      email: email,
-      date:date
+  public getProducts(id: any) {
+    const data = {
+      id: id
     };
-    return this.http.get(`${this.baseUrl}getAll.php`, {params:data});
+    return this.http.get(`${this.baseUrl}getDetailOrder.php`, { params: data });
   }
 
   public getProduct(id: any) {
@@ -34,7 +33,7 @@ export class ProductProviderService {
     return this.http.post(`${this.baseUrl}reduceInventory.php`, JSON.stringify(provider)).subscribe();
   }
 
-  removeProduct(product: any) {
-    return this.http.post(`${this.baseUrl}edit.php`, JSON.stringify(product)).subscribe();
+  removeProduct(provider: any) {
+    return this.http.post(`${this.baseUrl}edit.php`, JSON.stringify(provider)).subscribe();
   }
 }

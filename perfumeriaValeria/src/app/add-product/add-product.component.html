@@ -75,26 +75,20 @@
 
 
     <!-- Code Bar -->
-    <div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 md-form">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 md-form">
       <input mdbInputDirective type="text" class="form-control mb-4" formControlName="codeBar" #qr (keyup)="0">
       <label for="codeBar" class="">Codigo</label>
     </div>
 
 
     <!-- Price -->
-    <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 md-form">
-      <input mdbInputDirective type="number" id="priceIn" class="form-control mb-4" formControlName="priceIn">
-      <label for="priceIn" class="">Precio Compra</label>
-    </div>
-
-    <!-- Price -->
-    <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 md-form">
-      <input mdbInputDirective type="number" id="priceOut" class="form-control mb-4" formControlName="priceOut">
-      <label for="priceOut" class="">Precio Venta</label>
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 md-form">
+      <input mdbInputDirective type="number" id="priceIn" class="form-control mb-4" formControlName="ganancy">
+      <label for="priceIn" class="">Ganacia</label>
     </div>
 
     <!-- discount -->
-    <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 md-form">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 md-form">
       <input mdbInputDirective type="number" id="discount" class="form-control mb-4" formControlName="discount">
       <label for="discount" class="">Descuento</label>
     </div>
@@ -103,25 +97,21 @@
       <p *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['required']"> El nombrre de prosucto es requerido</p>
       <p *ngIf="addForm.get('codeBar').dirty && addForm.get('codeBar').errors && addForm.get('codeBar').errors['required']"> El código de barras es requerido</p>
       <p *ngIf="addForm.get('codeBar').dirty && addForm.get('codeBar').errors && addForm.get('codeBar').errors['pattern']"> El código de barras ingresado es inválido</p>
-      <p *ngIf="addForm.get('priceIn').dirty && addForm.get('priceIn').errors && addForm.get('priceIn').errors['required']"> El precio de entrada es requerido</p>
-      <p *ngIf="addForm.get('priceOut').dirty && addForm.get('priceOut').errors && addForm.get('priceOut').errors['required']"> El precio de salida es requerido</p>
     </div>
 
     <!-- category -->
-    <div class="col-12 col-sm-12 col-md-4 col-lg-6 col-xl-6 md-form input-group">
-      <input formControlName="category" type="text" autocomplete="off" id="category" mdbInputDirective [(ngModel)]="asyncSelected"
-             [typeaheadScrollable]="true"
-             [typeahead]="dataSource"
-             typeaheadOptionField="id"
-             class="form-control"
-             aria-describedby="button-addon2">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 md-form input-group">
+      <select class="browser-default custom-select" formControlName="category">
+        <option *ngFor="let category of categories" [value]="category.id">{{category.name}} 
+          
+        </option>
+      </select>
       <div class="input-group-append">
         <button  (click)="frame.show()" mdbBtn color="default" size="md" class="m-0 px-3 py-2" type="button" id="button-addon2"
                 mdbWavesEffect>
           Agregar Categoria
         </button>
       </div>
-      <label for="category" class="">Categoria</label>
     </div>
 
 
@@ -164,7 +154,7 @@
       <i class="fa fa-check"></i>
     </button>
 
-    <qrcode style="left:20px; bottom:20px;"
+    <qrcode type="hidden" style="left:20px; bottom:20px;"
             class="position-fixed" mdbWavesEffect id="qr" [qrdata]="qr.value" [size]="128" [level]="'M'" image="true"></qrcode>
 
   </div>

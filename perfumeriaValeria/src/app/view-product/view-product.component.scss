@@ -1,0 +1,22 @@
+main {
+  background-color: #e7e7e7;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.card:hover {
+  webkit-transition: -webkit-box-shadow .1s ease-out;
+  transition: -webkit-box-shadow .1s ease-out;
+  transition: box-shadow .1s ease-out;
+  transition: box-shadow .1s ease-out,-webkit-box-shadow .1s ease-out;
+  -webkit-box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+  box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+}
+
+.card {
+  box-shadow: none;
+}
+
+ .row {
+   background-color: white;
+ }

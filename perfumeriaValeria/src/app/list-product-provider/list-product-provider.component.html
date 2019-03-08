@@ -1,57 +1,119 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg indigo navbar-dark fixed-top scrolling-navbar">
 
-<header class="h-100" style="margin-top:100px;">
-  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg black navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="true">
-    <mdb-navbar-brand>
-      <a class="logo navbar-brand" href="#">
-        <strong>Valeria´s</strong>
-      </a>
-    </mdb-navbar-brand>
-    <links>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a routerLink="" class="nav-link">
-            Inicio
-          </a>
-        </li>
-      </ul>
+  <!-- Navbar brand -->
+  <!-- Collapsible content -->
+  <links>
 
-      <div *ngIf="currentUser" class="navbar-nav nav-flex-icons">
-        <div class="nav-item dropdown" dropdown>
-          <a dropdownToggle type="button" class="nav-link">
-            <i class="fa fa-user" style="font-size: x-large;"></i>
-          </a>
-          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-            <a routerLink="/detail-count/{{currentUser.email}}" class="dropdown-item ">{{currentUser.name}}</a>
-            <a routerLink="/orders" class="dropdown-item ">Mis pedidos</a>
-            <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
-          </div>
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Pedidos</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/sales">Reportes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Ventas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/help">Ayuda</a>
+      </li>
 
-        </div>
-        <a routerLink="/order" class="nav-link">
-          <i class="fa fa-shopping-cart" style="font-size: x-large;"></i>
-        </a>
+      <!-- Dropdown -->
+
+
+    </ul>
+    <!-- Links -->
+    <!-- Search form -->
+    <!--
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
       </div>
-    </links>
-  </mdb-navbar>
-  <!-- Main -->
-  <!-- /.Main -->
-</header>
+    </form>
+    -->
+    <div class="navbar-nav nav-flex-icons">
+      <div class="nav-item dropdown" dropdown>
+        <a dropdownToggle type="button" class="nav-link">
+          <i class="fa fa-user" style="font-size: x-large;"></i>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item " href="#">Perfil</a>
+          <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+        </div>
+      </div>
+    </div>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+
+<!--form create product -->
+<div class="d-flex p-3 col-example"></div>
+<form class="p-5  container col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8" [formGroup]="addForm">
+  <p class="h4 mb-4 text-center">Producto</p>
+  <div class="row aling-center">
+    <!-- Name -->
+
+    <div class="md-form  col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <div class="md-form">
+        <div class="row">
+          <div class="col-sm-3">
+            <select class="form-control" formControlName="codeBar">
+              <option value="0">Producto</option>
+              <option value="{{product.codeBar}}" *ngFor="let product of allProducts">
+                {{product.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="md-form col-9 col-sm-10 col-md-4 col-lg-4 col-xl-4">
+      <i class="fa fa-hashtag prefix grey-text"></i>
+      <input mdbInputDirective type="text" class="form-control mb-4 " formControlName="amount">
+      <label for="amount" class="">Cantidad</label>
+    </div>
+    <div class="md-form col-9 col-sm-10 col-md-4 col-lg-4 col-xl-4">
+      <i class="fa fa-hashtag prefix grey-text"></i>
+      <input mdbInputDirective type="text" class="form-control mb-4 " formControlName="priceIn">
+      <label for="amount" class="">Precio</label>
+    </div>
+
+
+    <button style="border-radius: 50%;width:55px;height:55px;padding:0.5rem;z-index:1;" (click)="onSubmit()"
+      class="form-group" mdbBtn color="success" mdbWavesEffect>
+      <i class="fa fa-plus"></i>
+    </button>
+
+
+
+  </div>
+
+
+</form>
+<button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem;z-index:1;"
+  class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
+  <i class="fa fa-check"></i>
+</button>
+<!-- form create product -->
 
 <div class="container" style="">
   <!--Grid column-->
   <div class="">
-    <div *ngIf="products">
-    <div *ngIf="products[0].state == 'V'" class="alert alert-success" role="alert">
-      <h4 class="alert-heading">Esta echo!</h4>
-      <p>Tu pedido ya ha sido validado, es tiempo de que canceles el valor de este y disfrutes de tus productos.</p>
-      <hr>
-      <p class="mb-0">Porfavor dirigete al banco mas cercano y consigna a esta cuenta {{products[0].count}}</p>
-    </div>
-    </div>
+
     <div class="card">
       <div class="card-body">
         <!-- Shopping Cart table -->
-
         <div class="table-responsive">
 
           <table class="table product-table">
@@ -59,26 +121,21 @@
             <!-- Table head -->
             <thead class="mdb-color lighten-5">
               <tr style="background-color:white;">
-                <th></th>
-                <th class="font-weight-bold">
-                  <strong>Proveedor</strong>
-                </th>
-                <th></th>
-                <th class="font-weight-bold">
-                  <strong>Fecha</strong>
-                </th>
+
                 <th class="font-weight-bold">
                   <strong>Producto</strong>
+                </th>
+                <th></th>
+                <th class="font-weight-bold">
+                  <strong>Precio</strong>
                 </th>
                 <th class="font-weight-bold">
                   <strong>Cantidad</strong>
                 </th>
                 <th class="font-weight-bold">
-                  <strong>Valor</strong>
-                </th>
-                <th class="font-weight-bold">
                   <strong>Total</strong>
                 </th>
+                <th></th>
                 <th></th>
               </tr>
             </thead>
@@ -89,7 +146,7 @@
               <!-- First row -->
               <tr *ngFor="let product of products" style="vertical-align:middle;">
                 <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
-                     aria-labelledby="myModalLabel" aria-hidden="true">
+                  aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
                     <!--Content-->
                     <div class="modal-content text-center">
@@ -105,40 +162,51 @@
 
                       <!--Footer-->
                       <div class="modal-footer justify-content-center">
-                        <a mdbBtn color="succsess" outline="true" class="waves-effect"
-                           mdbWavesEffect (click)="delete(product)">Si</a>
-                        <a (click)="frame.hide()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" this.photo=product.photo;>No</a>
+                        <a mdbBtn color="succsess" outline="true" class="waves-effect" mdbWavesEffect
+                          (click)="delete(product)">Si</a>
+                        <a (click)="frame.hide()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect
+                          data-dismiss="modal" this.photo=product.photo;>No</a>
                       </div>
                     </div>
                     <!--/.Content-->
                   </div>
                 </div>
-                <th scope="row">
-                  <img [src]="product.photo" alt="" class="img-fluid z-depth-0">
-                </th>
+
                 <td>
                   <h5 class="mt-3">
-                    <strong>{{product.provider}} {{product.lastName}}</strong>
+                    <strong>{{product.NAME}}</strong>
                   </h5>
                 </td>
                 <td></td>
-                <td>{{product.DATE}}</td>
-                <td>{{product.product}}</td>
-                <td>{{product.amount}}</td>
                 <td>{{product.priceIn}}</td>
+                <td class="font-weight-bold">
+                  <input [disabled]="disable" type="number" value="{{product.amount}}" aria-label="Search"
+                    class="form-control" style="width: 100px">
+                </td>
                 <td>{{product.total}}</td>
+                <td><i (click)="disable = !disable" class="float-right p-2 fa fa-pencil green-text fa-lg"
+                    aria-hidden="true"></i></td>
+
+                <td>
+                  <button (click)="frame.show()" type="button" class="btn btn-sm btn-primary waves-effect waves-light"
+                    data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove item">
+                    X
+                  </button>
+                </td>
               </tr>
               <tr>
                 <td colspan="3"></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td>
                   <h4 class="mt-2">
                     <strong>Total</strong>
                   </h4>
                 </td>
-                <td class="text-right">
+                <td *ngIf="products[0]" class="text-right">
                   <h4 class="mt-2">
-                    <strong>{{product.totalOrder}}</strong>
+                    <strong>{{products[0].totalOrder}}</strong>
                   </h4>
                 </td>
               </tr>
@@ -160,4 +228,3 @@
   <!--Grid column-->
 
 </div>
-
