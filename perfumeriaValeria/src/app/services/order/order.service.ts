@@ -24,15 +24,15 @@ export class OrderService {
   }
 
   addProduct(order: any, id: any) {
-    return this.http.post(`${this.baseUrl}addProduct.php?id=`+id, JSON.stringify(order)).subscribe();
+    return this.http.post(`${this.baseUrl}addProduct.php?id=`+id, JSON.stringify(order));
   }
 
   deleteOrder(order: any) {
     return this.http.post(`${this.baseUrl}delete.php`, JSON.stringify(order)).subscribe();
   }
 
-  deleteProduct(product: any) {
-    return this.http.post(`${this.baseUrl}deleteProduct.php`, JSON.stringify(product)).subscribe();
+  deleteProduct(product: any, idOrder: any) {
+    return this.http.post(`${this.baseUrl}deleteProduct.php?id=`+idOrder, JSON.stringify(product)).subscribe();
   }
 
   editOrder(order: any) {

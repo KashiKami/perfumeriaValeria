@@ -62,52 +62,31 @@
   <div class="row aling-center">
     <!-- Name -->
 
-    <div class="modal-body mx-3">
-            <!-- LastName -->
-            <div class="md-form">
-              <i class="fa fa-hashtag prefix grey-text"></i>
-              <input mdbInputDirective type="text" id="idOrder" autocomplete="off" class="form-control" formControlName="idOrder" [(ngModel)]="aux.idOrder">
-              <label for="idOrder" class="">Numero</label>
-            </div>
-
-            <!-- Email -->
-            <div class="md-form">
-              <i class="fa fa-user prefix grey-text"></i>
-              <input formControlName="email" type="text" autocomplete="off" id="email" mdbInputDirective [(ngModel)]="asyncSelectedClient"
-                     [typeaheadScrollable]="true"
-                     [typeahead]="dataSourceClient"
-                     typeaheadOptionField="email"
-                     class="form-control">
-              <label for="email" class="">Cliente</label>
-            </div>
-          </div>
-            
-              <div class="md-form">
-                <div class="row">
-                  <div class="col-sm-3">
-                      <h4 class="page-header">Proveedor</h4>
-                      <select [(ngModel)]="opcionSeleccionado" class="form-control" formControlName="email">
-                          <option value="0">Selecciona un producto</option>
-                          <option *ngFor="let provider of providers">
-                            {{provider.email}}
-                          </option>
-                      </select>
-                  </div>
-                  </div>
-              
-      <label for="codeBar" class="">Producto</label>
+    <div class="md-form  col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      
+      <select class="browser-default custom-select form-control" formControlName="codeBar">
+        <option *ngFor="let product of availableProducts" [value]="product.codeBar">{{product.NAME}}   
+        </option>
+      </select>
     </div>
 
-    <div class="md-form col-9 col-sm-10 col-md-4 col-lg-4 col-xl-4">
-      <i class="fa fa-hashtag prefix grey-text"></i>
+    <div class="md-form col-9 col-sm-10 col-md-2 col-lg-2 col-xl-2">
+      
       <input mdbInputDirective type="text" id="amount" class="form-control mb-4 " formControlName="amount">
       <label for="amount" class="">Cantidad</label>
     </div>
 
+    <div class="md-form col-9 col-sm-10 col-md-3 col-lg-3 col-xl-3">
+      
+      <input mdbInputDirective type="text" id="priceIn" class="form-control mb-4 " formControlName="priceIn">
+      <label for="priceIn" class="">Precio de compra</label>
+    </div>
 
-    <button style="border-radius: 50%;width:55px;height:55px;padding:0.5rem;z-index:1;"
+
+    <button style="height:55px;padding:0.5rem;z-index:1;"
             class="form-group" mdbBtn color="success" mdbWavesEffect>
       <i class="fa fa-plus"></i>
+      Agregar al pedido
     </button>
 
 
@@ -116,9 +95,10 @@
 
 
 </form>
-<button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem;z-index:1;"
+<button (click)="verify()" style="right:20px; bottom:20px;height:55px;padding:0.5rem;z-index:1;"
         class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
   <i class="fa fa-check"></i>
+  Verificar pedido
 </button>
 <!-- form create product -->
 
@@ -241,4 +221,3 @@
   <!--Grid column-->
 
 </div>
-

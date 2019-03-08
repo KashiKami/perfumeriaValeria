@@ -35,8 +35,8 @@ export class OrderProviderService {
     return this.http.post(`${this.baseUrl}delete.php`, JSON.stringify(order)).subscribe();
   }
 
-  deleteProduct(product: any) {
-    return this.http.post(`${this.baseUrl}deleteProduct.php`, JSON.stringify(product)).subscribe();
+  deleteProduct(product: any, idOrder: any) {
+    return this.http.post(`${this.baseUrl}deleteProduct.php?id=`+idOrder, JSON.stringify(product)).subscribe();
   }
 
   editOrder(order: any) {
@@ -44,5 +44,9 @@ export class OrderProviderService {
   }
   removeProduct(product: any) {
     return this.http.post(`${this.baseUrl}edit.php`, JSON.stringify(product)).subscribe();
+  }
+
+  addInventory(product: any) {
+    return this.http.post(`${this.baseUrl}addInventory.php`, JSON.stringify(product)).subscribe();
   }
 }

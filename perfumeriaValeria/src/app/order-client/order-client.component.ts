@@ -73,7 +73,7 @@ export class OrderClientComponent implements OnInit {
   }
 
   delete(product: any) {
-    this.orderService.deleteProduct(product);
+    this.orderService.deleteProduct(product, (this.currentOrder.id));
     setTimeout(() => {
       this.getProducts();
     }, 100);

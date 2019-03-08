@@ -28,12 +28,15 @@ import { ListClientsComponent } from './list-clients/list-clients.component';
 import { CategoryClientComponent } from './category-client/category-client.component';
 import { ViewClientOrderComponent } from './view-client-order/view-client-order.component';
 import { OrderProviderComponent } from './order-provider/order-provider.component';
+import { OrderListProviderComponent } from './order-list-provider/order-list-provider.component';
 
 const routes: Routes = [
   { path: 'admin/products', component: ProductListComponent, canActivate: [AuthGuard]},
   { path: 'admin/products/add-product', component: AddProductComponent, canActivate: [AuthGuard] },
   { path: 'admin/products/edit-product/:id', component: AddProductComponent, canActivate: [AuthGuard] },
+
   { path: 'admin/productProvider/view-products/:id', component: ListProductProviderComponent, canActivate: [AuthGuard] },
+
 
   { path: 'admin/inventory', component: InventoryComponent, canActivate: [AuthGuard] },
 
@@ -43,7 +46,10 @@ const routes: Routes = [
   
   { path: 'admin/providers/add-provider', component: AddProviderComponent, canActivate: [AuthGuard] },
   { path: 'admin/providers/edit-provider/:email', component: AddProviderComponent, canActivate: [AuthGuard] },
-  { path: 'admin/orderProvider/create-order', component: OrderProviderComponent, canActivate: [AuthGuard] },
+
+  { path: 'admin/ordersProvider', component: OrderListProviderComponent, canActivate: [AuthGuard] },
+  { path: 'admin/ordersProvider/:email', component: OrderListProviderComponent, canActivate: [AuthGuard] },
+  { path: 'admin/orderProvider/edit-order/:id', component: OrderProviderComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/orders', component: OrderListComponent, canActivate: [AuthGuard] },
   { path: 'admin/orders/:email', component: OrderListComponent, canActivate: [AuthGuard] },
