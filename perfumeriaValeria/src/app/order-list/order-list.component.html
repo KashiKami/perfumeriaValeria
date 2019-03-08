@@ -229,8 +229,10 @@
         <th scope="row">{{order.id}}</th>
         <td>{{order.name}}</td>
         <td>{{order.phone}}</td>
-        <td>{{order.value}}</td>
-        <td>{{order.state}}</td>
+        <td>{{order.totalOrder}}</td>
+        <td *ngIf="order.state == 'T' ">Tramite</td>
+        <td *ngIf="order.state == 'V' ">Validado</td>
+        <td *ngIf="order.state == 'D' ">Despachado</td>
         <td>{{order.date}}</td>
         <td>
           <i *ngIf="order.state == 'T' " routerLink="/admin/orders/edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i>

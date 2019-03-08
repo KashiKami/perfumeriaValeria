@@ -234,7 +234,7 @@
         <td>{{order.date}}</td>
         <td>
           <i routerLink="/admin/orders/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"></i>
-          <i routerLink="/admin/orderProvider/edit-order/{{order.id}}" class="float-right p-2 fa fa-edit green-text fa-lg" aria-hidden="true"></i>
+          <i *ngIf="order.state == 'N'" routerLink="/admin/orderProvider/edit-order/{{order.id}}" class="float-right p-2 fa fa-edit green-text fa-lg" aria-hidden="true"></i>
         </td>
       </tr>
     </tbody>

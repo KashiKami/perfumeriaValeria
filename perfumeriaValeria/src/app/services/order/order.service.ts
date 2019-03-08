@@ -35,6 +35,10 @@ export class OrderService {
     return this.http.post(`${this.baseUrl}deleteProduct.php?id=`+idOrder, JSON.stringify(product)).subscribe();
   }
 
+  editProduct(product: any, idOrder: any) {
+    return this.http.post(`${this.baseUrl}editProduct.php?id=`+idOrder, JSON.stringify(product)).subscribe();
+  }
+
   editOrder(order: any) {
     return this.http.post(`${this.baseUrl}edit.php`, JSON.stringify(order)).subscribe();
   }

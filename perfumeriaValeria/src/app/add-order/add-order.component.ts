@@ -23,9 +23,10 @@ export class AddOrderComponent implements OnInit {
   public products: Product[] = null;
   public availableProducts: Product[];
 
-  public disable: boolean = false;
+  public auxProduct: any = {};
 
   addForm: FormGroup;
+  editForm: FormGroup;
 
   constructor(private orderService: OrderService,
               private clientService: ClientService,
@@ -41,6 +42,12 @@ export class AddOrderComponent implements OnInit {
       "codeBar": ['', Validators.required],
       "amount": ['', Validators.required]
     });
+
+    this.editForm = this.formBuilder.group({
+      "codeBar": ['', Validators.required],
+      "amount": ['', Validators.required]
+    });
+
 
     setTimeout(() => {
       this.getProducts();
@@ -67,6 +74,16 @@ export class AddOrderComponent implements OnInit {
   delete(product: any) {
     let id = this.route.snapshot.paramMap.get('id');
     this.orderService.deleteProduct(product, id);
+    setTimeout(() => {
+      this.getProducts();
+    }, 100);
+  }
+
+  editProduct(product: any) {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.editForm.patchValue({codeBar:product.codeBar});
+    console.log(this.editForm.value);
+    this.orderService.editProduct(this.editForm.value, id);
     setTimeout(() => {
       this.getProducts();
     }, 100);

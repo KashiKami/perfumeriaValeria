@@ -174,12 +174,18 @@
                   </h5>
                 </td>
                 <td></td>
-                <td>{{product.priceOut}}</td>
+                <td>
+                  <form [formGroup]="editForm" (ngSubmit)="editProduct()">
+                  <input formControlName="priceIn" type="number" value="{{product.priceOut}}" aria-label="Search" class="form-control" style="width: 100px">
+                  </form>
+                </td>
                 <td class="font-weight-bold">
-                  <input [disabled]="disable" type="number" value="{{product.amount}}" aria-label="Search" class="form-control" style="width: 100px">
+                  <form [formGroup]="editForm" (ngSubmit)="editProduct()">
+                  <input formControlName="amount" type="number" value="{{product.amount}}" aria-label="Search" class="form-control" style="width: 100px">
+                  </form>
                 </td>
                 <td>{{product.total}}</td>
-                <td><i (click)="disable = !disable" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
+                <td><i (click)="editProduct(product)" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
 
                 <td>
                   <button (click)="frame.show()" type="button" class="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove item">

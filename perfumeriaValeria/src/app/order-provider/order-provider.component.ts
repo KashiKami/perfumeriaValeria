@@ -30,6 +30,7 @@ export class OrderProviderComponent implements OnInit {
   private order: any = {};
 
   addForm: FormGroup;
+  editForm: FormGroup;
 
   constructor(private orderProviderService: OrderProviderService,
               private productServie: ProductService,
@@ -41,6 +42,12 @@ export class OrderProviderComponent implements OnInit {
 
   ngOnInit() {
     this.addForm = this.formBuilder.group({
+      "codeBar": ['', Validators.required],
+      "amount": ['', Validators.required],
+      "priceIn": ['', Validators.required]
+    });
+
+    this.editForm = this.formBuilder.group({
       "codeBar": ['', Validators.required],
       "amount": ['', Validators.required],
       "priceIn": ['', Validators.required]
@@ -97,6 +104,16 @@ export class OrderProviderComponent implements OnInit {
     this.orderProviderService.addInventory(this.order);
     this.showSuccessM('Pedido realizado correctamente');
     this.router.navigate(['admin/products']);
+  }
+
+  editProduct(product: any) {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.editForm.patchValue({codeBar:product.codeBar});
+    console.log(this.editForm.value);
+    this.orderProviderService.editProduct(this.editForm.value, id);
+    setTimeout(() => {
+      this.getProducts();
+    }, 100);
   }
 
   logOut() {
