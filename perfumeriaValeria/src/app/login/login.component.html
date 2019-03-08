@@ -73,7 +73,7 @@
 
                   <!-- Sign in button -->
                   <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!loginForm.valid">Ingresar</button>
-
+                  <p style="color:#FF0000" ion-text *ngIf="!login"> Campos requeridos, no validos</p>
                   <!-- Register -->
                   <p>
                     No estas registrado?
