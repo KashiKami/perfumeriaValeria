@@ -14,6 +14,7 @@ import { ProductService } from '../services/product/product.service';
 import { OrderProviderService } from '../services/orderProvider/order-provider.service';
 
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { Provider } from '../models/provider';
 
 @Component({
   selector: 'app-order-provider',
@@ -24,10 +25,13 @@ export class OrderProviderComponent implements OnInit {
 
   public products: Product[] = null;
   public availableProducts: Product[];
+  public provider: Provider = null;
 
   public disable: boolean = false;
 
   private order: any = {};
+
+  headElements = ['Proveedor', 'Telefono'];
 
   addForm: FormGroup;
   editForm: FormGroup;
@@ -60,12 +64,23 @@ export class OrderProviderComponent implements OnInit {
     setTimeout(() => {
       this.getClients();
     }, 100);
+
+    setTimeout(() => {
+      this.getProvider();
+    }, 100);
   }
 
   getProducts(): void {
     let id = this.route.snapshot.paramMap.get('id');
     this.orderProviderService.getProducts(id).subscribe((data: Product[]) => {
       this.products = data;
+    });
+  }
+
+  getProvider(): void {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.orderProviderService.getProvider(id).subscribe((data: Provider) => {
+      this.provider = data;
     });
   }
 

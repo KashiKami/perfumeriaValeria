@@ -30,6 +30,8 @@ export class OrderListComponent implements OnInit {
 
   aux: any = {};
 
+  public print: boolean = false;
+
   daterangepickerModel: Date[];
 
   asyncSelectedClient: string;
@@ -170,6 +172,8 @@ export class OrderListComponent implements OnInit {
   {  
     var data = document.getElementById('contentToConvert');  
     html2canvas(data).then(canvas => {  
+      
+
       // Few necessary setting options  
       var imgWidth = 208;   
       var pageHeight = 295;    
@@ -178,10 +182,11 @@ export class OrderListComponent implements OnInit {
   
       const contentDataURL = canvas.toDataURL('image/png')  
       let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
-      var position = 0;  
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+      var position = 10;  
+      pdf.addImage(contentDataURL, 'PNG', 10, position, imgWidth-10, imgHeight-10)  
       pdf.save('MYPdf.pdf'); // Generated PDF   
     });  
+    
   }  
 
   closeAlert() {

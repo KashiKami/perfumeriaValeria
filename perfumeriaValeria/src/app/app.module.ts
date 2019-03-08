@@ -49,6 +49,7 @@ import { ToastrModule } from 'ng6-toastr-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewClientOrderComponent } from './view-client-order/view-client-order.component';
 import { OrderListProviderComponent } from './order-list-provider/order-list-provider.component';
+import { ViewProviderOrderComponent } from './view-provider-order/view-provider-order.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { OrderListProviderComponent } from './order-list-provider/order-list-pro
     ReportGanancyComponent,
     ViewClientOrderComponent,
     OrderProviderComponent,
-    OrderListProviderComponent
+    OrderListProviderComponent,
+    ViewProviderOrderComponent
 
   ],
   imports: [

@@ -1,60 +1,63 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product';
-import { ActivatedRoute, Router } from '@angular/router';
-import { OrderService } from '../services/order/order.service';
+import { OrderProviderService } from '../services/orderProvider/order-provider.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as jspdf from 'jspdf';  
 import html2canvas from 'html2canvas';  
-import { Client } from '../models/client';
+import { Provider } from '@angular/compiler/src/core';
 
 @Component({
-  selector: 'app-view-client-order',
-  templateUrl: './view-client-order.component.html',
-  styleUrls: ['./view-client-order.component.scss']
+  selector: 'app-view-provider-order',
+  templateUrl: './view-provider-order.component.html',
+  styleUrls: ['./view-provider-order.component.scss']
 })
-export class ViewClientOrderComponent implements OnInit {
+export class ViewProviderOrderComponent implements OnInit {
+
 
   public products: Product[] = null;
-  public client: Client = null;
-  public disable: boolean = false;
 
-  headElements = ['Cliente', 'Telefono'];
+  private order: any = {};
 
+  private provider: Provider = null;
 
-  constructor(private orderService: OrderService,
+  headElements = ['Proveedor', 'Telefono'];
+
+  constructor(private orderProviderService: OrderProviderService,
               private router: Router,
               private route: ActivatedRoute) {
   }
-
 
   ngOnInit() {
 
     setTimeout(() => {
       this.getProducts();
     }, 100);
-
     setTimeout(() => {
-      this.getClient();
-    }, 100);
+    this.getProvider();
+  }, 100);
   }
 
   getProducts(): void {
     let id = this.route.snapshot.paramMap.get('id');
-    this.orderService.getProducts(id).subscribe((data: Product[]) => {
+    this.orderProviderService.getProducts(id).subscribe((data: Product[]) => {
       this.products = data;
+    });
+    
+  }
+
+  getProvider(): void {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.orderProviderService.getProvider(id).subscribe((data: Provider) => {
+      this.provider = data;
     });
   }
 
-  getClient(): void {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.orderService.getClient(id).subscribe((data: Client) => {
-      this.client = data;
-    });
-  }
-  
   public getReportPdf()  
   {  
     var data = document.getElementById('contentToConvert');  
     html2canvas(data).then(canvas => {  
+      
+
       // Few necessary setting options  
       var imgWidth = 208;   
       var pageHeight = 295;    
@@ -63,10 +66,11 @@ export class ViewClientOrderComponent implements OnInit {
   
       const contentDataURL = canvas.toDataURL('image/png')  
       let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
-      var position = 0;  
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+      var position = 10;  
+      pdf.addImage(contentDataURL, 'PNG', 10, position, imgWidth-10, imgHeight-10)  
       pdf.save('MYPdf.pdf'); // Generated PDF   
     });  
+    
   }  
 
   logOut() {

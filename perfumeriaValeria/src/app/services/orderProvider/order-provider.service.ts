@@ -14,8 +14,13 @@ export class OrderProviderService {
   public getOrders() {
     return this.http.get(`${this.baseUrl}getOrders.php`);
   }
+
   public getProviders() {
     return this.http.get(`${this.baseUrl}getProviders.php`);
+  }
+
+  public getProvider(id: any) {
+    return this.http.get(`${this.baseUrl}getProvider.php?id=`+ id);
   }
 
   public getProducts(id: any) {

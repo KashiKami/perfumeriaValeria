@@ -22,8 +22,11 @@ export class AddOrderComponent implements OnInit {
 
   public products: Product[] = null;
   public availableProducts: Product[];
+  public client: Client = null;
 
   public auxProduct: any = {};
+
+  headElements = ['Cliente', 'Telefono'];
 
   addForm: FormGroup;
   editForm: FormGroup;
@@ -56,12 +59,23 @@ export class AddOrderComponent implements OnInit {
     setTimeout(() => {
       this.getClients();
     }, 100);
+
+    setTimeout(() => {
+      this.getClient();
+    }, 100);
   }
 
   getProducts(): void {
     let id = this.route.snapshot.paramMap.get('id');
     this.orderService.getProducts(id).subscribe((data: Product[]) => {
       this.products = data;
+    });
+  }
+
+  getClient(): void {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.orderService.getClient(id).subscribe((data: Client) => {
+      this.client = data;
     });
   }
 

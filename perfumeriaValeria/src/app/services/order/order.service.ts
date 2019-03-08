@@ -19,6 +19,11 @@ export class OrderService {
     return this.http.get(`${this.baseUrl}getProducts.php?id=`+id);
   }
 
+  public getClient(id: any) {
+    return this.http.get(`${this.baseUrl}getClient.php?id=`+id);
+  }
+
+
   addOrder(order: any) {
     return this.http.post(`${this.baseUrl}create.php`, JSON.stringify(order));
   }

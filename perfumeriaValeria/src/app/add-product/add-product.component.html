@@ -266,9 +266,10 @@
       <iframe class="embed-responsive-item" [src]="safeSrc" allowfullscreen></iframe>
     </div><!-- Sign in button -->
 
-    <button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem"
-            class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect [disabled]="!addForm.valid">
+    <button style="right:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem"
+            class="position-fixed form-group expand" mdbBtn color="success" mdbWavesEffect [disabled]="!addForm.valid">
       <i class="fa fa-check"></i>
+      <span>Crear Producto</span>
     </button>
 
     <qrcode type="hidden" style="left:20px; bottom:20px;"
@@ -357,20 +358,15 @@
             <!-- Email -->
             <div class="md-form">
               <i class="fa fa-user prefix grey-text"></i>
-              <input formControlName="superCategory" type="text" autocomplete="off" id="email" mdbInputDirective [(ngModel)]="asyncSelected"
-                     [typeaheadScrollable]="true"
-                     [typeahead]="dataSource"
-                     typeaheadOptionField="id"
-                     class="form-control">
-              <label for="email" class="">Categoria Padre</label>
+              <select class="browser-default custom-select" formControlName="superCategory">
+                  <option *ngFor="let category of categories" [value]="category.id">{{category.name}}
+                  </option>
+                </select>
             </div>
 
-            <!-- Sign in button -->
-
-
           </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button mdbBtn color="success" class="waves-light" mdbWavesEffect>Agregar</button>
+          <div class="modal-footer d-flex justify-content-center" >
+            <button mdbBtn color="success" class="waves-light" style="height: 39px" mdbWavesEffect>Agregar</button>
           </div>
         </form>
 

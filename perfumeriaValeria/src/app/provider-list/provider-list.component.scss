@@ -5,4 +5,22 @@
   word-wrap: break-word;
 }
 
+.expand span {
+  max-width: 0;
+  -webkit-transition: max-width 1s;
+  transition: max-width 1s;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.expand:hover span {
+  max-width: 11rem;
+  color: white;
+  font-size: 1.2em;
+}
+
+.expand:hover i{
+  visibility: hidden;
+}
 
