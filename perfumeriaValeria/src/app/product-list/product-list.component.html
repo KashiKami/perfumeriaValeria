@@ -155,7 +155,7 @@
 
 </mdb-navbar>
 
-<div class="container">
+<div class="container" style="margin-top: 20px">
   <div class="d-flex p-4 col-example"></div>
   <div class="row">
     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 p-2" *ngFor="let product of products">
@@ -193,7 +193,7 @@
 
 
           <!-- Card img -->
-          <mdb-card-img src="{{product.photo}}" alt="Card image cap">
+          <mdb-card-img src="{{product.photo}}" alt="Card image cap" > 
 
           </mdb-card-img>
           <a class="row">
@@ -201,20 +201,24 @@
           </a>
         </div>
         <!--Card content-->
-        <div class="row p-2">
-          <i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i>
-          <i routerLink="edit-product/{{product.codeBar}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i>
-        </div>
+        
 
         <mdb-card-body>
           <!--Title-->
           <mdb-card-title>
-            <h4>{{product.name}}</h4>
+            <h4>{{product.NAME}}</h4>
           </mdb-card-title>
 
           <!--Text-->
           <mdb-card-text>
-            <div *ngIf="product.amount <= 10" class="alert alert-danger" role="alert">
+              <div *ngIf="product.amount == 0" class="alert alert-danger" role="alert">
+                  <h4 class="alert-heading">Oye!</h4>
+                  <p>no tienes stock en el inventario de este producto, por favor realiza un pedido.</p>
+                  <hr>
+                  <p class="mb-0">Porfavor realiza un pedido.</p>
+                </div>
+
+            <div *ngIf="product.amount <= 10 && product.amount > 0" class="alert alert-danger" role="alert">
               <h4 class="alert-heading">Oye!</h4>
               <p>En este momento cuentas solo con {{product.amount}} productos.</p>
               <hr>
@@ -234,6 +238,10 @@
             </div>
           </mdb-card-text>
 
+          <div class="row p-2">
+              <i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i>
+              <i routerLink="edit-product/{{product.codeBar}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i>
+            </div>
 
         </mdb-card-body>
       </mdb-card>
@@ -244,7 +252,8 @@
 </div>
 
 
-<button routerLink="add-product" class="btn green waves-light position-fixed"
-        style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem">
+<button routerLink="add-product" class="btn green waves-light position-fixed expand"
+        style="right:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem">
   <i class="fa fa-plus"></i>
+  <span>Crear Producto</span>
 </button>

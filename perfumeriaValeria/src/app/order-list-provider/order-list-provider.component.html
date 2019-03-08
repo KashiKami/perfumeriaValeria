@@ -176,7 +176,6 @@
     <thead>
       <tr>
         <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
-        <td></td>
       </tr>
     </thead>
     <tbody *ngIf="orders" >
@@ -214,8 +213,8 @@
         <td>{{order.total}}</td>
         <td>{{order.date}}</td>
         <td>
-          <i routerLink="/admin/orders/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"></i>
-          <i routerLink="/admin/orderProvider/edit-order/{{order.id}}" class="float-right p-2 fa fa-edit green-text fa-lg" aria-hidden="true"></i>
+          <i routerLink="/admin/orderProvider/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"></i>
+          <i *ngIf="order.state == 'N'" routerLink="/admin/orderProvider/edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i>
         </td>
       </tr>
     </tbody>
@@ -280,14 +279,14 @@
   </div>
 </div>
 
-<button (click)="frame.show()" class="btn green waves-light position-fixed"
-        style="right:20px; bottom:20px">
+<button (click)="frame.show()" class="btn green waves-light position-fixed expand"
+        style="right:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem">
   <i class="fa fa-plus"></i>
-  Crear pedido
+  <span>Crear pedido</span> 
 </button>
 
-<button (click)="getReportPdf()" class="btn blue waves-light position-fixed"
-        style="left:20px; bottom:20px">
-        <mdb-icon fa icon="file-pdf"></mdb-icon>
-  Generar reporte
+<button (click)="getReportPdf()" class="btn blue waves-light position-fixed expand"
+        style="left:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem">
+        <i class="fa fa-file"></i>
+  <span>Generar reporte</span> 
 </button>

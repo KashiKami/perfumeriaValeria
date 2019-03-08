@@ -22,10 +22,14 @@ export class AddOrderComponent implements OnInit {
 
   public products: Product[] = null;
   public availableProducts: Product[];
+  public client: Client = null;
 
-  public disable: boolean = false;
+  public auxProduct: any = {};
+
+  headElements = ['Cliente', 'Telefono'];
 
   addForm: FormGroup;
+  editForm: FormGroup;
 
   constructor(private orderService: OrderService,
               private clientService: ClientService,
@@ -42,6 +46,12 @@ export class AddOrderComponent implements OnInit {
       "amount": ['', Validators.required]
     });
 
+    this.editForm = this.formBuilder.group({
+      "codeBar": ['', Validators.required],
+      "amount": ['', Validators.required]
+    });
+
+
     setTimeout(() => {
       this.getProducts();
     }, 100);
@@ -49,12 +59,23 @@ export class AddOrderComponent implements OnInit {
     setTimeout(() => {
       this.getClients();
     }, 100);
+
+    setTimeout(() => {
+      this.getClient();
+    }, 100);
   }
 
   getProducts(): void {
     let id = this.route.snapshot.paramMap.get('id');
     this.orderService.getProducts(id).subscribe((data: Product[]) => {
       this.products = data;
+    });
+  }
+
+  getClient(): void {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.orderService.getClient(id).subscribe((data: Client) => {
+      this.client = data;
     });
   }
 
@@ -67,6 +88,16 @@ export class AddOrderComponent implements OnInit {
   delete(product: any) {
     let id = this.route.snapshot.paramMap.get('id');
     this.orderService.deleteProduct(product, id);
+    setTimeout(() => {
+      this.getProducts();
+    }, 100);
+  }
+
+  editProduct(product: any) {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.editForm.patchValue({codeBar:product.codeBar});
+    console.log(this.editForm.value);
+    this.orderService.editProduct(this.editForm.value, id);
     setTimeout(() => {
       this.getProducts();
     }, 100);

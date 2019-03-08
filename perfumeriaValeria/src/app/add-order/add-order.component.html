@@ -1,59 +1,176 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg indigo navbar-dark fixed-top scrolling-navbar">
 
-  <!-- Navbar brand -->
-  <!-- Collapsible content -->
-  <links>
-
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/products">Productos</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/inventory">Pedidos</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/sales">Reportes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/providers">Proveedores</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/orders">Ventas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin/help">Ayuda</a>
-      </li>
-
-      <!-- Dropdown -->
-
-
-    </ul>
-    <!-- Links -->
-    <!-- Search form -->
-    <!--
-    <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="md-form my-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
-      </div>
-    </form>
-    -->
-    <div class="navbar-nav nav-flex-icons">
-      <div class="nav-item dropdown" dropdown>
-        <a dropdownToggle type="button" class="nav-link">
-          <i class="fa fa-user" style="font-size: x-large;"></i>
-        </a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item " href="#">Perfil</a>
-          <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+    <!-- Navbar brand -->
+    <!-- Collapsible content -->
+    <links>
+  
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item ">
+          <div class="navbar-nav nav-flex-icons">
+  
+              <a dropdownToggle  type="button" class="nav-link">
+                <div class="form-row">
+                  <div class="col">
+                    <img src="../../assets/img/perfume.png" ALIGN=top WIDTH=25 HEIGHT=25 class="fa fa-user" mdbWavesEffect routerLink="/admin/products">
+                  </div>
+                  <div class="col">
+  
+              <label mdbWavesEffect routerLink="/admin/products"><b>Productos</b></label>
+                  </div>
+                </div>
+  
+            </a>
+          </div>
+  
+        </li>
+  
+  
+        <li class="nav-item ">
+        <div class="navbar-nav nav-flex-icons">
+          <div class="nav-item dropdown" WIDTH=30 HEIGHT=30 dropdown>
+            <a dropdownToggle  type="button" class="nav-link">
+              <div class="form-row ">
+              <div class="col">
+                <img src="../../assets/img/pedidos.png" ALIGN=top WIDTH=25 HEIGHT=25 class="fa fa-user" >
+              </div>
+              <div class="col">
+  
+                <label >Pedidos</label>
+  
+              </div>
+              </div>
+            </a>
+            <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+              <a class="dropdown-item" routerLink="/admin/orders">Cliente</a>
+              <a class="dropdown-item" routerLink="/admin/ordersProvider">Proveedor</a>
+            </div>
+          </div>
         </div>
+        </li>
+  
+  
+  
+        <li class="nav-item ">
+          <div class="navbar-nav nav-flex-icons">
+            <div class="nav-item dropdown" WIDTH=30 HEIGHT=30 dropdown>
+              <a dropdownToggle  type="button" class="nav-link">
+          <div class="form-row">
+            <div class="col">
+              <img  src="../../assets/img/periodico.png" ALIGN=MIDDLE WIDTH=25 HEIGHT=25  class="fa fa-user" mdbWavesEffect routerLink="/admin/sales">
+            </div>
+            <div class="col">
+  
+              <label  mdbWavesEffect routerLink="/admin/sales">Reportes</label>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
-  </links>
-  <!-- Collapsible content -->
-
-</mdb-navbar>
+        </li>
+  
+        <li class="nav-item">
+          <div class="navbar-nav nav-flex-icons">
+            <div class="nav-item dropdown" WIDTH=30 HEIGHT=30 dropdown>
+              <a dropdownToggle  type="button" class="nav-link">
+          <div class="form-row ">
+            <div class="col">
+              <img class="fa fa-user" mdbWavesEffect routerLink="/admin/providers" src="../../assets/img/bolsa.png" ALIGN=MIDDLE WIDTH=25 HEIGHT=25  >
+            </div>
+            <div class="col">
+  
+              <label mdbWavesEffect routerLink="/admin/providers">Proveedores</label>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+        </li>
+  
+        <li class="nav-item">
+          <div class="navbar-nav nav-flex-icons">
+            <div class="nav-item dropdown" WIDTH=30 HEIGHT=30 dropdown>
+              <a dropdownToggle  type="button" class="nav-link">
+          <div class="form-row ">
+            <div class="col">
+              <img  src="../../assets/img/ventas.png" ALIGN=MIDDLE WIDTH=25 HEIGHT=25 class="fa fa-user" mdbWavesEffect routerLink="/admin/orders">
+            </div>
+            <div class="col">
+  
+              <label mdbWavesEffect routerLink="/admin/orders"><b>Ventas</b></label>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+        </li>
+  
+        <li class="nav-item">
+          <div class="navbar-nav nav-flex-icons">
+            <div class="nav-item dropdown" WIDTH=30 HEIGHT=30 dropdown>
+              <a dropdownToggle  type="button" class="nav-link">
+          <div class="form-row ">
+            <div class="col">
+              <img class="fa fa-user" mdbWavesEffect routerLink="/admin/clients"  src="../../assets/img/cliente.png" ALIGN=MIDDLE WIDTH=25 HEIGHT=25>
+            </div>
+            <div class="col">
+  
+              <label mdbWavesEffect routerLink="/admin/clients"><b>Clientes</b></label>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    </li>
+  
+        <li class="nav-item">
+          <div class="navbar-nav nav-flex-icons">
+            <div class="nav-item dropdown" WIDTH=30 HEIGHT=30 dropdown>
+              <a dropdownToggle  type="button" class="nav-link">
+          <div class="form-row ">
+            <div class="col">
+              <img class="fa fa-user" mdbWavesEffect routerLink="/admin/help"  src="../../assets/img/ayuda.png" ALIGN=MIDDLE WIDTH=25 HEIGHT=25>
+            </div>
+            <div class="col">
+  
+              <label mdbWavesEffect routerLink="/admin/help"><b>Ayuda</b></label>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  
+        </li>
+  
+        <!-- Dropdown -->
+  
+  
+      </ul>
+      <!-- Links -->
+      <!-- Search form -->
+      <!--
+      <form class="form-inline waves-light" mdbWavesEffect>
+        <div class="md-form my-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
+        </div>
+      </form>
+      -->
+      <div class="navbar-nav nav-flex-icons">
+        <div class="nav-item dropdown" WIDTH=40 HEIGHT=40 dropdown>
+          <a dropdownToggle  type="button" class="nav-link">
+            <img src="../../assets/img/user.png" ALIGN=MIDDLE WIDTH=40 HEIGHT=40 class="fa fa-user"  style="font-size: x-large;">
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item " href="#">Perfil</a>
+            <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+          </div>
+        </div>
+      </div>
+    </links>
+    <!-- Collapsible content -->
+  
+  </mdb-navbar>
 
 <!--form create product -->
 <div class="d-flex p-3 col-example"></div>
@@ -98,7 +215,19 @@
 <div class="container" style="">
   <!--Grid column-->
   <div class="">
-
+      <table mdbTable *ngIf="client">
+          <thead class="grey lighten-1 black-text">
+            <tr>
+              <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr mdbTableCol>
+              <th >{{client.name}} {{client.lastname}}</th>
+              <td>{{client.phone}}</td>
+            </tr>
+          </tbody>
+        </table>
     <div class="card">
       <div class="card-body">
         <!-- Shopping Cart table -->
@@ -169,10 +298,12 @@
                 <td></td>
                 <td>{{product.priceOut}}</td>
                 <td class="font-weight-bold">
-                  <input [disabled]="disable" type="number" value="{{product.amount}}" aria-label="Search" class="form-control" style="width: 100px">
+                  <form [formGroup]="editForm" (ngSubmit)="editProduct()">
+                  <input formControlName="amount" type="number"for value="{{product.amount}}" aria-label="Search" class="form-control" style="width: 100px">
+                  </form>
                 </td>
                 <td>{{product.total}}</td>
-                <td><i (click)="disable = !disable" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
+                <td><i (click)="editProduct(product)" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i></td>
 
                 <td>
                   <button (click)="frame.show()" type="button" class="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove item">

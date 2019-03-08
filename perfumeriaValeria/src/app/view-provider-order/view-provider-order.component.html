@@ -171,111 +171,115 @@
     <!-- Collapsible content -->
   
   </mdb-navbar>
-
-<!--form create product -->
-<div class="d-flex p-3 col-example"></div>
-<div class="container" style="margin-top: 100px;" id="contentToConvert">
-  <!--Grid column-->
-  <div class="" id="contentToConvert">
-      <table mdbTable *ngIf="client">
-          <thead class="grey lighten-1 black-text">
-            <tr>
-              <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr mdbTableCol>
-              <th >{{client.name}} {{client.lastname}}</th>
-              <td>{{client.phone}}</td>
-            </tr>
-          </tbody>
-        </table>
-    <div class="card">
-      <div class="card-body">
-        <!-- Shopping Cart table -->
-        <div class="table-responsive">
-
-          <table class="table product-table">
-
-            <!-- Table head -->
-            <thead class="mdb-color lighten-5">
-              <tr style="background-color:white;">
-                <th></th>
-                <th class="font-weight-bold">
-                  <strong>Producto</strong>
-                </th>
-                <th></th>
-                <th class="font-weight-bold">
-                  <strong>Precio</strong>
-                </th>
-                <th class="font-weight-bold">
-                  <strong>Cantidad</strong>
-                </th>
-                <th class="font-weight-bold">
-                  <strong>Total</strong>
-                </th>
-                <th></th>
-                <th></th>
+  
+  <!--form create product -->
+  <div class="d-flex p-3 col-example"></div>
+  <div class="container" style="margin-top: 100px">
+    <!--Grid column-->
+    <div class="" id="contentToConvert">
+        <table mdbTable *ngIf="provider">
+            <thead class="grey lighten-1 black-text">
+              <tr>
+                <th *ngFor="let head of headElements" scope="col">{{head}} </th>
               </tr>
             </thead>
-            <!-- /.Table head -->
-            <!-- Table body -->
-            <tbody *ngIf="products">
-
-              <!-- First row -->
-              <tr *ngFor="let product of products" style="vertical-align:middle;">
-                <th scope="row">
-                  <img [src]="product.photo" alt="" class="img-fluid z-depth-0">
-                </th>
-                <td>
-                  <h5 class="mt-3">
-                    <strong>{{product.name}}</strong>
-                  </h5>
-                </td>
-                <td></td>
-                <td>{{product.priceOut}}</td>
-                <td class="font-weight-bold">
-                  <input [disabled]="disable" type="number" value="{{product.amount}}" aria-label="Search" class="form-control" style="width: 100px">
-                </td>
-                <td>{{product.total}}</td>
+            <tbody>
+              <tr mdbTableCol>
+                <th >{{provider.name}} {{provider.lastname}}</th>
+                <td>{{provider.phone}}</td>
               </tr>
-              <tr>
-                <td colspan="3"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <h4 class="mt-2">
-                    <strong>Total</strong>
-                  </h4>
-                </td>
-                <td *ngIf="products[0]" class="text-right">
-                  <h4 class="mt-2">
-                    <strong>{{products[0].totalOrder}}</strong>
-                  </h4>
-                </td>
-              </tr>
-
-              <!-- /.First row -->
             </tbody>
-            <!-- /.Table body -->
-
           </table>
+      <div class="card">
+        <div class="card-body">
+          <!-- Shopping Cart table -->
+          <div class="table-responsive">
 
+            <table class="table product-table" >
+  
+              <!-- Table head -->
+              <thead class="mdb-color lighten-5">
+                <tr style="background-color:white;">
+                  <th></th>
+                  <th class="font-weight-bold">
+                    <strong>Producto</strong>
+                  </th>
+                  <th></th>
+                  <th class="font-weight-bold">
+                    <strong>Precio</strong>
+                  </th>
+                  <th class="font-weight-bold">
+                    <strong>Cantidad</strong>
+                  </th>
+                  <th class="font-weight-bold">
+                    <strong>Total</strong>
+                  </th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <!-- /.Table head -->
+              <!-- Table body -->
+              <tbody *ngIf="products">
+  
+                <!-- First row -->
+                <tr *ngFor="let product of products" style="vertical-align:middle;">
+                  <th scope="row">
+                    <img [src]="product.photo" alt="" class="img-fluid z-depth-0">
+                  </th>
+                  <td>
+                    <h5 class="mt-3">
+                      <strong>{{product.name}}</strong>
+                    </h5>
+                  </td>
+                  <td></td>
+                  <td>
+                      {{product.priceOut}}
+                  </td>
+                  <td class="font-weight-bold">
+                      {{product.amount}}
+                  </td>
+                  <td>{{product.total}}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td colspan="3"></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h4 class="mt-2">
+                      <strong>Total</strong>
+                    </h4>
+                  </td>
+                  <td *ngIf="products[0]" class="text-right">
+                    <h4 class="mt-2">
+                      <strong>{{products[0].totalOrder}}</strong>
+                    </h4>
+                  </td>
+                </tr>
+  
+                <!-- /.First row -->
+              </tbody>
+              <!-- /.Table body -->
+  
+            </table>
+  
+          </div>
+          <!-- /.Shopping Cart table -->
+  
         </div>
-        <!-- /.Shopping Cart table -->
-
+  
       </div>
-
+  
     </div>
-
+    <!--Grid column-->
+  
   </div>
-  <!--Grid column-->
-
-</div>
-
-<button (click)="getReportPdf()" class="btn blue waves-light position-fixed expand"
-        style="left:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem">
+  
+  <button (click)="getReportPdf()" class="btn blue waves-light position-fixed expand"
+        style="left:20px; bottom:20px;;min-width:55px;height:55px;padding:0.5rem">
         <i class="fa fa-file"></i>
   <span>Generar reporte</span> 
 </button>

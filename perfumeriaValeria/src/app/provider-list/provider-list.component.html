@@ -165,7 +165,7 @@
       <thead>
         <tr>
           <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
-          <td></td>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -215,7 +215,8 @@
     </table>
   </div>
 
-  <button routerLink="add-provider" class="btn green waves-light position-fixed"
-        style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem">
+  <button routerLink="add-provider" class="btn green waves-light position-fixed expand"
+        style="right:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem">
   <i class="fa fa-plus"></i>
+  <span>Crear Proveedor</span>
 </button>

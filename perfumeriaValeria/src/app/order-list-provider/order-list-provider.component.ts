@@ -27,7 +27,7 @@ export class OrderListProviderComponent implements OnInit {
 
   daterangepickerModel: Date[];
 
-  headElements = ['#', 'Nombre Cliente', 'Telefono Cliente', 'Valor', 'Fecha', ];
+  headElements = ['#', 'Nombre Proveedor', 'Telefono Proveedor', 'Valor', 'Fecha', ];
 
   addForm: FormGroup;
 

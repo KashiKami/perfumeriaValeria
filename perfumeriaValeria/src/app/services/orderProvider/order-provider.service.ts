@@ -14,8 +14,13 @@ export class OrderProviderService {
   public getOrders() {
     return this.http.get(`${this.baseUrl}getOrders.php`);
   }
+
   public getProviders() {
     return this.http.get(`${this.baseUrl}getProviders.php`);
+  }
+
+  public getProvider(id: any) {
+    return this.http.get(`${this.baseUrl}getProvider.php?id=`+ id);
   }
 
   public getProducts(id: any) {
@@ -48,5 +53,9 @@ export class OrderProviderService {
 
   addInventory(product: any) {
     return this.http.post(`${this.baseUrl}addInventory.php`, JSON.stringify(product)).subscribe();
+  }
+
+  editProduct(product: any, idOrder: any) {
+    return this.http.post(`${this.baseUrl}editProduct.php?id=`+idOrder, JSON.stringify(product)).subscribe();
   }
 }
