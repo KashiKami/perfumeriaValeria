@@ -107,8 +107,6 @@
     <div class="form-row mb-4">
       <div class="col">
         <!-- First name -->
-
-
         <label>Nombres</label>
         <input   type="text" class="form-control" formControlName="name" >
         <p style="color:#FF0000" ion-text *ngIf="addForm.get('name').dirty && addForm.get('name').errors && addForm.get('name').errors['required']"> El nombre es requerido</p>
