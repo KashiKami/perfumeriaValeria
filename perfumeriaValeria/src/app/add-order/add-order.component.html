@@ -63,15 +63,15 @@
     <!-- Name -->
 
     <div class="md-form  col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
-      
+
       <select class="browser-default custom-select form-control" formControlName="codeBar">
-        <option *ngFor="let product of availableProducts" [value]="product.codeBar">{{product.NAME}}   
+        <option *ngFor="let product of availableProducts" [value]="product.codeBar">{{product.NAME}}
         </option>
       </select>
     </div>
 
     <div class="md-form col-9 col-sm-10 col-md-4 col-lg-4 col-xl-4">
-      
+
       <input mdbInputDirective type="text" id="amount" class="form-control mb-4 " formControlName="amount">
       <label for="amount" class="">Cantidad</label>
     </div>
