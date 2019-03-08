@@ -26,11 +26,8 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
 import { ListClientsComponent } from './list-clients/list-clients.component';
 import { CategoryClientComponent } from './category-client/category-client.component';
-<<<<<<< HEAD
 import { ViewClientOrderComponent } from './view-client-order/view-client-order.component';
-=======
 import { OrderProviderComponent } from './order-provider/order-provider.component';
->>>>>>> 8bc1027bad987cbd1b696a93a21f60799a7fac5e
 
 const routes: Routes = [
   { path: 'admin/products', component: ProductListComponent, canActivate: [AuthGuard]},

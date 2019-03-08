@@ -49,7 +49,7 @@ export class ListProductProviderComponent implements OnInit {
   onSubmit() {
     let myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
     this.addForm.patchValue({ date: myDate })
-    let id = this.route.snapshot.paramMap.params.id;
+    let id = this.route.snapshot.params.id;
     this.orderProviderService.addProduct(this.addForm.value, id).subscribe((data: any) => {
       this.productProviderService.removeProduct(this.addForm.value);
       if (data.error && data.error != 'creado exitosamente') {

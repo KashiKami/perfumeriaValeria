@@ -14,6 +14,9 @@ import { Product } from '../models/product';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CategoryService } from '../services/category/category.service';
+import { User } from '../models/user';
+
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 const URL = 'http://localhost:3000/api/upload';
 
@@ -43,10 +46,9 @@ export class AddProductComponent implements OnInit {
 
   product: any = {};
 
-  asyncSelected: string;
-  dataSource: Observable<any>;
-
   public categories: any[] = null;
+
+  currentUser: User;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -54,14 +56,8 @@ export class AddProductComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private sanitizer: DomSanitizer,
-    private categoryService: CategoryService) {
-    this.dataSource = Observable.create((observer: any) => {
-      // Runs on every search
-      observer.next(this.asyncSelected);
-    })
-      .pipe(
-        mergeMap((token: string) => this.getProductsAsObservable(token))
-      );
+    private categoryService: CategoryService,
+    public toastr: ToastrManager) {
   }
 
   getProductsAsObservable(token: string): Observable<any> {
@@ -80,7 +76,7 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let id = this.route.snapshot.paramMap.get('id');
     this.element = document.getElementById('qr').children as HTMLCollection;
 
@@ -93,14 +89,14 @@ export class AddProductComponent implements OnInit {
       "codeBar": [' ', Validators.required],
       "name": ['', Validators.required],
       "description": ['', Validators.required],
-      "priceIn": ['', Validators.required],
-      "priceOut": ['', Validators.required],
+      "ganancy": ['', Validators.required],
       "discount": ['', Validators.required],
       "category": ['', Validators.required],
       "photo": [''],
       "qr": [''],
       "video": [''],
-      "email": ["hola@123"]
+      "email": [''],
+      "priceIn": ['']
     });
 
     this.addCategoryForm = this.formBuilder.group({
@@ -126,11 +122,12 @@ export class AddProductComponent implements OnInit {
     if (id == null) {
       this.addForm.patchValue({ photo: this.url })
       this.addForm.patchValue({ qr: this.element[1].getAttribute('src') });
+      this.addForm.patchValue({ email:  this.currentUser.email});
       this.productService.createProduct(this.addForm.value).subscribe((data: any) => {
         if (data.error && data.error != 'creado exitosamente') {
-          this.error = true;
-          this.errorText = data.error;
+          this.showAlarm(data.error);
         } else if (data.error == 'creado exitosamente') {
+          this.showSuccess();
           setTimeout(() => {
             this.router.navigate(['admin/products']);
           }, 500);
@@ -191,15 +188,6 @@ export class AddProductComponent implements OnInit {
     this.categoryService.addCategory(this.addCategoryForm.value).subscribe((data: any) => {
       if (data.error == 'creado exitosamente') {
         this.getCategories();
-
-        this.dataSource = Observable.create((observer: any) => {
-          // Runs on every search
-          observer.next(this.asyncSelected);
-        })
-          .pipe(
-            mergeMap((token: string) => this.getProductsAsObservable(token))
-        );
-
       }
     });
   }
@@ -209,18 +197,18 @@ export class AddProductComponent implements OnInit {
 
     this.categoryService.deleteCategory(category);
     this.getCategories();
-
-    this.dataSource = Observable.create((observer: any) => {
-      // Runs on every search
-      observer.next(this.asyncSelected);
-    })
-      .pipe(
-        mergeMap((token: string) => this.getProductsAsObservable(token))
-      );
   }
 
   logOut() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['viewClient']);
+  }
+
+  showSuccess() {
+    this.toastr.successToastr('Producto agregado', 'Esta hecho!');
+  }
+
+  showAlarm(text: any) {
+    this.toastr.warningToastr(text, 'Cuidado!');
   }
 }

@@ -57,7 +57,7 @@
 
 <!--form create product -->
 <div class="d-flex p-3 col-example"></div>
-<div class="container" style="">
+<div class="container" style="margin-top: 100px;" id="contentToConvert">
   <!--Grid column-->
   <div class="">
 
@@ -144,3 +144,9 @@
   <!--Grid column-->
 
 </div>
+
+<button (click)="getReportPdf()" class="btn blue waves-light position-fixed"
+        style="left:20px; bottom:20px">
+        <mdb-icon fa icon="file-pdf"></mdb-icon>
+  Generar reporte
+</button>

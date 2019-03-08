@@ -74,11 +74,8 @@ import { ViewClientOrderComponent } from './view-client-order/view-client-order.
     ListProductProviderComponent,
     CategoryClientComponent,
     ReportGanancyComponent,
-<<<<<<< HEAD
-    ViewClientOrderComponent
-=======
+    ViewClientOrderComponent,
     OrderProviderComponent
->>>>>>> 8bc1027bad987cbd1b696a93a21f60799a7fac5e
 
   ],
   imports: [
