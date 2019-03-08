@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   currentUser: User;
   order: any = {};
 
+  login: boolean = true;
+
   error: boolean = false;
   textError: string = "";
 
@@ -60,6 +62,7 @@ export class LoginComponent implements OnInit {
       } else if (data.error) {
         this.error = true;
         this.textError = data.error;
+
       }
 
     });
@@ -80,6 +83,9 @@ export class LoginComponent implements OnInit {
           this.clientService.createOrderClient(this.order);
           this.router.navigate(['viewClient']);
         }
+      }
+      else{
+        this.login = false;
       }
     }
       , 500);
