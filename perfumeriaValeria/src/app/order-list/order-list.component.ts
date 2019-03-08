@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { formatDate } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 import { ProducInventoryService } from '../services/productInventory/produc-inventory.service';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas';  
 
 @Component({
   selector: 'app-order-list',
@@ -74,7 +76,14 @@ export class OrderListComponent implements OnInit {
 
     this.getOrders();
 
-   
+    this.orderService.getOrders().subscribe((data: Order[]) => {
+      this.orders = data;
+      let email = this.route.snapshot.paramMap.get('email');
+
+      if (email != null) {
+        this.orders = this.orders.filter(order => order.email == email);
+      }
+    });
 
     setTimeout(() => {
       this.getClients();
@@ -86,6 +95,7 @@ export class OrderListComponent implements OnInit {
     if (name != '') {
       this.orders = this.orders.filter(order => order.name.toUpperCase().includes(name.toUpperCase()));
     } else {
+      console.log("hola");
       this.getOrders();
     }
   }
@@ -98,11 +108,6 @@ export class OrderListComponent implements OnInit {
   getOrders(): void {
     this.orderService.getOrders().subscribe((data: Order[]) => {
       this.orders = data;
-      let email = this.route.snapshot.paramMap.get('email');
-
-      if (email != null) {
-        this.orders = this.orders.filter(order => order.email == email);
-      }
     });
   }
 
@@ -160,6 +165,24 @@ export class OrderListComponent implements OnInit {
       this.getOrders();
     }, 100);
   }
+
+  public getReportPdf()  
+  {  
+    var data = document.getElementById('contentToConvert');  
+    html2canvas(data).then(canvas => {  
+      // Few necessary setting options  
+      var imgWidth = 208;   
+      var pageHeight = 295;    
+      var imgHeight = canvas.height * imgWidth / canvas.width;  
+      var heightLeft = imgHeight;  
+  
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      var position = 0;  
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+      pdf.save('MYPdf.pdf'); // Generated PDF   
+    });  
+  }  
 
   closeAlert() {
     this.error = false;

@@ -190,15 +190,15 @@
                placeholder="Fecha" bsDaterangepicker (onHidden)="handler()" [(ngModel)]="daterangepickerModel"/>
       </div>
   </div>
-  <table mdbTable hover="true" class="m-4 table product-table">
+  <table mdbTable hover="true" class="m-4 table product-table" id="contentToConvert">
 
     <thead>
       <tr>
         <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
       </tr>
     </thead>
-    <tbody *ngIf="orders">
-      <tr mdbTableCol *ngFor="let order of orders">
+    <tbody *ngIf="orders" >
+      <tr mdbTableCol *ngFor="let order of orders" >
 
         <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel" aria-hidden="true">
@@ -233,9 +233,10 @@
         <td>{{order.state}}</td>
         <td>{{order.date}}</td>
         <td>
-          <i *ngIf="order.state == 'T' " routerLink="edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i>
+          <i *ngIf="order.state == 'T' " routerLink="/admin/orders/edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i>
           <i *ngIf="order.state == 'T' " (click)="edit('V', order.id)" class="float-right p-2 fa fa-check-circle blue-text fa-lg" aria-hidden="true"></i>
           <i *ngIf="order.state == 'V' " (click)="edit('D', order.id)" class="float-right p-2 fa fa-truck grey-text fa-lg" aria-hidden="true"></i>
+          <i *ngIf="order.state == 'D' " routerLink="/admin/orders/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"></i>
           <i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i>
         </td>
       </tr>
@@ -304,6 +305,13 @@
 </div>
 
 <button (click)="frame.show()" class="btn green waves-light position-fixed"
-        style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem">
+        style="right:20px; bottom:20px">
   <i class="fa fa-plus"></i>
+  Crear pedido
+</button>
+
+<button (click)="getReportPdf()" class="btn blue waves-light position-fixed"
+        style="left:20px; bottom:20px">
+        <mdb-icon fa icon="file-pdf"></mdb-icon>
+  Generar reporte
 </button>

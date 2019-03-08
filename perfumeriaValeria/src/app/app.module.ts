@@ -46,6 +46,7 @@ import { ReportGanancyComponent } from './report-ganancy/report-ganancy.componen
 
 import { ToastrModule } from 'ng6-toastr-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ViewClientOrderComponent } from './view-client-order/view-client-order.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ListClientsComponent,
     ListProductProviderComponent,
     CategoryClientComponent,
-    ReportGanancyComponent
+    ReportGanancyComponent,
+    ViewClientOrderComponent
 
   ],
   imports: [
