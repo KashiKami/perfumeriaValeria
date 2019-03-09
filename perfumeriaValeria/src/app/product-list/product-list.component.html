@@ -197,7 +197,7 @@
 
           </mdb-card-img>
           <a class="row">
-            <div class="mask h1"><mdb-badge class="rounded-right" color="red">{{format(product.priceIn)}} $</mdb-badge></div>
+            <div class="mask h1"><mdb-badge class="rounded-right" color="red">{{product.priceIn | currency}} $</mdb-badge></div>
           </a>
         </div>
         <!--Card content-->
@@ -214,8 +214,6 @@
               <div *ngIf="product.amount == 0" class="alert alert-danger" role="alert">
                   <h4 class="alert-heading">Oye!</h4>
                   <p>no tienes stock en el inventario de este producto, por favor realiza un pedido.</p>
-                  <hr>
-                  <p class="mb-0">Porfavor realiza un pedido.</p>
                 </div>
 
             <div *ngIf="product.amount <= 10 && product.amount > 0" class="alert alert-danger" role="alert">

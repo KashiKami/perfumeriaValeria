@@ -165,12 +165,9 @@
              placeholder="Fecha" bsDaterangepicker formControlName="range" />
     </div>
 
-    <button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem"
-            class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
-      <i class="fa fa-check"></i>
-    </button>
+    
   </form>
-  <table mdbTable hover="true" class="m-4" *ngIf="products">
+  <table mdbTable hover="true" class="m-4" *ngIf="products" id="contentToConvert">
     <thead>
       <tr>
         <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
@@ -181,15 +178,27 @@
         <th>{{product.name}}</th>
         <th>{{product.client}}</th>
         <td>{{product.amount}}</td>
-        <td>{{product.priceOut}}</td>
-        <td>{{product.total}}</td>
+        <td>{{product.priceOut | currency}}</td>
+        <td>{{product.total | currency}}</td>
       </tr>
       <tr>
         <th></th>
         <td></td>
         <td>Total</td>
-        <td>{{TotalSale.total}}</td>
+        <td>{{TotalSale.total | currency}}</td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<button (click)="getReportPdf()" class="btn blue waves-light position-fixed expand"
+        style="left:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem">
+        <i class="fa fa-file"></i>
+  <span>Descargar reporte</span> 
+</button>
+
+<button style="right:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem"
+            class="position-fixed form-group expand" mdbBtn color="success" mdbWavesEffect>
+      <i class="fa fa-check"></i>
+      <span>Generar reporte</span>
+    </button>

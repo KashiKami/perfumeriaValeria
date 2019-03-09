@@ -211,7 +211,7 @@
         <th scope="row">{{order.id}}</th>
         <td>{{order.name}}</td>
         <td>{{order.phone}}</td>
-        <td>{{order.totalOrder}}</td>
+        <td>{{order.totalOrder | currency}}</td>
         <td *ngIf="order.state == 'T' ">Tramite</td>
         <td *ngIf="order.state == 'V' ">Validado</td>
         <td *ngIf="order.state == 'D' ">Despachado</td>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReportService } from '../services/report/report.service';
 import { formatDate } from '@angular/common';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas'; 
 
 @Component({
   selector: 'app-sales',
@@ -46,6 +48,24 @@ export class SalesComponent implements OnInit {
       });
     }, 200);
   }
+
+  public getReportPdf()  
+  {  
+    var data = document.getElementById('contentToConvert');  
+    html2canvas(data).then(canvas => {  
+      // Few necessary setting options  
+      var imgWidth = 208;   
+      var pageHeight = 295;    
+      var imgHeight = canvas.height * imgWidth / canvas.width;  
+      var heightLeft = imgHeight;  
+  
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      var position = 20;  
+      pdf.addImage(contentDataURL, 'PNG', 20, position, imgWidth, imgHeight)  
+      pdf.save('ventas.pdf'); // Generated PDF   
+    });  
+  }  
 
 }
 

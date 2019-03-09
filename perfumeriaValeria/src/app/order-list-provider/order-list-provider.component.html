@@ -210,7 +210,7 @@
         <th >{{order.id}}</th>
         <td>{{order.name}} {{order.LastName}}</td>
         <td>{{order.phone}}</td>
-        <td>{{order.total}}</td>
+        <td>{{order.total | currency}}</td> 
         <td>{{order.date}}</td>
         <td>
           <i routerLink="/admin/orderProvider/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"></i>

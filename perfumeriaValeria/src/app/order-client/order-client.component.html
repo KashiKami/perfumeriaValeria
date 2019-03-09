@@ -104,7 +104,7 @@
                 <tr style="background-color:white;">
                   <th></th>
                   <th class="font-weight-bold">
-                    <strong>Producti</strong>
+                    <strong>Producto</strong>
                   </th>
                   <th></th>
                   <th class="font-weight-bold">
@@ -160,11 +160,11 @@
                     </h5>
                   </td>
                   <td></td>
-                  <td>{{product.priceOut}}</td>
+                  <td>{{product.priceOut | currency}}</td>
                   <td class="font-weight-bold">
                     {{product.amount}}
                   </td>
-                  <td>{{product.total}}</td>
+                  <td>{{product.total | currency}}</td>
                   <td></td>
                   <td>
                     <button (click)="frame.show()" mdbBtn type="button" color="danger" class="btn btn-sm waves-effect waves-light">
@@ -184,7 +184,7 @@
                   </td>
                   <td class="text-right">
                     <h4 class="mt-2">
-                      <strong>{{products[0].totalOrder}}</strong>
+                      <strong>{{products[0].totalOrder| currency}}</strong>
                     </h4>
                   </td>
                 </tr>
