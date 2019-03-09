@@ -77,4 +77,8 @@ export class ViewProductComponent implements OnInit {
     this.toastr.successToastr('Producto agregado.', 'Esta hecho!');
   }
 
+  logOut() {
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['viewClient']);
+  }
 }

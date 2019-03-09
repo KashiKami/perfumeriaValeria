@@ -217,11 +217,11 @@
         <td *ngIf="order.state == 'D' ">Despachado</td>
         <td>{{order.date}}</td>
         <td>
-          <i *ngIf="order.state == 'T' && !print" routerLink="/admin/orders/edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i>
-          <i *ngIf="order.state == 'T' && !print" (click)="edit('V', order.id)" class="float-right p-2 fa fa-check-circle blue-text fa-lg" aria-hidden="true"></i>
-          <i *ngIf="order.state == 'V' && !print" (click)="edit('D', order.id)" class="float-right p-2 fa fa-truck grey-text fa-lg" aria-hidden="true"></i>
-          <i *ngIf="order.state == 'D' && !print" routerLink="/admin/orders/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"></i>
-          <i *ngIf="order.state == 'D' && !print" (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i>
+          <i *ngIf="order.state == 'T' && !print" routerLink="/admin/orders/edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Editar</span></i>
+          <i *ngIf="order.state == 'T' && !print" (click)="edit('V', order.id)" class="float-right p-2 fa fa-check-circle blue-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Validar</span></i>
+          <i *ngIf="order.state == 'V' && !print" (click)="edit('D', order.id)" class="float-right p-2 fa fa-truck grey-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Despachar</span></i>
+          <i *ngIf="order.state == 'D' && !print" routerLink="/admin/orders/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Ver</span></i>
+          <i *ngIf="order.state == 'T' && !print" (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Eliminar</span></i>
         </td>
       </tr>
     </tbody>

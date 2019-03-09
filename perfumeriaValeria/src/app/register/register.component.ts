@@ -43,8 +43,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.clientService.createClient(this.addForm.value).subscribe((data: any) => {
       if (data.error && data.error != 'creado exitosamente') {
-        this.error = true;
-        this.errorText = data.error;
+        this.showAlert(data.error);
       } else if (data.error == 'creado exitosamente') {
         this.showSuccess();
         this.router.navigate(['/login']);
@@ -72,5 +71,9 @@ export class RegisterComponent implements OnInit {
 
   showSuccess() {
     this.toastr.successToastr('Registro completo', 'Esta hecho!');
+  }
+
+  showAlert(text: any) {
+    this.toastr.warningToastr(text, 'Cuidado!');
   }
 }

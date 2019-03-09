@@ -213,8 +213,8 @@
         <td>{{order.total | currency}}</td> 
         <td>{{order.date}}</td>
         <td>
-          <i routerLink="/admin/orderProvider/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"></i>
-          <i *ngIf="order.state == 'N'" routerLink="/admin/orderProvider/edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"></i>
+          <i routerLink="/admin/orderProvider/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Ver</span></i>
+          <i *ngIf="order.state == 'N'" routerLink="/admin/orderProvider/edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Editar</span></i>
         </td>
       </tr>
     </tbody>

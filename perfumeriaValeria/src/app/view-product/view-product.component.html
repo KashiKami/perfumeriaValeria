@@ -37,7 +37,7 @@
           <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
             <a routerLink="/detail-count/{{currentUser.email}}" class="dropdown-item ">{{currentUser.name}}</a>
             <a routerLink="/orders" class="dropdown-item ">Mis pedidos</a>
-            <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+            <a (click)="logOut()" class="dropdown-item ">Salir</a>
           </div>
         </div>
         <a routerLink="/order" class="nav-link">
@@ -103,7 +103,7 @@
         <div class=" wow fadeInDown animated text-left text-justify" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
           <h1>{{product.name}}</h1>
           {{product.description}}
-          <a class="black-text font-weight-bold">{{product.priceIn}} $</a>
+          <a class="black-text font-weight-bold">{{product.priceIn | currency}}</a>
         </div>
 
         <div *ngIf="currentUser; else elseBuy" class="input-group-append" style="height:30px;">
@@ -155,7 +155,7 @@
               </h5>
 
               <h4 class="font-weight-bold">
-                <strong>{{product.priceIn}}$</strong>
+                <strong>{{product.priceIn | currency}}</strong>
               </h4>
 
             </mdb-card-body>

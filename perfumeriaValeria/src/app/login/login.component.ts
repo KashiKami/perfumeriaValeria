@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from '../services/client/client.service';
 import { formatDate } from '@angular/common';
 import { CategoryService } from '../services/category/category.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private clientService: ClientService,
               private route: ActivatedRoute,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              public toastr: ToastrManager) { }
 
   ngOnInit() {
     let state = this.route.snapshot.paramMap.get('state');
@@ -58,11 +60,10 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.login(this.loginForm.value).subscribe((data: any) => {
       if (data.email) {
+        this.showSuccess(data.name);
         localStorage.setItem('currentUser', JSON.stringify(data));
       } else if (data.error) {
-        this.error = true;
-        this.textError = data.error;
-
+        this.showAlarm(data.error);
       }
 
     });
@@ -107,6 +108,14 @@ export class LoginComponent implements OnInit {
 
   closeAlert() {
     this.error = false;
+  }
+
+  showSuccess(text: any) {
+    this.toastr.successToastr('Disfruta de nuesta tienda', 'Bienvenido '+ text);
+  }
+
+  showAlarm(text: any) {
+    this.toastr.warningToastr(text, 'Cuidado!');
   }
 
 }

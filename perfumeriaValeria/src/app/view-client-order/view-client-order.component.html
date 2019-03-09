@@ -233,11 +233,11 @@
                   </h5>
                 </td>
                 <td></td>
-                <td>{{product.priceOut}}</td>
+                <td>{{product.priceOut | currency}}</td>
                 <td class="font-weight-bold">
-                  <input [disabled]="disable" type="number" value="{{product.amount}}" aria-label="Search" class="form-control" style="width: 100px">
+                  {{product.amount}}
                 </td>
-                <td>{{product.total}}</td>
+                <td>{{product.total  | currency}}</td>
               </tr>
               <tr>
                 <td colspan="3"></td>
@@ -251,7 +251,7 @@
                 </td>
                 <td *ngIf="products[0]" class="text-right">
                   <h4 class="mt-2">
-                    <strong>{{products[0].totalOrder}}</strong>
+                    <strong>{{products[0].totalOrder  | currency}}</strong>
                   </h4>
                 </td>
               </tr>

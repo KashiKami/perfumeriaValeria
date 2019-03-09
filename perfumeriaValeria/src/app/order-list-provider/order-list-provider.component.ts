@@ -70,7 +70,6 @@ export class OrderListProviderComponent implements OnInit {
     if (name != '') {
       this.orders = this.orders.filter(order => order.name.toUpperCase().includes(name.toUpperCase()));
     } else {
-      console.log("hola");
       this.getOrders();
     }
   }
@@ -105,8 +104,7 @@ export class OrderListProviderComponent implements OnInit {
     this.addForm.patchValue({ date: myDate })
     this.orderProviderService.addOrder(this.addForm.value).subscribe((data: any) => {
       if (data.error && data.error != 'creado exitosamente') {
-        this.error = true;
-        this.errorText = data.error;
+        this.showAlert(data.error);
       } else if (data.error == 'creado exitosamente') {
         this.showSuccess();
         this.router.navigate(['admin/orderProvider/edit-order/' + this.aux.idOrder]);
@@ -152,6 +150,10 @@ export class OrderListProviderComponent implements OnInit {
 
   showSuccess() {
     this.toastr.successToastr('Pedido creado.', 'Esta hecho!');
+  }
+
+  showAlert(text: any) {
+    this.toastr.warningToastr(text, 'Cuidado!');
   }
 
 }

@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { ProducInventoryService } from '../services/productInventory/produc-inventory.service';
 import * as jspdf from 'jspdf';  
 import html2canvas from 'html2canvas';  
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-order-list',
@@ -47,7 +48,8 @@ export class OrderListComponent implements OnInit {
               private formBuilder: FormBuilder,
               private router: Router,
               private productInventoryService: ProducInventoryService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public toastr: ToastrManager) {
 
     this.dataSourceClient = Observable.create((observer: any) => {
       // Runs on every search
@@ -132,12 +134,13 @@ export class OrderListComponent implements OnInit {
     this.addForm.patchValue({ date: myDate })
     this.orderService.addOrder(this.addForm.value).subscribe((data: any) => {
       if (data.error && data.error != 'creado exitosamente') {
-        this.error = true;
-        this.errorText = data.error;
+        this.showAlarm(data.error);
       } else if (data.error == 'creado exitosamente') {
-        console.log("creado exitosamente")
-        this.router.navigate(['admin/orders/edit-order/' + this.aux.idOrder]);
-      }
+        this.showSuccess();
+        setTimeout(() => {
+          this.router.navigate(['admin/orders/edit-order/' + this.aux.idOrder]);
+        }, 500);
+      } 
     });
 
 
@@ -191,5 +194,13 @@ export class OrderListComponent implements OnInit {
 
   closeAlert() {
     this.error = false;
+  }
+
+  showSuccess() {
+    this.toastr.successToastr('Producto agregado', 'Esta hecho!');
+  }
+
+  showAlarm(text: any) {
+    this.toastr.warningToastr(text, 'Cuidado!');
   }
 }
