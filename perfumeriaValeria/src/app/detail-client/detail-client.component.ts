@@ -32,7 +32,7 @@ export class DetailClientComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
 
-    let email = this.route.snapshot.paramMap.get('email');
+    let email = this.currentUser.email;
 
     this.addForm = this.formBuilder.group({
       "email": ['', Validators.required],

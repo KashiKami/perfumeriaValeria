@@ -144,7 +144,7 @@
           <img src="../../assets/img/user.png" ALIGN=MIDDLE WIDTH=40 HEIGHT=40 class="fa fa-user"  style="font-size: x-large;">
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item ">Perfil</a>
+          <a class="dropdown-item " routerLink="/admin/profile">Perfil</a>
           <a (click)="logOut()" class="dropdown-item">Salir</a>
         </div>
       </div>
@@ -335,9 +335,8 @@
           <div class="modal-body mx-3">
             <!-- LastName -->
             <div class="md-form">
-              <i class="fa fa-hashtag prefix grey-text"></i>
               <input mdbInputDirective type="text" id="name" autocomplete="off" class="form-control" formControlName="name">
-              <label for="name" class="">Nombre</label>
+              <label for="name" class="">Nombre categoria</label>
             </div>
 
             <!-- Email -->
@@ -345,7 +344,7 @@
               <select class="browser-default custom-select" formControlName="superCategory" >
                   <option value="" selected disabled hidden>Elige una categora padre
                   </option>
-                  <option *ngFor="let category of categories" [value]="category.id">{{category.name}}
+                  <option *ngFor="let category of SuperCategories" [value]="category.id">{{category.name}}
                   </option>
                 </select>
             </div>

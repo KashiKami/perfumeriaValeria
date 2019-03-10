@@ -14,6 +14,10 @@ export class CategoryService {
     return this.http.get(`${this.baseUrl}getAll.php`);
   }
 
+  public getAllSuperCategory() {
+    return this.http.get(`${this.baseUrl}getAllSuperCategory.php`);
+  }
+
   public getCategoriesTwo() {
     return this.http.get(`${this.baseUrl}getAllCategory.php`);
   }

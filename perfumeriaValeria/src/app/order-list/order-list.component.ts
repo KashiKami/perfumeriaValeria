@@ -29,6 +29,7 @@ export class OrderListComponent implements OnInit {
 
   order: any = {};
 
+  text: any = {};
 
   public print: boolean = false;
 
@@ -85,6 +86,7 @@ export class OrderListComponent implements OnInit {
 
       if (email != null) {
         this.orders = this.orders.filter(order => order.email == email);
+        this.text.name = this.orders[0].name;
       }
     });
 
@@ -95,11 +97,13 @@ export class OrderListComponent implements OnInit {
 
   onKey(event: any) { // without type info
     let name = event.target.value;
-    if (name != '') {
+    
+    if (name != '') { 
       this.orders = this.orders.filter(order => order.name.toUpperCase().includes(name.toUpperCase()));
     } else {
-      console.log("hola");
+      setTimeout(() => {
       this.getOrders();
+    }, 100);
     }
   }
 

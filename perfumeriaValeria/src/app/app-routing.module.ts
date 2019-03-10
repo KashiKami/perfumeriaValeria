@@ -64,7 +64,7 @@ const routes: Routes = [
 
   { path: 'admin/documentation', component: ViewDocumentationComponent, canActivate: [AuthGuard] },
 
-  { path: 'admin/profile/:email', component: DetailAdminComponent, canActivate: [AuthGuard] },
+  { path: 'admin/profile', component: DetailAdminComponent, canActivate: [AuthGuard] },
 
   { path: 'provider', component: ViewProviderComponent, canActivate: [AuthGuardProvider] },
 

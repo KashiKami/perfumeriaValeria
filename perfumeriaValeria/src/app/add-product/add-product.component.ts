@@ -46,6 +46,7 @@ export class AddProductComponent implements OnInit {
 
   product: any = {};
 
+  public SuperCategories: any[] = null;
   public categories: any[] = null;
 
   currentUser: User;
@@ -70,6 +71,10 @@ export class AddProductComponent implements OnInit {
   }
 
   getCategories(): void {
+    this.categoryService.getAllSuperCategory().subscribe((data: Product[]) => {
+      this.SuperCategories = data;
+    });
+
     this.categoryService.getCategories().subscribe((data: Product[]) => {
       this.categories = data;
     });

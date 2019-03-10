@@ -25,6 +25,8 @@ export class OrderListProviderComponent implements OnInit {
 
   aux: any = {};
 
+  text: any = {};
+
   daterangepickerModel: Date[];
 
   headElements = ['#', 'Nombre Proveedor', 'Telefono Proveedor', 'Valor', 'Fecha', ];
@@ -57,6 +59,7 @@ export class OrderListProviderComponent implements OnInit {
 
       if (email != null) {
         this.orders = this.orders.filter(order => order.email == email);
+        this.text.name = this.orders[0].name;
       }
     });
 
