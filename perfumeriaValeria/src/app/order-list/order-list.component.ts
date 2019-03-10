@@ -29,7 +29,6 @@ export class OrderListComponent implements OnInit {
 
   order: any = {};
 
-  aux: any = {};
 
   public print: boolean = false;
 
@@ -75,7 +74,7 @@ export class OrderListComponent implements OnInit {
     this.addForm = this.formBuilder.group({
       "idOrder": ['', Validators.required],
       "email": ['', Validators.required],
-      "date": ['', Validators.required]
+      "date": ['']
     });
 
     this.getOrders();
@@ -138,19 +137,13 @@ export class OrderListComponent implements OnInit {
       } else if (data.error == 'creado exitosamente') {
         this.showSuccess();
         setTimeout(() => {
-          this.router.navigate(['admin/orders/edit-order/' + this.aux.idOrder]);
-        }, 500);
+          this.router.navigate(['admin/orders/edit-order/' + this.addForm.value.idOrder]);
+        }, 100);
       } 
     });
 
 
    this.getOrders();
-
-    this.addForm = this.formBuilder.group({
-      "idOrder": ['', Validators.required],
-      "email": ['', Validators.required],
-      "date": ['', Validators.required]
-    });
   }
 
   logOut() {

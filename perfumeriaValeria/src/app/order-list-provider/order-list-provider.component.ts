@@ -46,7 +46,7 @@ export class OrderListProviderComponent implements OnInit {
     this.addForm = this.formBuilder.group({
       "idOrder": ['', Validators.required],
       "email": ['', Validators.required],
-      "date": ['', Validators.required]
+      "date": ['']
     });
 
     this.getOrders();
@@ -107,17 +107,8 @@ export class OrderListProviderComponent implements OnInit {
         this.showAlert(data.error);
       } else if (data.error == 'creado exitosamente') {
         this.showSuccess();
-        this.router.navigate(['admin/orderProvider/edit-order/' + this.aux.idOrder]);
+        this.router.navigate(['admin/orderProvider/edit-order/' + this.addForm.value.idOrder]);
       }
-    });
-
-
-   this.getOrders();
-
-    this.addForm = this.formBuilder.group({
-      "idOrder": ['', Validators.required],
-      "email": ['', Validators.required],
-      "date": ['', Validators.required]
     });
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product/product.service';
 import { Router } from "@angular/router";
+import { User } from '../models/user';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class ProductListComponent implements OnInit {
 
   public products: Product[];
 
-
+  currentUser: User;
 
   format(price: number) {
     return price.toLocaleString('es-CO', { currency: 'COP', style: 'currency' });
@@ -25,6 +26,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     setTimeout(() => {
       this.getProducts();
     }, 500);
@@ -40,7 +42,7 @@ export class ProductListComponent implements OnInit {
     this.productService.deleteProduct(product);
     setTimeout(() => {
       this.getProducts();
-    }, 100);
+    }, 500);
   }
 
 

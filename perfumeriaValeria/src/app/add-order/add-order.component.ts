@@ -80,7 +80,7 @@ export class AddOrderComponent implements OnInit {
   }
 
   getClients(): void {
-    this.productServie.getProducts().subscribe((data: Product[]) => {
+    this.productServie.getProductsInventory().subscribe((data: Product[]) => {
       this.availableProducts = data;
     });
   }

@@ -1,4 +1,3 @@
-<!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg indigo navbar-dark fixed-top scrolling-navbar">
 
   <!-- Navbar brand -->
@@ -154,68 +153,13 @@
   <!-- Collapsible content -->
 
 </mdb-navbar>
-  <br>
-  <br>
+
+<div class="" style="background-color: #212121; padding-top: 100px"> 
+<pdf-viewer [src]="pdfSrc" 
+            [render-text]="true"
+            style="display: block;"
+></pdf-viewer>
 
 
-  <div class="container">
-    <div class="d-flex p-4 col-example"></div>
-    <table mdbTable hover="true" class="m-4">
-      <thead>
-        <tr>
-          <th *ngFor="let head of headElements" scope="col" class="text-primary">{{head}} </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr mdbTableCol *ngFor="let provider of providers">
-            <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-           <!--Content-->
-           <div class="modal-content text-center">
-             <!--Header-->
-             <div class="modal-header d-flex justify-content-center">
-               <p class="heading">Estas seguro?</p>
-             </div>
+</div>
 
-             <!--Body-->
-             <div class="modal-body">
-               <i class="fa fa-times fa-4x animated rotateIn"></i>
-             </div>
-
-             <!--Footer-->
-             <div class="modal-footer justify-content-center">
-               <a mdbBtn color="succsess" outline="true" class="waves-effect"
-                  mdbWavesEffect (click)="delete(provider)">Si</a>
-               <a (click)="frame.hide()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" this.photo=product.photo;>No</a>
-             </div>
-           </div>
-           <!--/.Content-->
-         </div>
-       </div>
-
-          <th >{{provider.name}} {{provider.lastName}}</th>
-          <td>{{provider.identify}}</td>
-          <td>{{provider.email}}</td>
-          <td>{{provider.phone}}</td>
-
-          <td>
-            <i (click)="frame.show()" class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"></i>
-            <i routerLink="edit-provider/{{provider.email}}" class="float-right p-2 fa fa-edit green-text fa-lg" aria-hidden="true"></i>
-          </td>
-          <td><button routerLink="/admin/ordersProvider/{{provider.email}}" type="submit"
-          class="form-group" mdbBtn color="success" mdbWavesEffect>
-    <i class="fa fa-view"></i>
-    Ver Pedidos
-  </button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <button routerLink="add-provider" class="btn green waves-light position-fixed expand"
-        style="right:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem">
-  <i class="fa fa-plus"></i>
-  <span>Crear Proveedor</span>
-</button>

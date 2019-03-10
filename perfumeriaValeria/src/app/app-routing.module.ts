@@ -30,6 +30,8 @@ import { ViewClientOrderComponent } from './view-client-order/view-client-order.
 import { OrderProviderComponent } from './order-provider/order-provider.component';
 import { OrderListProviderComponent } from './order-list-provider/order-list-provider.component';
 import { ViewProviderOrderComponent } from './view-provider-order/view-provider-order.component';
+import { ViewDocumentationComponent } from './view-documentation/view-documentation.component';
+import { DetailAdminComponent } from './detail-admin/detail-admin.component';
 
 const routes: Routes = [
   { path: 'admin/products', component: ProductListComponent, canActivate: [AuthGuard]},
@@ -59,6 +61,10 @@ const routes: Routes = [
   { path: 'admin/orders/view-order/:id', component: ViewClientOrderComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/clients', component: ListClientsComponent, canActivate: [AuthGuard] },
+
+  { path: 'admin/documentation', component: ViewDocumentationComponent, canActivate: [AuthGuard] },
+
+  { path: 'admin/profile/:email', component: DetailAdminComponent, canActivate: [AuthGuard] },
 
   { path: 'provider', component: ViewProviderComponent, canActivate: [AuthGuardProvider] },
 

@@ -88,6 +88,7 @@
   </div>
       </li>
 
+
       <li class="nav-item">
         <div class="navbar-nav nav-flex-icons">
           <div class="nav-item dropdown" WIDTH=30 HEIGHT=30 dropdown>
@@ -112,11 +113,11 @@
             <a dropdownToggle  type="button" class="nav-link">
         <div class="form-row ">
           <div class="col">
-            <img class="fa fa-user" mdbWavesEffect routerLink="/admin/help"  src="../../assets/img/ayuda.png" ALIGN=MIDDLE WIDTH=25 HEIGHT=25>
+            <img class="fa fa-user" mdbWavesEffect routerLink="/admin/documentation"  src="../../assets/img/ayuda.png" ALIGN=MIDDLE WIDTH=25 HEIGHT=25>
           </div>
           <div class="col">
 
-            <label mdbWavesEffect routerLink="/admin/help"><b>Ayuda</b></label>
+            <label mdbWavesEffect routerLink="/admin/documentation"><b>Documentacion</b></label>
           </div>
         </div>
       </a>
@@ -144,8 +145,8 @@
           <img src="../../assets/img/user.png" ALIGN=MIDDLE WIDTH=40 HEIGHT=40 class="fa fa-user"  style="font-size: x-large;">
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item " href="#">Perfil</a>
-          <a (click)="logOut()" class="dropdown-item " routerLink="exit">Salir</a>
+          <a class="dropdown-item ">Perfil</a>
+          <a (click)="logOut()" class="dropdown-item">Salir</a>
         </div>
       </div>
     </div>
@@ -161,16 +162,17 @@
 <div class="container">
   <div class="d-flex p-4 col-example table-responsive"></div>
   <div class="row">
-    <div class="form-group col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-      <label for="exampleInputEmail1">Nombre</label>
-      <input (keyup)="onKey($event)" type="email" class="form-control" placeholder="Filtro de nombre">
-
-    </div>
-      <div class="form-group md-form col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <input type="text" readonly class="form-control mb-3"
-               placeholder="Fecha" bsDaterangepicker (onHidden)="handler()" [(ngModel)]="daterangepickerModel"/>
+      <div class="form-group col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <label for="">Busca por nombre</label>
+        <input (keyup)="onKey($event)" type="email" class="form-control" placeholder="Filtro de nombre">
+  
       </div>
-  </div>
+      <div class="form-group col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <label>Busca por un rango de fechas</label>
+        <input type="text" readonly class="form-control"
+        placeholder="ejemplo: 03/09/2019 - 03/11/2019" bsDaterangepicker (onHidden)="handler()" (onShow)="getOrders()" [(ngModel)]="daterangepickerModel"/>
+      </div>
+    </div>
   <table mdbTable hover="true" class="m-4 table product-table" id="contentToConvert">
 
     <thead>
@@ -213,6 +215,7 @@
         <td>{{order.total | currency}}</td> 
         <td>{{order.date}}</td>
         <td>
+          <i *ngIf="order.state == 'N'" (click)="frame.show()"  class="float-right p-2 fa fa-close red-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Eliminar</span></i>
           <i routerLink="/admin/orderProvider/view-order/{{order.id}}" class="float-right p-2 fa fa-eye blue-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Ver</span></i>
           <i *ngIf="order.state == 'N'" routerLink="/admin/orderProvider/edit-order/{{order.id}}" class="float-right p-2 fa fa-pencil green-text fa-lg" aria-hidden="true"><span style="font-family: Roboto, sans-serif;">Editar</span></i>
         </td>
@@ -237,40 +240,39 @@
 
       <!--Body-->
       <div class="modal-body">
-        <form class="" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+          <form class="" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
-          <div *ngIf="error" #alert class="alert alert-danger alert-dismissible fade show" role="alert">
-            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            {{errorText}}
-          </div>
-
-          <div class="modal-body mx-3">
-            <!-- LastName -->
-            <div class="md-form">
-              <i class="fa fa-hashtag prefix grey-text"></i>
-              <input mdbInputDirective type="text" id="idOrder" autocomplete="off" class="form-control" formControlName="idOrder" [(ngModel)]="aux.idOrder">
-              <label for="idOrder" class="">Numero</label>
-            </div>
-
-            <!-- Email -->
-            <div class="md-form">
-              <i class="fa fa-user prefix grey-text"></i>
-              <select class="browser-default custom-select form-control" formControlName="email">
-                <option *ngFor="let provider of providers" [value]="provider.email">{{provider.name}}
-                </option>
-              </select>
-            </div>
-
-            <!-- Sign in button -->
-
-
-          </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button mdbBtn color="success" class="waves-light" mdbWavesEffect>Agregar</button>
-          </div>
-        </form>
+              <div *ngIf="error" #alert class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{errorText}}
+              </div>
+    
+              <div class="modal-body mx-3">
+                <!-- LastName -->
+                <div class="md-form">
+                  <input mdbInputDirective type="text" id="idOrder" autocomplete="off" class="form-control" formControlName="idOrder">
+                  <label for="idOrder" class="">Numero de pedido</label>
+                </div>
+    
+                <!-- Email -->
+                <div class="md-form">
+                  <select class="browser-default custom-select" formControlName="email">
+                      <option value="" selected disabled hidden>Escoge un proveedor</option>
+                      <option *ngFor="let provider of providers" [value]="provider.email">{{provider.name}}
+                      </option>
+                    </select>
+                </div>
+    
+                <!-- Sign in button -->
+    
+    
+              </div>
+              <div class="modal-footer d-flex justify-content-center">
+                <button [disabled]="!addForm.valid" mdbBtn color="success" class="waves-light" mdbWavesEffect>Agregar</button>
+              </div>
+            </form>
 
       </div>
 

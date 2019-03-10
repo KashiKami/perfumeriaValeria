@@ -50,6 +50,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewClientOrderComponent } from './view-client-order/view-client-order.component';
 import { OrderListProviderComponent } from './order-list-provider/order-list-provider.component';
 import { ViewProviderOrderComponent } from './view-provider-order/view-provider-order.component';
+import { ViewDocumentationComponent } from './view-documentation/view-documentation.component';
+
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { DetailAdminComponent } from './detail-admin/detail-admin.component';
+
 
 @NgModule({
   declarations: [
@@ -79,7 +84,9 @@ import { ViewProviderOrderComponent } from './view-provider-order/view-provider-
     ViewClientOrderComponent,
     OrderProviderComponent,
     OrderListProviderComponent,
-    ViewProviderOrderComponent
+    ViewProviderOrderComponent,
+    ViewDocumentationComponent,
+    DetailAdminComponent
 
   ],
   imports: [
@@ -96,7 +103,8 @@ import { ViewProviderOrderComponent } from './view-provider-order/view-provider-
     BsDatepickerModule.forRoot(),
     NgDatepickerModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PdfViewerModule
   ],
   providers: [AuthGuard, AuthenticationService],
   bootstrap: [AppComponent]

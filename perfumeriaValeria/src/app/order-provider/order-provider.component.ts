@@ -105,9 +105,15 @@ export class OrderProviderComponent implements OnInit {
       if (data.error && data.error != 'creado exitosamente') {
         this.showAlarm(data.error);
       } else if (data.error == 'creado exitosamente') {
-        this.showSuccess();
         setTimeout(() => {
+          this.showSuccess();
           this.getProducts();
+          this.addForm = this.formBuilder.group({
+            "codeBar": ['', Validators.required],
+            "amount": ['', Validators.required],
+            "priceIn": ['', Validators.required]
+          });
+      
         }, 100);
       }
     });

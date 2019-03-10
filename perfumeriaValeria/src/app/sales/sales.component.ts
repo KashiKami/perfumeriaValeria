@@ -15,7 +15,7 @@ export class SalesComponent implements OnInit {
   products: any[] = null;
   TotalSale: any;
   
-  headElements = ['Producto', 'Cliente', 'Cantidad', 'Precio de Venta', 'Total'];
+  headElements = ['Producto', 'Cliente','Precio de Venta', 'Cantidad', 'Total'];
   date: any = {};
 
   myForm: FormGroup;
@@ -36,6 +36,7 @@ export class SalesComponent implements OnInit {
   getProducts() {
     this.date.dateStart = formatDate(this.myForm.value.range[0], 'yyyy-MM-dd', 'en');
     this.date.dateFinish = formatDate(this.myForm.value.range[1], 'yyyy-MM-dd', 'en');
+    console.log(this.date.dateStart);
     this.products = null;
     setTimeout(() => {
       this.reportService.getSales(this.date).subscribe((data: any) => {

@@ -196,7 +196,9 @@ export class AddProductComponent implements OnInit {
     console.log(category);
 
     this.categoryService.deleteCategory(category);
+    setTimeout(() => {
     this.getCategories();
+  }, 500);
   }
 
   logOut() {
