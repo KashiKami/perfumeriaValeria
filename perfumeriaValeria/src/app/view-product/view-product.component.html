@@ -103,22 +103,21 @@
         <div class=" wow fadeInDown animated text-left text-justify" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
           <h1>{{product.name}}</h1>
           {{product.description}}
-          <a class="black-text font-weight-bold">{{product.priceIn | currency}}</a>
+          <a class="font-weight-bold pink-text">{{product.priceIn | currency}}</a>
         </div>
 
         <div *ngIf="currentUser; else elseBuy" class="input-group-append" style="height:30px;">
-          <input type="number" class="form-control" placeholder="0" aria-label="Recipient's username"
-                 aria-describedby="button-addon2" [(ngModel)]="productAdd.amount">
+                 <input min='0' [(ngModel)]="productAdd.amount" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57">
           <button (click)="addProduct()" mdbBtn color="default" size="md" class="m-0 px-3 py-2" type="button" id="button-addon2"
                   mdbWavesEffect>
-            Comprar
+                  Comprar
           </button>
         </div>
         <ng-template #elseBuy>
           <div class="input-group-append" style="height:30px;">
             <button routerLink="/login" mdbBtn color="default" size="md" class="m-0 px-3 py-2" type="button" id="button-addon2"
                     mdbWavesEffect>
-              Agregar al carro de la compra
+              Ingresa ya
             </button>
           </div>
         </ng-template>
@@ -154,7 +153,7 @@
                 </strong>
               </h5>
 
-              <h4 class="font-weight-bold">
+              <h4 class="font-weight-bold pink-text">
                 <strong>{{product.priceIn | currency}}</strong>
               </h4>
 

@@ -63,7 +63,7 @@ const routes: Routes = [
   { path: 'provider', component: ViewProviderComponent, canActivate: [AuthGuardProvider] },
 
   { path: '', component: ViewClientComponent },
-  { path: 'product/:id', component: ViewProductComponent },
+  { path: 'product/:id', component: ViewProductComponent, runGuardsAndResolvers: "paramsChange" },
 
   { path: 'order', component: OrderClientComponent, canActivate: [AuthGuardClient] },
   { path: 'orders', component: OrderListClientComponent, canActivate: [AuthGuardClient] },

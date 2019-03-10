@@ -36,7 +36,7 @@ export class ViewClientComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.productService.getProducts().subscribe((data: Product[]) => {
+    this.productService.getProductsInventory().subscribe((data: Product[]) => {
       this.products = data;
     });
   }

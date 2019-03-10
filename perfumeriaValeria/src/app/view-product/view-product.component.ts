@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { User } from '../models/user';
 import { ProductService } from '../services/product/product.service';
 import { Product } from '../models/product';
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute,NavigationEnd } from "@angular/router";
 import { ClientService } from '../services/client/client.service';
 import { CategoryService } from '../services/category/category.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
@@ -12,12 +12,14 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   templateUrl: './view-product.component.html',
   styleUrls: ['./view-product.component.scss']
 })
-export class ViewProductComponent implements OnInit {
+export class ViewProductComponent implements OnInit, OnDestroy {
 
   currentUser: User;
   currentOrder: any;
   product: any = {};
   productAdd: any = {};
+
+  navigationSubscription;
 
   public categories: any[] = null;
   public subCategories: any[] = null;
@@ -29,7 +31,17 @@ export class ViewProductComponent implements OnInit {
               private route: ActivatedRoute,
               private clienService: ClientService,
               private categoryService: CategoryService,
-              public toastr: ToastrManager) { }
+              public toastr: ToastrManager) { 
+                this.navigationSubscription = this.router.events.subscribe((e: any) => {
+                  // If it is a NavigationEnd event re-initalise the component
+                  if (e instanceof NavigationEnd) {
+                    let id = this.route.snapshot.paramMap.get('id');
+                    this.productService.getOneProduct(id).subscribe(data => {
+                      this.product = data;
+                    })
+                  }
+                });
+              }
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
@@ -45,17 +57,28 @@ export class ViewProductComponent implements OnInit {
     })
   }
 
+  ngOnDestroy() {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
   addProduct() {
     this.productAdd.codeBar = this.product.codeBar;
-    setTimeout(() => {
-      this.clienService.addProduct(this.productAdd, this.currentOrder.id);
-      this.showSuccess();
-      this.router.navigate(['/order']);
-    }, 300);
+      this.clienService.addProduct(this.productAdd, this.currentOrder.id).subscribe((data: any) => {
+        if (data.error && data.error != 'creado exitosamente') {
+          this.showAlarm(data.error);
+        } else if (data.error == 'creado exitosamente') {
+          setTimeout(() => {
+            this.showSuccess();
+            this.router.navigate(['/order']);
+          }, 500);
+        }
+      });
   }
 
   getProducts(): void {
-    this.productService.getProducts().subscribe((data: Product[]) => {
+    this.productService.getProductsInventory().subscribe((data: Product[]) => {
       this.products = data;
     });
   }
@@ -76,6 +99,11 @@ export class ViewProductComponent implements OnInit {
   showSuccess() {
     this.toastr.successToastr('Producto agregado.', 'Esta hecho!');
   }
+
+  showAlarm(text: any) {
+    this.toastr.warningToastr(text, 'Cuidadado!');
+  }
+
 
   logOut() {
     localStorage.removeItem('currentUser');

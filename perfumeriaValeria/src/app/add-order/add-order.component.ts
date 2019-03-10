@@ -132,4 +132,8 @@ export class AddOrderComponent implements OnInit {
     this.toastr.warningToastr(text, 'Cuidado!');
   }
 
+  ok(){
+    this.router.navigate(['/admin/orders']);
+  }
+
 }

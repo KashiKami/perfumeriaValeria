@@ -206,9 +206,10 @@
 
 
 </form>
-<button style="right:20px; bottom:20px;border-radius: 50%;width:55px;height:55px;padding:0.5rem;z-index:1;"
-        class="position-fixed form-group" mdbBtn color="success" mdbWavesEffect>
-  <i class="fa fa-check"></i>
+<button (click)="ok()" style="right:20px; bottom:20px;min-width:55px;height:55px;padding:0.5rem"
+class="position-fixed form-group expand" mdbBtn color="success" mdbWavesEffect>
+<i class="fa fa-check"></i>
+<span>Aceptar</span>
 </button>
 <!-- form create product -->
 

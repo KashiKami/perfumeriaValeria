@@ -5,9 +5,6 @@ import { Product } from '../models/product';
 import { ProductService } from '../services/product/product.service';
 import { CategoryService } from '../services/category/category.service';
 
-import { from } from 'rxjs/observable/from';
-import { filter } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-category-client',

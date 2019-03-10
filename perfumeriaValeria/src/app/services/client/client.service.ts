@@ -35,7 +35,7 @@ export class ClientService {
   }
 
   addProduct(order: any, id: any) {
-    return this.http.post(`${this.baseUrl}addProduct.php?id=` + id, JSON.stringify(order)).subscribe();
+    return this.http.post(`${this.baseUrl}addProduct.php?id=` + id, JSON.stringify(order));
   }
 
   public getOrderSpecify(order: any) {

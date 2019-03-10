@@ -15,6 +15,10 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}getAll.php`);
   }
 
+  public getProductsInventory() {
+    return this.http.get(`${this.baseUrl}getAllInventory.php`);
+  }
+
   public getProductsOffer() {
     return this.http.get(`${this.baseUrl}getAllOffer.php`);
   }
